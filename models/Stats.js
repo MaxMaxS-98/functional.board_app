@@ -5,14 +5,20 @@ class Stats extends Model { }
 
 Stats.init(
     {
+    // id: {
+    //     type: DataTypes.INTEGER,
+    //     allowNull: false,
+    //     primaryKey: true,
+    //     autoIncrement: true,
+    // },
     player_id: {
         type: DataTypes.INTEGER,
-        // allowNull: true,
+        allowNull: false,
         primaryKey: true,
         references: {
             model: 'user',
             key: 'user_id',
-          },
+          }
     },
     games_won: {
         type: DataTypes.INTEGER,

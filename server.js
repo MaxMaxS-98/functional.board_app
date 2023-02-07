@@ -8,7 +8,6 @@ const { User, Stats } = require('./models')
 // const routes = require('./controllers');
 const sequelize = require('./config/connection');
 const { Model } = require('sequelize');
-const { Stats } = require('./models');
 // const helpers = require('./utils/helpers');
 
 const app = express();
