@@ -6,7 +6,8 @@ class Stats extends Model { }
 Stats.init(
     {
     player_id: {
-        allowNull: false,
+        type: DataTypes.INTEGER,
+        // allowNull: true,
         primaryKey: true,
         references: {
             model: 'user',
