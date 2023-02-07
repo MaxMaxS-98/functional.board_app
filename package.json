@@ -27,7 +27,8 @@
     "handlebars": "",
     "mysql2": "",
     "sequelize": "",
-    "socket.io": ""
+    "socket.io": "",
+    "deck-of-cards": ""
   },
   "homepage": "https://github.com/MaxMaxS-98/BlackJackProject#readme"
 }
