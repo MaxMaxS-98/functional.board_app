@@ -40,8 +40,10 @@ app.get('/api/users', async (req, res) => {
     const dbUserData = await User.findAll({
       attributes: ['id', 'username'],
       include: [
-        { model: Record,
-        attributes: ['games_played', 'games_won', 'max_profit'] },
+        {
+          model: Record,
+          attributes: ['games_played', 'games_won', 'max_profit']
+        },
       ],
     })
     const users = dbUserData.map((user) =>
@@ -58,7 +60,7 @@ app.get('/api/table', async (req, res) => {
     const dbTableData = await Playtable.findAll({
       include: [
         { model: Dealer },
-        // {model: Player}
+        { model: Player }
       ],
     })
     const tables = dbTableData.map((table) =>
@@ -74,7 +76,8 @@ app.get('/api/players', async (req, res) => {
   try {
     const dbPlayerData = await Player.findAll({
       include: [
-        { model: User,
+        {
+          model: User,
           attributes: ['id', 'username'],
         }
       ],

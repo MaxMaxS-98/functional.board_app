@@ -4,6 +4,7 @@ const seedRecord = require('./recordData')
 const seedPlayers = require('./playerData')
 const seedDealers = require('./dealerData')
 const seedTables = require('./tableData')
+
 const seedAll = async () => {
   await sequelize.sync({ force: true });
   await seedTables();

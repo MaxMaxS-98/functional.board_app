@@ -1,16 +1,12 @@
 const { Playtable } = require('../models');
 
-// const tableData = [
-//   {
-//     id: 1,
-//   }
-// ];
-
-const seedTables = async () => {
-  const newTable = await Playtable.create({
+const newTable = [{
   id: 1,
   is_active: true
-});
-}
+}]
+
+const seedTables = () => Playtable.bulkCreate(newTable);
+  
+
 
 module.exports = seedTables;

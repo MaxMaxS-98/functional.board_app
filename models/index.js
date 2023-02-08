@@ -6,14 +6,18 @@ const Dealer = require('./dealer');
 
 // Table has many players
 Playtable.hasMany(Player,
-  { foreignKey: 'id',
-  onDelete: 'CASCADE', }
+  {
+    foreignKey: 'table_id',
+    onDelete: 'CASCADE',
+  }
 );
 
 // Player belongs to one table
 Player.belongsTo(Playtable,
-  { foreignKey: 'id',
-  onDelete: 'CASCADE', }
+  {
+    foreignKey: 'table_id',
+    onDelete: 'CASCADE',
+  }
 );
 
 // Table has one dealer
