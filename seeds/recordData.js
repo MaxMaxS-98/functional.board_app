@@ -1,6 +1,6 @@
 const { Record } = require('../models');
 
-const recorddata = [
+const recordData = [
     {
         // id: 1,
         player_id: 1,
@@ -22,6 +22,6 @@ const recorddata = [
     },
 ];
 
-const seedRecord = () => Record.bulkCreate(recorddata);
+const seedRecord = () => Record.bulkCreate(recordData);
 
 module.exports = seedRecord;

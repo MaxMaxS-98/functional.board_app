@@ -1,6 +1,6 @@
 const path = require('path');
 const express = require('express');
-const { User, Stats } = require('./models')
+const { User, Record, Player, Dealer, Table } = require('./models')
 // const session = require('express-session');
 // const exphbs = require('express-handlebars');
 // const SequelizeStore = require('connect-session-sequelize')(session.Store);
@@ -47,6 +47,23 @@ app.get('/api/users', async (req, res) => {
       user.get({ plain: true })
     );
     res.status(200).json(users)
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+app.get('/api/table', async (req, res) => {
+  try {
+    const dbTableData = await Table.findAll({
+      include: [
+        { model: Dealer },
+        {model: Player}
+      ],
+    })
+    const tables = dbTableData.map((table) =>
+      table.get({ plain: true })
+    );
+    res.status(200).json(tables)
   } catch (err) {
     res.status(500).json({ error: err.message });
   }

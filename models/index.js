@@ -23,4 +23,4 @@ User.hasOne(Record
 // record belongs to one user
 Record.belongsTo(User);
 
-module.exports = { User, Record, Table};
+module.exports = { User, Record, Table, Player, Dealer};
