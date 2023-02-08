@@ -1,42 +1,41 @@
 const { Model, DataTypes } = require('sequelize');
 const sequelize = require('../config/connection');
 
-class Record extends Model { }
+class Table extends Model { }
 
-Record.init(
+Table.init(
     {
-    user_id: {
+    id: {
         type: DataTypes.INTEGER,
         allowNull: false,
         primaryKey: true,
+        autoIncrement: true,
+    },
+    players: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
         references: {
-            model: 'user',
-            key: 'user_id',
+            model: 'player',
+            key: 'id',
           }
     },
-    games_won: {
+    dealer: {
         type: DataTypes.INTEGER,
         allowNull: false,
-        defaultValue: 0
+        references: {
+            model: 'dealer',
+            key: 'id',
+          }
     },
-    games_played: {
-        type: DataTypes.INTEGER,
-        allowNull: false,
-        defaultValue: 0
-    },
-    max_profit: {
-        type: DataTypes.INTEGER,
-        allowNull: false,
-        defaultValue: 0
-    }
+
 },
 {
     sequelize,
     timestamps: false,
     freezeTableName: true,
     underscored: true,
-    modelName: 'record',
+    modelName: 'table',
 }
 );
 
-module.exports = Record
+module.exports = Table
