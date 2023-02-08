@@ -1,10 +1,10 @@
 const User = require('./User');
-const Stats = require('./Stats');
+const Record = require('./Record');
 
-User.hasOne(Stats 
+User.hasOne(Record 
   ,{ foreignKey: 'player_id', sourceKey: 'user_id' }
   );
 
-Stats.belongsTo(User);
+Record.belongsTo(User);
 
-module.exports = { User, Stats };
+module.exports = { User, Record };
