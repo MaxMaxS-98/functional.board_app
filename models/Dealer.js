@@ -15,7 +15,7 @@ Dealer.init(
         type: DataTypes.INTEGER,
         allowNull: false,
         references: {
-            model: 'table',
+            model: 'playtable',
             key: 'id',
           }
     },

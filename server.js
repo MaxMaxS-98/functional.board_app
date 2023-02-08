@@ -1,6 +1,6 @@
 const path = require('path');
 const express = require('express');
-const { User, Record, Player, Dealer, Table } = require('./models')
+const { User, Record, Player, Dealer, Playtable } = require('./models')
 // const session = require('express-session');
 // const exphbs = require('express-handlebars');
 // const SequelizeStore = require('connect-session-sequelize')(session.Store);
@@ -38,9 +38,10 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.get('/api/users', async (req, res) => {
   try {
     const dbUserData = await User.findAll({
-      attributes: ['user_id', 'username'],
+      attributes: ['id', 'username'],
       include: [
-        { model: Stats },
+        { model: Record,
+        attributes: ['games_played', 'games_won', 'max_profit'] },
       ],
     })
     const users = dbUserData.map((user) =>
@@ -54,16 +55,34 @@ app.get('/api/users', async (req, res) => {
 
 app.get('/api/table', async (req, res) => {
   try {
-    const dbTableData = await Table.findAll({
+    const dbTableData = await Playtable.findAll({
       include: [
         { model: Dealer },
-        {model: Player}
+        // {model: Player}
       ],
     })
     const tables = dbTableData.map((table) =>
       table.get({ plain: true })
     );
     res.status(200).json(tables)
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+app.get('/api/players', async (req, res) => {
+  try {
+    const dbPlayerData = await Player.findAll({
+      include: [
+        { model: User,
+          attributes: ['id', 'username'],
+        }
+      ],
+    })
+    const players = dbPlayerData.map((player) =>
+      player.get({ plain: true })
+    );
+    res.status(200).json(players)
   } catch (err) {
     res.status(500).json({ error: err.message });
   }

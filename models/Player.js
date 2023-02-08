@@ -11,20 +11,13 @@ Player.init(
         primaryKey: true,
         autoIncrement: true,
     },
-    table_id: {
+    current_table: {
         type: DataTypes.INTEGER,
-        allowNull: false,
+        allowNull: true,
+        // defaultValue: 1,
         references: {
-            model: 'table',
+            model: 'playtable',
             key: 'id',
-          }
-    },
-    user_id: {
-        type: DataTypes.INTEGER,
-        allowNull: false,
-        references: {
-            model: 'user',
-            key: 'user_id',
           }
     },
     credit: {
@@ -52,6 +45,12 @@ Player.init(
         type: DataTypes.BOOLEAN,
         allowNull: false,
         defaultValue: true
+    },
+    // This shows the status of a player, for example: 'stand', 'split', 'double', 'busted', 'stand', etc.
+    current_status: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        defaultValue: 'idle'
     }
 },
 {
