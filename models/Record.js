@@ -1,17 +1,11 @@
 const { Model, DataTypes } = require('sequelize');
 const sequelize = require('../config/connection');
 
-class Stats extends Model { }
+class Record extends Model { }
 
-Stats.init(
+Record.init(
     {
-    // id: {
-    //     type: DataTypes.INTEGER,
-    //     allowNull: false,
-    //     primaryKey: true,
-    //     autoIncrement: true,
-    // },
-    player_id: {
+    user_id: {
         type: DataTypes.INTEGER,
         allowNull: false,
         primaryKey: true,
@@ -34,11 +28,6 @@ Stats.init(
         type: DataTypes.INTEGER,
         allowNull: false,
         defaultValue: 0
-    },
-    credit: {
-        type: DataTypes.INTEGER,
-        allowNull: false,
-        defaultValue: 1000 
     }
 },
 {
@@ -46,8 +35,8 @@ Stats.init(
     timestamps: false,
     freezeTableName: true,
     underscored: true,
-    modelName: 'stats',
+    modelName: 'record',
 }
 );
 
-module.exports = Stats
+module.exports = Record
