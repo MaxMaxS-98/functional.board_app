@@ -40,6 +40,8 @@ Stats.init(
         allowNull: false,
         defaultValue: 1000 
     }
+    
+
 },
 {
     sequelize,

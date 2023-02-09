@@ -1,21 +1,10 @@
 // dealerFunctions.js
 // handles server side dealer logic
 
-let newDeck = [];
 
-// start newGame
-const startNewGame = () => {
-    // logic for starting a new game
-    // create new deck
-    newDeck = [];
-    for (let i = 0; i < 52; i++) {
-        newDeck[i] = {
-            id: i,
-            value: 0
-        }
-    }
-    console.log(newDeck);
-}
+import { Deck, Player } from 'playing-cards-js'; 
+const deck = new Deck();
+
 
 const newShoe = () => {
     // logic for creating a new shoe of cards with 2 decks 
@@ -57,7 +46,7 @@ const notifications = () => {
             console.log("Blackjack!")
         }, 1000)
     }
-    // update status letting the table know that it has won
+    // update status letting the player know that they won  
     let won = () => {
         setTimeout(() => {
             console.log("You Won!")
@@ -85,7 +74,11 @@ const notifications = () => {
     let idle = () => {
         setTimeout(() => {
             console.log("Please make a move!")
-        }, 20000)
+           
+        }, 1000)
+        // if player has not made a move after 20 seconds, go to next player
+        //TODO: add logic to make a move if player has not made a move after 20 seconds
+        
     }
     // if dealer shows an Ace, update status letting the table know that it has Ace, and ask player if they want to buy insurance
     }
@@ -98,9 +91,10 @@ const notifications = () => {
             }, 5000)
       
         }, 1000)
+    }
         // check hole card for a 10 value card
         // if hole card is a 10 value card, update status letting the table know that it has blackjack and end current game
-        if (checkHoleCard === 10) {
+       const checkHoleCard = () => {
             setTimeout(() => {
                 console.log("Dealer has blackjack!")
             }, 1000)
@@ -108,7 +102,6 @@ const notifications = () => {
                 newGame()
             }, 1000)
     
-    }
     // check split
     // if player has two cards of the same value, update status letting the table know that it has split and ask player if they want to split
     }
@@ -158,5 +151,22 @@ const notifications = () => {
         }
     }
 
-    
+    // dealTable()
+    // pull from deck and deal cards to players
+    let dealTable = () => {
+        // check to see how many players are at the table
+        //TODO: add logic to check how many activeplayers are at the table by checking the activeplayers array
+        // if there is 1 player or more deal 2 cards to each player in 1 second intervals
+        for (let i = 0; i < activePlayers.length; i++) {
+            setTimeout(() => {
+                console.log(activePlayers[i].name + " has " + activePlayers[i].hand.length + " cards in their hand.")
+            }, 1000 * i)
+       
 
+        for (let i = 0; i < 1; i++) {
+        }
+        // deal cards to each player
+    }
+
+
+    }
