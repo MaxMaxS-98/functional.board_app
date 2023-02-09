@@ -8,15 +8,15 @@ let insuranceTimer;
 let databaseTimer;
 
 const timers = {
-  betTimer: 10,
-  playerTimer: 60,
-  insuranceTimer: 5,
-  databaseTimer: 30,
+  bet: 10,
+  player: 60,
+  insurance: 5,
+  database: 30,
 };
 
 const interval = 1000; // 1 second interval in milliseconds
 
-const startTimer = (timerName) => {
+const startCountdown = (timerName) => {
   let time = timers[timerName];
   betTimer;
   console.log(`Timer "${timerName}" started with ${time} seconds`);
@@ -32,7 +32,7 @@ const startTimer = (timerName) => {
   }, interval);
 };
 
-startTimer("betTimer");
-startTimer("playerTimer");
-startTimer("insuranceTimer");
-startTimer("databaseTimer");
+startTimer("bet");
+startTimer("player");
+startTimer("insurance");
+startTimer("database");
