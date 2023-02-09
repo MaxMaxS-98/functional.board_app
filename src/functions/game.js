@@ -1,106 +1,85 @@
-// game.js
-const fs = require('fs');
-const path = require('path');
-const deck = require('./buildDeck');
+const fs = require("fs");
+const path = require("path");
+const deck = require("./buildDeck");
 
 const startGame = async () => {
-    // count the number of objects in activeplayers.json file
-    // and assign it to numPlayers
-    let activePlayers = fs.readFileSync(path.join(__dirname, '../db/activePlayers.json'));
-    console.log(activePlayers); //check work
-    const numPlayers = activePlayers.length;
-    console.log(numPlayers); //check work
-    
+  var activePlayers = JSON.parse(
+    fs.readFileSync(path.join(__dirname, "../db/activePlayers.json"))
+  );
+  console.log(activePlayers);
+  var numPlayers = Object.keys(activePlayers).length;
+  console.log(numPlayers);
 
+  let shoe = require("../db/activeShoe.json");
+  console.log(shoe);
+  let deckLength = deck.length;
+  console.log(deckLength);
 
-    const shoe = require('../db/activeShoe.json');
-    console.log(shoe); //check work
-    //length of cards left in shoe
-    let deckLength = deck.length;
-    console.log(deckLength); //check work
-    
+  var players = [];
+  for (let i = 0; i < numPlayers; i++) {
+    players.push("Player" + (i + 1));
+  }
+  console.log(players);
+  let dealerHand = [];
+  let playerHand = [];
 
-    // shuffle deck
-    //TODO:
-    //create a holding array for holding cards for each player and assign a variable to each array
+  console.log("Starting a new game...");
+  await new Promise((resolve) => setTimeout(resolve, 2000));
+  console.log("Dealing cards...");
+  await new Promise((resolve) => setTimeout(resolve, 1000));
 
-    let playerHand = [];
-    for (let i = 0; i < numPlayers; i++) {
-        playerHand[i] = [];
-
-    }
-
-    // create a holding array for dealer
-    let dealerHand = [];
+  // Deal cards to players
+  for (let i = 0; i < numPlayers; i++) {
   
-    console.log ("Starting a new game...");
-    // pause for 2 seconds
-    await new Promise(resolve => setTimeout(resolve, 2000));
-    console.log ("Dealing cards...");
+    var indexToRemove = Math.floor(Math.random() * deckLength);
+    shoe.splice(indexToRemove, 1);
+    await new Promise((resolve) => setTimeout(resolve, 1000));
+    console.log(
+      `${players[i]} was dealt a ${shoe[i].name} of ${shoe[i].suit}. Value: ${shoe[i].value}.`
+    );
+    playerHand.push(shoe[i]);
+  }
 
-    // pause for 2 seconds
-    await new Promise(resolve => setTimeout(resolve, 1000));
+  dealerHand.push(deck.pop());
+  let faceDownCard = dealerHand[0].value;
+  let faceDownSuit = dealerHand[0].suit;
+  let faceDownName = dealerHand[0].name;
 
-    // Deal cards one by one to each player.
-    for (let i = 0; i < numPlayers; i++) {
-        playerHand[i].push(deck.pop());
-        // wait 1 second between each deal
-        await new Promise(resolve => setTimeout(resolve, 1000));
-        console.log ("Player " + (i + 1) + " was dealt a " + playerHand[i][0].name + " of " + playerHand[i][0].suit + ". Value: " + playerHand[i][0].value);
-       
-    }
+  await new Promise((resolve) => setTimeout(resolve, 1000));
+  console.log("Dealer was dealt a face down card.");
 
-    // Deal a face down card to the dealer.
-    dealerHand.push(deck.pop());
-    //store all facedown information
-    let faceDownCard = faceDownCard.value;
-    let faceDownSuit = faceDownCard.suit;
-    let faceDownName = faceDownCard.name;
+  for (let i = 0; i < numPlayers; i++) {
+    players[i].push(deck.pop());
+    await new Promise((resolve) => setTimeout(resolve, 1000));
+    console.log(
+      `${players[i]} was dealt a ${players[i][0].name} of ${players[i][0].suit}. Value: ${players[i][0].value}.`
+    );
+  }
 
-    // wait 1 second between each deal
-    await new Promise(resolve => setTimeout(resolve, 1000));
-   
-    console.log ("Dealer was dealt a face down card.");
-    
-    // Deal second cards  one by one to each player.
-   
-    for (let i = 0; i < numPlayers; i++) {
-        playerHand[i].push(deck.pop());
-        // wait 1 second between each deal
-        await new Promise(resolve => setTimeout(resolve, 1000));
-        console.log ("Player " + (i + 1) + " was dealt a " + playerHand[i][0].name + " of " + playerHand[i][0].suit + ". Value: " + playerHand[i][0].value);
-       
-    }
+  dealerHand.push(deck.pop());
+  let faceUpCard = dealerHand[1].value;
+  let faceUpSuit = dealerHand[1].suit;
+  let faceUpName = dealerHand[1].name;
 
-    // Deal a face up card to the dealer.
-    dealerHand.push(deck.pop());
-    //store all faceup information
-    let faceUpCard = faceUpCard.value;
-    let faceUpSuit = faceUpCard.suit;
-    let faceUpName = faceUpCard.name;
+  console.log(`Dealer's up card is ${faceUpName} of ${faceUpSuit}.`);
+  await new Promise((resolve) => setTimeout(resolve, 3000));
 
-    // wait for 3 seconds before next action
-    console.log ("Dealer's up card is " + faceUpName + " of " + faceUpSuit + ".");
+  console.log("Checking for dealer blackjack...");
+  await new Promise((resolve) => setTimeout(resolve, 3000));
 
-    await new Promise(resolve => setTimeout(resolve, 3000));
-
-   // check for dealer blackjack
-   console.log ("Checking for dealer blackjack...");
-   //wait 3 seconds before next action
-    await new Promise(resolve => setTimeout(resolve, 3000));
-
-   if ((faceDownCard + faceUpCard) === 21) {
-    console.log ("Dealer has blackjack!");
+  if (faceDownCard + faceUpCard === 21) {
+    console.log("Dealer has blackjack!");
     // end the game, push all arrays to usedShoe.json
-    fs.writeFileSync(path.join(__dirname, '../db/usedShoe.json'), JSON.stringify(playerHand));
-    fs.writeFileSync(path.join(__dirname, '../db/usedShoe.json'), JSON.stringify(dealerHand));
-    console.log ("Game over!");
+    fs.writeFileSync(
+      path.join(__dirname, "../db/usedShoe.json"),
+      JSON.stringify(players)
+    );
+    console.log("Game over!");
     process.exit();
-    } else {
-        console.log ("Dealer has no blackjack!");
-        // write instructions here
-    }
-}
+  } else {
+    console.log("Dealer has no blackjack!");
+    // write instructions here
+  }
+};
 
 startGame();
-
