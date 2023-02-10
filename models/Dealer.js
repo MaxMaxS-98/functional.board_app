@@ -1,9 +1,9 @@
 const { Model, DataTypes } = require('sequelize');
 const sequelize = require('../config/connection');
 
-class Player extends Model { }
+class Dealer extends Model { }
 
-Player.init(
+Dealer.init(
     {
         id: {
             type: DataTypes.INTEGER,
@@ -18,11 +18,6 @@ Player.init(
                 model: 'playtable',
                 key: 'id',
             }
-        },
-        credit: {
-            type: DataTypes.INTEGER,
-            allowNull: false,
-            defaultValue: 1000
         },
         first_hand: {
             type: DataTypes.STRING,
@@ -40,12 +35,7 @@ Player.init(
             type: DataTypes.STRING,
             allowNull: true
         },
-        is_active: {
-            type: DataTypes.BOOLEAN,
-            allowNull: false,
-            defaultValue: true
-        },
-        // This shows the status of a player, for example: 'stand', 'split', 'double', 'busted', 'stand', etc.
+        // This shows the status of a dealer, for example: 'stand', 'split', 'double', 'busted', 'stand', etc.
         current_status: {
             type: DataTypes.STRING,
             allowNull: false,
@@ -57,8 +47,8 @@ Player.init(
         timestamps: false,
         freezeTableName: true,
         underscored: true,
-        modelName: 'player',
+        modelName: 'dealer',
     }
 );
 
-module.exports = Player
+module.exports = Dealer
