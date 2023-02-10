@@ -9,8 +9,8 @@ const seedAll = async () => {
   await sequelize.sync({ force: true });
   await seedTables();
   await seedDealers();
-  await seedPlayers();
   await seedUsers();
+  await seedPlayers();
   await seedRecord();
   process.exit(0);
 };

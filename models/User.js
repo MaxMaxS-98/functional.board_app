@@ -16,13 +16,9 @@ User.init(
       primaryKey: true,
       autoIncrement: true,
     },
-    player_id:{
-      type: DataTypes.INTEGER,
+    fullname: {
+      type: DataTypes.STRING,
       allowNull: false,
-      references: {
-        model: 'player',
-        key: 'id'
-      }
     },
     username: {
       type: DataTypes.STRING,
