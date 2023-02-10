@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { User } = require('../../models');
+const { User, Record } = require('../../models');
 
 // CREATE new user
 router.post('/', async (req, res) => {
@@ -7,11 +7,15 @@ router.post('/', async (req, res) => {
     const dbUserData = await User.create(
       req.body
     );
-    
+    const dbRecordData = await Record.create(
+      {
+        user_id: req.body.id
+      }
+    );
     req.session.save(() => {
       req.session.loggedIn = true;
 
-      res.status(200).json(dbUserData);
+      res.status(200).json({ dbUserData, dbRecordData });
     });
   } catch (err) {
     console.log(err);

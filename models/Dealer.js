@@ -11,14 +11,14 @@ Dealer.init(
             primaryKey: true,
             autoIncrement: true,
         },
-        table_id: {
-            type: DataTypes.INTEGER,
-            allowNull: false,
-            references: {
-                model: 'playtable',
-                key: 'id',
-            }
-        },
+        // table_id: {
+        //     type: DataTypes.INTEGER,
+        //     allowNull: false,
+        //     references: {
+        //         model: 'playtable',
+        //         key: 'id',
+        //     }
+        // },
         hand: {
             type: DataTypes.STRING,
             allowNull: true

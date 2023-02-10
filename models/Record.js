@@ -10,16 +10,15 @@ Record.init(
             allowNull: false,
             primaryKey: true,
             autoIncrement: true,
-
         },
-        username: {
-            type: DataTypes.INTEGER,
-            allowNull: false,
-            references: {
-                model: 'user',
-                key: 'username',
-            }
-        },
+        // record_username: {
+        //     type: DataTypes.STRING,
+        //     allowNull: true,
+        //     references: {
+        //         model: 'user',
+        //         key: 'username',
+        //     }
+        // },
         games_won: {
             type: DataTypes.INTEGER,
             allowNull: false,

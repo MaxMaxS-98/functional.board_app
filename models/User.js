@@ -7,7 +7,6 @@ class User extends Model {
     return bcrypt.compareSync(loginPw, this.password);
   }
 }
-
 User.init(
   {
     id: {
@@ -23,6 +22,8 @@ User.init(
     username: {
       type: DataTypes.STRING,
       allowNull: false,
+      unique: true,
+      index: true
     },
     email: {
       type: DataTypes.STRING,

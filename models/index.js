@@ -14,40 +14,45 @@ Playtable.hasMany(Player,
 
 // Player belongs to one table
 Player.belongsTo(Playtable,
-  {
-    foreignKey: 'table_id',
-    onDelete: 'CASCADE',
-  }
+  // {
+  //   foreignKey: 'table_id',
+  //   onDelete: 'CASCADE',
+  // }
 );
 
 // Table has one dealer
 Playtable.hasOne(Dealer,
-  { foreignKey: 'id' }
+  { foreignKey: 'table_id' }
 );
 
 // Dealer belongs to one table
 Dealer.belongsTo(Playtable,
-  { foreignKey: 'id' }
+  // { foreignKey: 'id' }
 );
 
-// User is one player
-// User.hasOne(Player,
-//   { foreignKey: 'player_name' }
-// );
+// User is a player
+User.hasOne(Player,
+  { foreignKey: 'user_id' }
+);
 
-// Player.belongsTo(User,
-//   { foreignKey: 'player_name' }
-// );
-// // User has one record
-// User.hasOne(Record,
-//   { foreignKey: 'username' }
-// );
-// // record belongs to one user
-// Record.belongsTo(User,
-//   { foreignKey: 'username' }
-// );
+Player.belongsTo(User,
+  // { foreignKey: 'player_name' }
+);
+// User has one record
+User.hasOne(Record,
+  { foreignKey: 'user_id' }
+);
+// record belongs to one user
+Record.belongsTo(User,
+  // { foreignKey: 'username' }
+);
 
 
 
-module.exports = { User, Record, Playtable, Player, Dealer };
+module.exports = { User, 
+  Record, 
+  Playtable, 
+  Player, 
+  Dealer 
+};
 

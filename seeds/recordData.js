@@ -2,22 +2,22 @@ const { Record } = require('../models');
 
 const recordData = [
     {
-        // id: 1,
-        user_name: 'Jane123',
+        user_id: 1,
+        // record_username: 'Jane123',
     },
     {
-        // id: 2,
-        user_name: 'Jack456',
+        user_id: 2,
+        // record_username: 'Jack456',
     },
     {
-        // id: 3,
-        user_name: 'John789',
-        games_played: 999,
+        user_id: 3,
+        // record_username: 'John789',
+        games_played: 100,
         games_won: 0
     },
     {
-        // id: 4,
-        user_name: 'Jim01234567',
+        user_id: 4,
+        // record_username: 'Jim01234567',
         max_profit: 1000000
     },
 ];
