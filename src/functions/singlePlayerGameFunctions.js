@@ -200,4 +200,6 @@ if (!playerBust && !dealerBust) {
   playerWin();
 }
 
-console.log("Thank you for playing Blackjack! Have a great day!");
+console.log("Thanks for playing Blackjack! ")
+console.log("Game over!");
+

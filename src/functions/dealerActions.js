@@ -1,3 +1,6 @@
+const Draw = require('../helpers/class/draw');
+const draw = new Draw();
+
 function dealerDraw() {
     draw
       .drawCard()

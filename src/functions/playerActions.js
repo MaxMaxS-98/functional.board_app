@@ -1,3 +1,7 @@
+const Draw = require('../helpers/class/draw');
+const draw = new Draw();
+
+
 function playerDraw() {
     draw
       .drawCard()
@@ -49,7 +53,7 @@ function playerDraw() {
   }
   
   function playerWin() {
-    playerBank = playerBank + 2 * playerBet;
+    playerBank = playerBank + (playerBet*2);
     console.log(
       "The player has won the hand! The player's bank is now " + playerBank + "."
     );

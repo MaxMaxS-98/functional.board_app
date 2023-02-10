@@ -1,9 +1,11 @@
 // File: game.js
 var playerBank = 1000
-
+const playerActions = require('./playerActions.js')
+const dealerActions = require('./dealerActions.js')
+const playerHand = [];
 
 // Start of the game
-console.log("Welcome to the Blackjack.");
+console.log("Welcome to Blackjack.");
 console.log("The player's starting bank is " + playerBank + ".");
 
 // Place a bet
@@ -12,17 +14,13 @@ playerBet(betAmount);
 
 // Deal initial cards
 console.log("Dealing initial cards...");
-playerDraw();
-dealerDraw();
+playerActions.playerDraw();
+dealerActions.dealerDraw();
 if (dealerHand.length > 0) {
   dealerDown.push(dealerHand[0]);
   console.log(
-    "The dealer's facedown card is a " +
-      dealerDown[0].name +
-      " of " +
-      dealerDown[0].suit +
-      "."
-  );
+    "The dealer's drew a facedown card.");
+    //TODO: store facedown value in variable
 }
 if (dealerHand.length > 1) {
   dealerUp.push(dealerHand[1]);
