@@ -2,7 +2,7 @@ const Record = require('./Record');
 const Playtable = require('./Playtable');
 const Player = require('./player');
 const Dealer = require('./dealer');
-
+const User = require('./User')
 
 // Table has many players
 Playtable.hasMany(Player,
@@ -30,12 +30,12 @@ Dealer.belongsTo(Playtable,
   { foreignKey: 'id' }
 );
 
-// Player has one user
-Player.hasOne(User,
+// User is one player
+User.hasOne(Player,
   { foreignKey: 'id' }
 );
 
-User.belongsTo(Player,
+Player.belongsTo(User,
   { foreignKey: 'id' }
 );
 // User has one record
