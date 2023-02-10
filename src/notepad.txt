@@ -1,0 +1,40 @@
+New Game when Player is Present.
+
+
+User Story:
+As a USER, I would like to initiate a game of Blackjack.
+
+Acceptance Criteria:
+GIVEN I am logged in as a USER, my balance is displayed.
+THEN the dealer should prompt me to place my bet.
+AFTER bet is placed, a countdown of 10 seconds is displayed to allow any other player to place their bets.
+WHEN the countdown reaches zero, the game begins and the balance is subtracted from the player balance.
+WHEN the game begins, the dealer begins to deal cards to the players from the Active Shoe starting from the dealer -left to the right.
+THEN the dealer takes a card (hole card) face down and value is hidden from the players.
+THEN the dealer distributes the second card to the players.
+THEN the dealer takes a second card which displays face up.
+GIVEN the dealers second card is a 10 value, dealer checks hole card for an ACE. If ACE is in hole card, game ends, and table is cleared.
+THEN if the dealers second card is an ACE, the insurance is offered to the players, and Yes/No option is displayed.
+THEN dealer checks hole card for a 10 value. If dealer has 10 value, dealer has blackjack and game ends.
+THEN If the dealer does not have blackjack, Player 1 is prompted to make a decision on their hand.
+THEN player chooses play options until either they are satisfied with hand total, or BUST.
+AFTER Player 1 is done, repeat until all players are done.
+THEN Dealer draws until they have 17 or higher. If dealer has 22 or more, Dealer Busts.
+THEN winning players are paid their winnings. The Game Ends, and table is cleared, and cards are discarded to Used Shoe JSON
+
+
+The deck of cards is held in the Active Shoe JSON. 
+When cards are drawn, they are removed from the Active Shoe and temporarily placed in Player array.
+When game ends, all cards are removed from the player arrays, and dealer arrays, and placed in usedShoe JSON.
+
+There will be several timers running to handle different functions.
+    -- Bet Timer: 10 seconds
+        - All active players have 10 seconds to place their bets.
+    -- Player Timer: 60 seconds.
+        - When its the players turn, the player has a total of 60 seconds to make their decision. If the time runs out, the hand stays as is, and then it becomes the next players turn, and the timer resets.
+    -- Insurance Timer: 5 seconds.
+        - All players have 5 seconds to decide whether or not to buy insurance.
+    -- Database Timer: 30 seconds.
+        - Every 30 seconds, the database is updated with player credits, (and any other data wish to be stored) so the information is saved for the next time they log in.
+        - The database is also updated after every round.
+    

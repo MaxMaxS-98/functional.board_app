@@ -1,8 +1,8 @@
-const User = require('./User');
 const Record = require('./Record');
 const Playtable = require('./Playtable');
 const Player = require('./player');
 const Dealer = require('./dealer');
+
 
 // Table has many players
 Playtable.hasMany(Player,
@@ -50,3 +50,4 @@ Record.belongsTo(User,
 
 
 module.exports = { User, Record, Playtable, Player, Dealer };
+
