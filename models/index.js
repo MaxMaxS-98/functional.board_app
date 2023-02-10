@@ -31,21 +31,21 @@ Dealer.belongsTo(Playtable,
 );
 
 // User is one player
-User.hasOne(Player,
-  { foreignKey: 'id' }
-);
+// User.hasOne(Player,
+//   { foreignKey: 'player_name' }
+// );
 
-Player.belongsTo(User,
-  { foreignKey: 'id' }
-);
-// User has one record
-User.hasOne(Record,
-  { foreignKey: 'id' }
-);
-// record belongs to one user
-Record.belongsTo(User,
-  { foreignKey: 'id' }
-);
+// Player.belongsTo(User,
+//   { foreignKey: 'player_name' }
+// );
+// // User has one record
+// User.hasOne(Record,
+//   { foreignKey: 'username' }
+// );
+// // record belongs to one user
+// Record.belongsTo(User,
+//   { foreignKey: 'username' }
+// );
 
 
 

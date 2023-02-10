@@ -12,12 +12,12 @@ Record.init(
             autoIncrement: true,
 
         },
-        user_id: {
+        username: {
             type: DataTypes.INTEGER,
             allowNull: false,
             references: {
                 model: 'user',
-                key: 'id',
+                key: 'username',
             }
         },
         games_won: {

@@ -15,6 +15,10 @@ Playtable.init(
         type: DataTypes.BOOLEAN,
         allowNull: false,
         defaultValue: true
+    },
+    deck: {
+        type: DataTypes.TEXT,
+        allowNull: true,
     }
 },
 {

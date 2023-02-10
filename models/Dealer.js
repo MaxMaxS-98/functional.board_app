@@ -19,19 +19,7 @@ Dealer.init(
                 key: 'id',
             }
         },
-        first_hand: {
-            type: DataTypes.STRING,
-            allowNull: true
-        },
-        second_hand: {
-            type: DataTypes.STRING,
-            allowNull: true
-        },
-        split_first_hand: {
-            type: DataTypes.STRING,
-            allowNull: true
-        },
-        split_second_hand: {
+        hand: {
             type: DataTypes.STRING,
             allowNull: true
         },
