@@ -1,7 +1,7 @@
 const router = require('express').Router();
 const { Playtable, Dealer, Player } = require('../../models');
 
-app.get('/', async (req, res) => {
+router.get('/', async (req, res) => {
     try {
         const dbTableData = await Playtable.findAll({
             include: [

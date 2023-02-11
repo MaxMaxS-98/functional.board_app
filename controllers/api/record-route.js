@@ -4,7 +4,7 @@ const withAuth = require('../../utils/auth');
 
 
 // Get all records
-app.get('/', async (req, res) => {
+router.get('/', async (req, res) => {
     try {
       const dbRecordData = await Record.findAll()
       const records = dbRecordData.map((record) =>
@@ -17,7 +17,7 @@ app.get('/', async (req, res) => {
   });
 
   // Get a single record by ID
-app.get('/:id', withAuth, async (req, res) => {
+router.get('/:id', withAuth, async (req, res) => {
     try {
       const dbRecordData = await Record.findOne({
         where: { id: req.params.id }
@@ -35,7 +35,7 @@ app.get('/:id', withAuth, async (req, res) => {
   });
   
   // Update a single record by ID
-  app.put('/:id', withAuth, async (req, res) => {
+  router.put('/:id', withAuth, async (req, res) => {
     try {
       const updatedRecord = await Record.update(req.body, {
         where: { id: req.params.id },

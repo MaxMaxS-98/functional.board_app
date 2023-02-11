@@ -27,7 +27,7 @@ router.post('/', async (req, res) => {
 });
 
 // get all users
-app.get('/', async (req, res) => {
+router.get('/', async (req, res) => {
   try {
     const dbUserData = await User.findAll({
       attributes: ['id', 'username'],
@@ -48,7 +48,7 @@ app.get('/', async (req, res) => {
 });
 
 // Get user by id
-app.get('/:id', withAuth, async (req, res) => {
+router.get('/:id', withAuth, async (req, res) => {
   try {
     const dbUserData = await User.findOne({
       where: { id: req.params.id },
@@ -72,7 +72,7 @@ app.get('/:id', withAuth, async (req, res) => {
 });
 
 // Update a user by id
-app.put('/:id', withAuth, async (req, res) => {
+router.put('/:id', withAuth, async (req, res) => {
   try {
     const updatedUser = await User.update(req.body, {
       where: { id: req.params.id },
