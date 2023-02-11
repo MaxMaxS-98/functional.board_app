@@ -11,40 +11,32 @@ Player.init(
             primaryKey: true,
             autoIncrement: true,
         },
-        table_id: {
-            type: DataTypes.INTEGER,
-            allowNull: false,
-            references: {
-                model: 'playtable',
-                key: 'id',
-            }
-        },
-        user_id: {
-            type: DataTypes.INTEGER,
-            allowNull: false,
-            references: {
-                model: 'user',
-                key: 'id',
-            }
-        },
+        // table_id: {
+        //     type: DataTypes.INTEGER,
+        //     allowNull: false,
+        //     references: {
+        //         model: 'playtable',
+        //         key: 'id',
+        //     }
+        // },
+        // player_name: {
+        //     type: DataTypes.STRING,
+        //     allowNull: false,
+        //     references: {
+        //         model: 'user',
+        //         key: 'username',
+        //     }
+        // },
         credit: {
             type: DataTypes.INTEGER,
             allowNull: false,
             defaultValue: 1000
         },
-        first_hand: {
+        hand: {
             type: DataTypes.STRING,
             allowNull: true
         },
-        second_hand: {
-            type: DataTypes.STRING,
-            allowNull: true
-        },
-        split_first_hand: {
-            type: DataTypes.STRING,
-            allowNull: true
-        },
-        split_second_hand: {
+        split_hand: {
             type: DataTypes.STRING,
             allowNull: true
         },
