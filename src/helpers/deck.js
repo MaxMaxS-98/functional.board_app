@@ -8,7 +8,7 @@ class Deck {
 	createDeck() {
 	  const suits = ["Hearts", "Diamonds", "Spades", "Clubs"];
 	  const names = [
-		{ name: "Ace", value: 1 },
+		{ name: "Ace", value: 1 || 11 },
 		{ name: "2", value: 2 },
 		{ name: "3", value: 3 },
 		{ name: "4", value: 4 },

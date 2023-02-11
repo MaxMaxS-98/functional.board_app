@@ -1,7 +1,7 @@
 //playerFunctionsDb.js
 // Methods to communicate with the database for player functions
 
-const { Player } = require('../models');
+const { Player } = require('../../../models');
 // define the Player model
 // const playerAction  = sequelize.define('playerAction', {
 
