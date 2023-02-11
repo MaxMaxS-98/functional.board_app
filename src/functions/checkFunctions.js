@@ -8,6 +8,14 @@ function checkBust() {
       dealerBust = true;
     }
   }
+
+  function checkBlackjack(playerTotal) {
+    if (playerTotal === 21) {
+      console.log("The player has blackjack! The player wins.");
+      console.log("Game over!");
+      playerBlackjack = true;
+    }
+  }
   
   function checkPush() {
     if (playerTotal === 21 && dealerTotal === 21) {
@@ -23,26 +31,53 @@ function checkBust() {
   }
   
   function checkDealerUp() {
+    
     if (dealerTotal >= 17) {
       dealerStand = true;
     }
   }
   
-//   function playerHit() {
-//     console.log("The player has chosen to hit.");
-//     playerDraw();
-//     checkBust();
-//   }
+  function playerHit() {
+    console.log("The player has chosen to hit.");
+    playerDraw();
+    checkBust();
+  }
   
-//   function playerStand() {
-//     console.log("The player has chosen to stand.");
-//     checkDealerDown();
-//     checkDealerUp();
-//   }
+  function playerStand() {
+    console.log("The player has chosen to stand.");
+    checkDealerDown();
+    checkDealerUp();
+  }
+
+  function checkDealerBlackjack() {
+    let dealerBlackjack = false;
+  
+    // Check if dealer has a blackjack when up card is a 10 value card
+    if (dealerUp[1].value === 10) {
+      if (dealerHand[0].value === 11) {
+        dealerBlackjack = true;
+        console.log("The dealer has blackjack! The dealer wins.");
+      }
+    }
+  
+    // Check if dealer has a blackjack when up card is an ace
+    if (dealerUp[1].value === 11) {
+      if (dealerHand[0].value === 10) {
+        dealerBlackjack = true;
+        console.log("The dealer has blackjack! The dealer wins.")
+      }
+    }
+  
+    return dealerBlackjack;
+  }
 
 module.exports = { 
     checkBust,
     checkPush,
     checkDealerDown,
     checkDealerUp,
+    playerHit,
+    playerStand,
+    checkBlackjack,
+    checkDealerBlackjack
 }

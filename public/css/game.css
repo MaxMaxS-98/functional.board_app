@@ -16,7 +16,7 @@ h1{
 }
 
 #game {
-    background: transparent url('../assets/img/6.jpeg')0 0 no-repeat;
+    background: transparent url("../assets/img/6.jpeg")0 0 no-repeat;
     border-radius: 10px;
     background-position: center;
     background-size:contain ;
@@ -88,3 +88,104 @@ input,#bet{
     background-color: rgb(208, 195, 193);
 
 }
+/* 
+.deck
+{
+	width:50%;
+	margin: 20px auto;
+	padding: 10px;
+	text-align: center;
+	color:white;
+}
+
+.card
+{
+	padding: 10px;
+	border: solid 1px #995454;
+	background-color: rgb(252, 251, 251);
+	display: inline-block;
+	border-radius: 10px;
+	font-size: 14pt;
+	text-align: center;
+	color:black;
+	margin: 3px;
+}
+
+.card .value{
+	font-size:15pt;
+	font-family: sans-serif;
+}
+
+.card .suit
+{
+	background-image: url('card.png');
+	height: 100px;
+	width: 85px;
+}
+
+.card .diamonds
+{
+	background-position-y: 100px;
+}
+
+.card .hearts
+{
+	background-position-x: 90px;
+}
+
+.card .clubs
+{
+	background-position-x:90px;
+	background-position-y:100px;
+} */
+
+.card-placement{
+    /* transform: rotate(35deg);  */
+    display: flex;
+    flex-direction: row-reverse;
+    position: absolute;
+    top: 24rem;
+    left: 11rem;
+}
+
+div #c1{
+    display: flex;
+    text-align: center;
+    font-size: xx-large;
+    margin: 90px;
+    padding: 11px;
+    border: 4px dotted black;
+    border-radius: 15px ;
+    height: 11rem;
+    width: 8rem
+}
+
+.card-placement .first{
+    margin-bottom: 20px;
+    transform: rotate(-35deg);
+    
+}
+
+.card-placement .second{
+    transform: rotate(-20deg);
+}
+
+.card-placement .third{
+    transform: rotate(-1deg);
+}
+
+.card-placement .forth{
+    transform: rotate(20deg);
+}
+
+.card-placement .fifth{ 
+    transform: rotate(30deg);}
+    
+    @media screen and (max-width: 768px) {
+        body {
+          width: 100%;
+        }
+        #game {
+          width: 100%;
+        }
+    }
