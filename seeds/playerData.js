@@ -2,24 +2,24 @@ const { Player } = require('../models');
 
 const playerData = [
   {
-   id: 1,
+   user_id: 1,
    table_id: 1,
-   user_id: 1
+  //  player_name: 'Jane123'
   },
   {
-    id: 2,
+    user_id: 2,
     table_id: 1,
-    user_id: 2
+    // player_name: 'Jack456'
   },
   {
-    id: 3,
+    user_id: 3,
     table_id: 1,
-    user_id: 3
+    // player_name: 'John789'
   },
   {
-    id: 4,
+    user_id: 4,
     table_id: 1,
-    user_id: 4
+    // player_name: 'Jim01234567'
   },
 ];
 

@@ -93,6 +93,18 @@ app.get('/api/players', async (req, res) => {
   }
 });
 
+app.get('/api/records', async (req, res) => {
+  try {
+    const dbRecordData = await Record.findAll()
+    const records = dbRecordData.map((record) =>
+      record.get({ plain: true })
+    );
+    res.status(200).json(records)
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
 sequelize.sync({ force: false }).then(() => {
   app.listen(PORT, () => console.log(`Now listening on ${PORT}`));
 });
