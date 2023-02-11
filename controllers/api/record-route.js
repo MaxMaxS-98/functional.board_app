@@ -6,52 +6,79 @@ const withAuth = require('../../utils/auth');
 // Get all records
 router.get('/', async (req, res) => {
     try {
-      const dbRecordData = await Record.findAll()
-      const records = dbRecordData.map((record) =>
-        record.get({ plain: true })
-      );
-      res.status(200).json(records)
-    } catch (err) {
-      res.status(500).json({ error: err.message });
-    }
-  });
+        const dbRecordData = await Record.findAll()
 
-  // Get a single record by ID
+        const records = dbRecordData.map((record) =>
+            record.get({ plain: true })
+        );
+        res.status(200).json(records)
+    } catch (err) {
+        res.status(500).json({ error: err.message });
+    }
+});
+
+// Get a single record by ID
 router.get('/:id', withAuth, async (req, res) => {
     try {
-      const dbRecordData = await Record.findOne({
-        where: { id: req.params.id }
-      });
-  
-      if (!dbRecordData) {
-        return res.status(404).json({ message: 'Record not found' });
-      }
-  
-      const record = dbRecordData.get({ plain: true });
-      res.status(200).json(record);
-    } catch (err) {
-      res.status(500).json({ error: err.message });
-    }
-  });
-  
-  // Update a single record by ID
-  router.put('/:id', withAuth, async (req, res) => {
-    try {
-      const updatedRecord = await Record.update(req.body, {
-        where: { id: req.params.id },
-        returning: true
-      });
-  
-      if (!updatedRecord[0]) {
-        return res.status(404).json({ message: 'Record not found' });
-      }
-  
-      const record = updatedRecord[1][0].get({ plain: true });
-      res.status(200).json({ message: 'Record updated successfully', record });
-    } catch (err) {
-      res.status(500).json({ error: err.message });
-    }
-  });
-  
+        const dbRecordData = await Record.findOne({
+            where: { id: req.params.id }
+        });
 
-  module.exports = router;
+        if (!dbRecordData) {
+            return res.status(404).json({ message: 'Record not found' });
+        }
+
+        res.status(200).json(dbRecordData.get({ plain: true }));
+    } catch (err) {
+        res.status(500).json({ error: err.message });
+    }
+});
+
+// Update a single record by ID
+router.put('/:id', withAuth, async (req, res) => {
+    try {
+        const updatedRecord = await Record.update(req.body, {
+            where: { id: req.params.id },
+            returning: true
+        });
+
+        if (!updatedRecord) {
+            return res.status(404).json({ message: 'Record not found' });
+        }
+        const plainRecord = updatedRecord.get({ plain: true })
+
+        res.status(200).json({ message: 'Record updated successfully', plainRecord });
+    } catch (err) {
+        res.status(500).json({ error: err.message });
+    }
+});
+
+// Create a new record
+router.post('/', withAuth, async (req, res) => {
+  try {
+    const dbRecordData = await Record.create(req.body);
+    res.status(200).json(dbRecordData.get({ plain: true }));
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+// Delete a single record by ID
+router.delete('/:id', withAuth, async (req, res) => {
+  try {
+    const deletedRecord = await Record.destroy({
+      where: { id: req.params.id }
+    });
+
+    if (!deletedRecord) {
+      return res.status(404).json({ message: 'Record not found' });
+    }
+
+    res.status(200).json({ message: 'Record deleted successfully' });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+
+module.exports = router;
