@@ -8,7 +8,7 @@ const router = require('express').Router();
 // GET homepage
 router.get('/', async (req, res) => {
   try {
-      await res.sendFile(path.join(__dirname, '../public/Webpage/index.html'));
+      await res.sendFile(path.join(__dirname, '../public/index.html'));
 
   } catch (err) {
     console.log(err);
@@ -23,7 +23,8 @@ router.get('/login', (req, res) => {
     return;
   }
 
-  res.render('login');
+  res.sendFile(path.join(__dirname, '../public/login.html'));
+
 });
 
 module.exports = router;
