@@ -1,8 +1,10 @@
 const path = require('path');
-
-class Draw {
+// const deckOfCards = require(path.join(__dirname, "../../db/activeShoe.json"));
+class Deck {
     constructor() {
       this.shoe = require(path.join(__dirname, "../../db/activeShoe.json"));
+      // this.shoe = deckOfCards
+      // this.usedShoe = []
     }
   
     async drawCard() {
@@ -23,4 +25,4 @@ class Draw {
     }
   }
 
-  module.exports = Draw;
+  module.exports = Deck;

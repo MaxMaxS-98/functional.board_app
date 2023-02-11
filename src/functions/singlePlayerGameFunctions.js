@@ -1,12 +1,13 @@
 const path = require("path");
-const check = require("./checkFunctions");
 const Deck = require(path.join(__dirname, "../helpers/class/Deck"));
 const draw = new Deck();
 
 const delay = require(path.join(__dirname, "../helpers/delayScript"));
 
 var playerHand = [];
+var playerHandValue = 0;
 var dealerHand = [];
+var dealerHandValue = 0;
 var dealerDown = [];
 var dealerUp = [];
 var playerBet = 25;
@@ -16,24 +17,16 @@ var playerBank = 1000;
 var playerBust = false;
 var dealerBust = false;
 var dealerStand = false;
-var playerBlackjack = false;
-var dealerBlackjack = false;
 var gameCount = 0;
 
-function drawCard(hand) {
-  const card = draw.drawCard();
+async function drawCard() {
+  const card = await draw.drawCard();
   console.log(card.name, card.suit, card.value);
-
-  hand.push(card);
 
   return card;
 }
 
-// Create two instances of drawCard function
-const playerDrawCard = () => drawCard(playerHand);
-const dealerDrawCard = () => drawCard(dealerHand);
-
-function startGame() {
+async function startGame() {
   console.log("Starting a new game of Blackjack...\n");
 
   // Deduct player's bet from bank
@@ -43,33 +36,22 @@ function startGame() {
   console.log("Your bank is now " + playerBank + ".\n");
 
   // Deal initial hands to player and dealer
-  playerDrawCard(playerHand);
-  console.log("Player dealt " + playerHand[0].name + " of " + playerHand[0].suit + ".")
+  playerHand.push(await drawCard());
 
-  dealerDrawCard(dealerHand);
-  console.log("Dealer dealt a face down card.");
+  dealerHand.push(await drawCard());
 
-  playerDrawCard(playerHand);
-  console.log("Player dealt " + playerHand[1].name + " of " + playerHand[1].suit + ".");
+  playerHand.push(await drawCard());
 
-  dealerDrawCard(dealerHand);
-  console.log("Dealer dealt " + dealerHand[1].name + " of " + dealerHand[1].suit + ".");
+  dealerHand.push(await drawCard());
 
-
-
-
-  // Check if player has blackjack
-console.log(playerTotal);
-checkBlackjack(playerTotal);
+  //update playerHandValues and dealerHandValues
+  playerHandValue = playerHand.reduce((sum, card) => sum + card.value, 0);
+  dealerHandValue = dealerHand.reduce((sum, card) => sum + card.value, 0);
 
   // Show player's initial hand
-  console.log(
-    "Your hand: " +
-      playerHand.map((card) => card.name).join(", ") 
- 
-  );
-  
-  console.log("Your total: " + playerTotal + "\n");
+  console.log("Your hand: " + playerHand.map((card) => card.name).join(", "));
+  playerTotal = playerHand.reduce((sum, card) => sum + card.value, 0);
+  console.log("Your total: " + playerHandValue + "\n");
 
   // Show one of the dealer's cards face up
   dealerUp.push(dealerHand[1]);
@@ -86,8 +68,8 @@ checkBlackjack(playerTotal);
   while (playerTotal < 21 && playerHand.length < 5) {
     console.log(playerHand.length + "-----test-----");
     console.log("\nYou choose to hit.");
-     delay(2);
-     playerHand.push( drawCard());
+    await delay(2);
+    await playerHand.push(await drawCard());
     console.log("Your hand: " + playerHand.map((card) => card.name).join(", "));
     playerTotal = playerHand.reduce((sum, card) => sum + card.value, 0);
     console.log("Your total: " + playerTotal);
@@ -121,27 +103,26 @@ checkBlackjack(playerTotal);
   // Show dealer's second card face up
   console.log("\nDealer's face up card: " + dealerUp.name);
 
-  console.log("\nDealer's hand: ", dealerUp.concat(dealerDown).join(", "));
+  console.log("\nDealer's hand: " + dealerUp.concat(dealerDown).join(", "));
 
   dealerTotal = draw.handValue(dealerHand);
 
   console.log("Dealer's total: " + dealerTotal + "\n");
 
-
   // Dealer's turn
   while (dealerTotal < 17) {
     console.log("Dealer hits.");
-  
-    dealerHand.push( draw.drawCard());
-    console.log("Dealer's hand: ", dealerHand[0]);
-  
+
+    dealerHand.push(await draw.drawCard());
+    console.log("Dealer's hand: " + dealerHand[0]);
+
     dealerTotal = draw.handValue(dealerHand);
     console.log("Dealer's total: " + dealerTotal);
-  
+
     if (dealerTotal > 21) {
       dealerBust = true;
       console.log("\nDealer busts! You win.");
-    
+
       playerBank += 2 * playerBet;
       console.log(
         "You won $" +
@@ -150,7 +131,7 @@ checkBlackjack(playerTotal);
           playerBank +
           "."
       );
-    
+
       //empty all arrays
       playerHand.length = 0;
       dealerHand.length = 0;
@@ -195,31 +176,22 @@ checkBlackjack(playerTotal);
       "You won $" + playerBet + ". Your remaining bank is $" + playerBank + "."
     );
     //empty all arrays
-    playerHand.length = 0;
-    dealerHand.length = 0;
-    dealerDown.length = 0;
-    dealerUp.length = 0;
   }
- 
-// for (let i = 1; i < 3; i++) {
+}
+for (let i = 1; i < 3; i++) {
+  startGame();
+  console.log("---test---");
+  gameCount++;
+  console.log("test " + gameCount + " complete");
+  console.log("---test---");
 
-
-
-  
-  // console.log("---test---");
-  // gameCount++;
-  // console.log("test " + gameCount + " complete");
-  // console.log("---test---");
-
-    // empty all arrays
-//  playerHand = [];
-//  dealerHand = [];
-//  dealerDown = [];
-//  dealerUp = [];
-//  playerHand.length = 0;
-//  dealerHand.length = 0;
-//  dealerDown.length = 0;
-//  dealerUp.length = 0;
-// }
- }
- startGame();
+  // empty all arrays
+  playerHand = [];
+  dealerHand = [];
+  dealerDown = [];
+  dealerUp = [];
+  playerHand.length = 0;
+  dealerHand.length = 0;
+  dealerDown.length = 0;
+  dealerUp.length = 0;
+}

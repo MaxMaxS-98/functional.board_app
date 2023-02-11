@@ -1,177 +1,201 @@
-// File: game.js
-const path = require('path');
-const delay = require(path.join(__dirname, '../helpers/delayScript.js'));
-// const playerActions = require('./playerActions.js')
-// const dealerActions = require('../helpers/class/dealerActions.js')
+const path = require("path");
+const Deck = require(path.join(__dirname, "../helpers/class/Deck"));
+const draw = new Deck();
+
+const delay = require(path.join(__dirname, "../helpers/delayScript"));
 
 var playerHand = [];
 var dealerHand = [];
 var dealerDown = [];
 var dealerUp = [];
+var playerBet = 25;
 var playerTotal = 0;
 var dealerTotal = 0;
 var playerBank = 1000;
+var playerBust = false;
+var dealerBust = false;
+var dealerStand = false;
+var gameCount = 0;
 
-// Start of the game
-console.log("Welcome to Blackjack.");
-console.log("The player's starting bank is " + playerBank + ".");
-
-// Place a bet
-let betAmount = 25;
-playerBet(betAmount);
-
-// Deal initial cards
-console.log("Dealing initial cards...");
-delay(1000);
-// draw card from dealerActions.js
-playerDraw();
-// push the card to playerHand array
-playerHand.push(playerDraw); //----PLACING CARD IN PLAYER HAND
-delay(1000);
-console.log(playerDraw +"----TESTING----");
-delay(1000);
-// draw card from dealerActions.js
-dealerDraw();
-// push the card to dealerHand array
-dealerHand.push(dealerDraw); //----PLACING CARD IN DEALER HAND
-delay(1000);
-console.log(dealerDraw +"----TESTING----");
-if (dealerHand.length > 0) {
-  delay(2000);
-  console.log(dealerHand.length + "----TESTING----");
-  delay(2000);
-  dealerDown.push(dealerHand[0]);
-  delay(2000);
-  console.log(dealerHand[0] + "----TESTING----");
-  delay(2000);
-  console.log( 
-    "The dealer drew a facedown card." + "----TESTING----");
-    //TODO: store facedown value in variable
-    
+async function drawCard() {
+  const card = await draw.drawCard();
+  console.log(card.name, card.suit, card.value);
+  
+  return card;
+  
 }
-if (dealerHand.length > 1) {
-  dealerUp.push(dealerHand[1]);
-  delay(2000);
+
+async function startGame() {
+  console.log("Starting a new game of Blackjack...\n");
+
+  // Deduct player's bet from bank
+  playerBank -= playerBet;
+  console.log("You bet " + playerBet + ".");
+  
+  console.log("Your bank is now " + playerBank + ".\n");
+  
+
+  // Deal initial hands to player and dealer
+  playerHand.push(await drawCard());
+  
+  dealerHand.push(await drawCard());
+  
+  playerHand.push(await drawCard());
+  
+  dealerHand.push(await drawCard());
+
+  // Show player's initial hand
   console.log(
-    "The dealer's faceup card is a " +
+    "Your hand: " +
+      playerHand.map((card) => card.name).join(", ") 
+ 
+  );
+  playerTotal = playerHand.reduce((sum, card) => sum + card.value, 0);
+  console.log("Your total: " + playerTotal + "\n");
+
+  // Show one of the dealer's cards face up
+  dealerUp.push(dealerHand[1]);
+  // console.log(dealerHand[1].name + "-----test-----");
+  console.log(
+    "Dealer's face up card: " +
       dealerUp[0].name +
       " of " +
       dealerUp[0].suit +
-      "."
+      "\n"
   );
 
-}
-
-
-// Player turn
-while (!playerBust && !dealerStand) {
-  let playerChoice = prompt("Do you want to hit or stand?");
-  if (playerChoice === "hit") {
-    playerHit();
-  } else if (playerChoice === "stand") {
-    playerStand();
+  // Player's turn
+  while (playerTotal < 21 && playerHand.length < 5) {
+    console.log(playerHand.length + "-----test-----");
+    console.log("\nYou choose to hit.");
+    await delay(2);
+    await playerHand.push(await drawCard());
+    console.log("Your hand: " + playerHand.map((card) => card.name).join(", "));
+    playerTotal = playerHand.reduce((sum, card) => sum + card.value, 0);
+    console.log("Your total: " + playerTotal);
+    if (playerTotal > 21) {
+      playerBust = true;
+      console.log("\n Player busts! You went over 21.");
+      //empty all arrays
+      playerHand.length = 0;
+      dealerHand.length = 0;
+      dealerDown.length = 0;
+      dealerUp.length = 0;
+      break;
+    }
   }
-}
 
-// Dealer turn
-while (!dealerBust && !dealerStand) {
-  checkDealerDown();
-  checkDealerUp();
-}
+  // Check if player busts
+  if (playerBust) {
+    console.log(
+      "\nYou lost $" +
+        playerBet +
+        ". Your remaining bank is $" +
+        playerBank +
+        "."
+    );
+    //empty all arrays
+    playerHand.length = 0;
+    dealerHand.length = 0;
+    dealerDown.length = 0;
+    dealerUp.length = 0;
+  }
+  // Show dealer's second card face up
+  console.log("\nDealer's face up card: " + dealerUp.name);
+  
+  console.log("\nDealer's hand: " + dealerUp.concat(dealerDown).join(", "));
+  
+  dealerTotal = draw.handValue(dealerHand);
+  
+  console.log("Dealer's total: " + dealerTotal + "\n");
+  
 
-// Determine winner
-if (!playerBust && !dealerBust) {
+  // Dealer's turn
+  while (dealerTotal < 17) {
+    console.log("Dealer hits.");
+    
+    dealerHand.push(await draw.drawCard());
+    console.log("Dealer's hand: " + dealerHand[0]);
+    
+    dealerTotal = draw.handValue(dealerHand);
+    console.log("Dealer's total: " + dealerTotal);
+    
+    if (dealerTotal > 21) {
+      dealerBust = true;
+      console.log("\nDealer busts! You win.");
+      
+      playerBank += 2 * playerBet;
+      console.log(
+        "You won $" +
+          2 * playerBet +
+          ". Your remaining bank is $" +
+          playerBank +
+          "."
+      );
+      
+      //empty all arrays
+      playerHand.length = 0;
+      dealerHand.length = 0;
+      dealerDown.length = 0;
+      dealerUp.length = 0;
+    }
+  }
+
+  // Compare player and dealer totals
+  console.log("\nFinal results:");
+  console.log("Your total: " + playerTotal);
+  console.log("Dealer's total: " + dealerTotal);
   if (playerTotal > dealerTotal) {
-    playerWin();
-  } else if (dealerTotal > playerTotal) {
-    dealerWin();
+    console.log("\nYou win!");
+    playerBank += 2 * playerBet;
+    console.log(
+      "You won $" +
+        2 * playerBet +
+        ". Your remaining bank is $" +
+        playerBank +
+        "."
+    );
+    //empty all arrays
+    playerHand.length = 0;
+    dealerHand.length = 0;
+    dealerDown.length = 0;
+    dealerUp.length = 0;
+  } else if (playerTotal < dealerTotal) {
+    console.log("\nYou lose.");
+    console.log(
+      "You lost $" + playerBet + ". Your remaining bank is $" + playerBank + "."
+    );
+    //empty all arrays
+    playerHand.length = 0;
+    dealerHand.length = 0;
+    dealerDown.length = 0;
+    dealerUp.length = 0;
   } else {
-    checkPush();
-  }
-} else if (playerBust) {
-  dealerWin();
-} else if (dealerBust) {
-  playerWin();
-}
-
-// Game play functions
-
-function checkBust() {
-  if (playerTotal > 21) {
-    console.log("The player has bust! The dealer wins.");
-    playerBust = true;
-  }
-  if (dealerTotal > 21) {
-    console.log("The dealer has bust! The player wins.");
-    dealerBust = true;
+    console.log("\nPush.");
+    playerBank += playerBet;
+    console.log(
+      "You won $" + playerBet + ". Your remaining bank is $" + playerBank + "."
+    );
+    //empty all arrays
   }
 }
+for (let i = 1; i < 3; i++) {
 
-function checkPush() {
-  if (playerTotal === 21 && dealerTotal === 21) {
-    console.log("The game is a push.");
-  }
+
+
+  startGame();
+  console.log("---test---");
+  gameCount++;
+  console.log("test " + gameCount + " complete");
+  console.log("---test---");
+  
+    // empty all arrays
+ playerHand = [];
+ dealerHand = [];
+ dealerDown = [];
+ dealerUp = [];
+ playerHand.length = 0;
+ dealerHand.length = 0;
+ dealerDown.length = 0;
+ dealerUp.length = 0;
 }
-
-function checkDealerDown() {
-  if (dealerTotal <= 16) {
-    dealerDraw();
-    checkBust();
-  }
-}
-
-function checkDealerUp() {
-  if (dealerTotal >= 17) {
-    dealerStand = true;
-  }
-}
-
-function playerHit() {
-  console.log("The player has chosen to hit.");
-  playerDraw();
-  checkBust();
-}
-
-function playerStand() {
-  console.log("The player has chosen to stand.");
-  checkDealerDown();
-  checkDealerUp();
-}
-
-function dealerStand() {
-  console.log("The dealer has chosen to stand.");
-}
-
-// Betting and winner determination functions
-
-function playerBust() {
-  console.log("The player has bust! The dealer wins.");
-  playerBust = true;
-}
-
-function dealerBust() {
-  console.log("The dealer has bust! The player wins.");
-  dealerBust = true;
-}
-
-function playerBet(amount) {
-  if (amount <= playerBank) {
-    playerBank = playerBank - amount;
-    console.log("The player has placed a bet of " + amount + ".");
-    console.log("The player's bank is now " + playerBank + ".");
-  } else {
-    console.log("The player does not have enough funds to place this bet.");
-  }
-}
-
-function playerWin() {
-  playerBank = playerBank + 2 * playerBet;
-  console.log(
-    "The player has won the hand! The player's bank is now " + playerBank + "."
-  );
-}
-
-function dealerWin() {
-  console.log("The dealer has won the hand.");
-}
-
