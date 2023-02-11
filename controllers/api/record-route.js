@@ -1,6 +1,6 @@
 const router = require('express').Router();
 const { Record } = require('../../models');
-const withAuth = require('../../utils/auth');
+// const withAuth = require('../../utils/auth');
 
 
 // Get all records
@@ -18,7 +18,7 @@ router.get('/', async (req, res) => {
 });
 
 // Get a single record by ID
-router.get('/:id', withAuth, async (req, res) => {
+router.get('/:id', async (req, res) => {
     try {
         const dbRecordData = await Record.findOne({
             where: { id: req.params.id }
@@ -35,7 +35,7 @@ router.get('/:id', withAuth, async (req, res) => {
 });
 
 // Update a single record by ID
-router.put('/:id', withAuth, async (req, res) => {
+router.put('/:id', async (req, res) => {
     try {
         const updatedRecord = await Record.update(req.body, {
             where: { id: req.params.id },
@@ -54,7 +54,7 @@ router.put('/:id', withAuth, async (req, res) => {
 });
 
 // Create a new record
-router.post('/', withAuth, async (req, res) => {
+router.post('/', async (req, res) => {
   try {
     const dbRecordData = await Record.create(req.body);
     res.status(200).json(dbRecordData.get({ plain: true }));
@@ -64,7 +64,7 @@ router.post('/', withAuth, async (req, res) => {
 });
 
 // Delete a single record by ID
-router.delete('/:id', withAuth, async (req, res) => {
+router.delete('/:id', async (req, res) => {
   try {
     const deletedRecord = await Record.destroy({
       where: { id: req.params.id }

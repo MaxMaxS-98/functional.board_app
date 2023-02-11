@@ -8,7 +8,7 @@ const User = require('./User')
 Playtable.hasMany(Player,
   {
     foreignKey: 'table_id',
-    onDelete: 'CASCADE',
+    onDelete: 'CASCADE'
   }
 );
 // Player belongs to one table
@@ -27,23 +27,23 @@ Dealer.belongsTo(Playtable);
 
 // User is a player
 User.hasOne(Player,
-  {
-    foreignKey: 'user_id',
-    onDelete: 'CASCADE',
-  }
+  
 );
-Player.belongsTo(User);
+Player.belongsTo(User,{
+  foreignKey: 'user_id',
+  onDelete: 'CASCADE'
+});
 
 
 // User has one record
 User.hasOne(Record,
-  {
-    foreignKey: 'user_id',
-    onDelete: 'CASCADE',
-  }
+  
 );
 // record belongs to one user
-Record.belongsTo(User);
+Record.belongsTo(User,{
+  foreignKey: 'user_id',
+  onDelete: 'CASCADE'
+});
 
 
 

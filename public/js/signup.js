@@ -1,4 +1,4 @@
-const nanoid = require('nanoid')
+// const nanoid = require('nanoid')
 const signupFormHandler = async (event) => {
     event.preventDefault();
     const fullname = document.querySelector('#fullname-signup').value.trim();
@@ -7,7 +7,7 @@ const signupFormHandler = async (event) => {
     const password = document.querySelector('#password-signup').value.trim();
     const confirm = document.querySelector('#password-confirm').value.trim();
     const isConfirmed = password && confirm && (password === confirm)
-    const id = await nanoid()
+    // const id = await nanoid()
 
     switch (true) {
         case !fullname:
@@ -31,7 +31,13 @@ const signupFormHandler = async (event) => {
 
     const response = await fetch('/api/user', {
         method: 'POST',
-        body: JSON.stringify({ id, fullname, username, email, password }),
+        body: JSON.stringify({ 
+            // id, 
+            fullname, 
+            username, 
+            email, 
+            password 
+        }),
         headers: { 'Content-Type': 'application/json' },
       });
     

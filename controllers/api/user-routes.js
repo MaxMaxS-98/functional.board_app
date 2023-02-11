@@ -1,6 +1,6 @@
 const router = require('express').Router();
 const { User, Record, Player } = require('../../models');
-const withAuth = require('../../utils/auth');
+
 
 // CREATE new user
 router.post('/', async (req, res) => {
@@ -8,11 +8,11 @@ router.post('/', async (req, res) => {
     const dbUserData = await User.create(req.body);
     const dbRecordData = await Record.create(
       {
-        user_id: req.body.id
+        user_id: dbUserData.id
       })
     const dbPlayerData = await Player.create(
       {
-        user_id: req.body.id
+        user_id: dbUserData.id
       });
       
     req.session.save(() => {
@@ -48,7 +48,7 @@ router.get('/', async (req, res) => {
 });
 
 // Get user by id
-router.get('/:id', withAuth, async (req, res) => {
+router.get('/:id', async (req, res) => {
   try {
     const dbUserData = await User.findOne({
       where: { id: req.params.id },
@@ -72,7 +72,7 @@ router.get('/:id', withAuth, async (req, res) => {
 });
 
 // Update a user by id
-router.put('/:id', withAuth, async (req, res) => {
+router.put('/:id', async (req, res) => {
   try {
     const updatedUser = await User.update(req.body, {
       where: { id: req.params.id },
@@ -90,7 +90,7 @@ router.put('/:id', withAuth, async (req, res) => {
 });
 
 // Delete an user by id
-router.delete('/:id', withAuth, async (req, res) => {
+router.delete('/:id', async (req, res) => {
   try {
     const deletedUser = await User.destroy({
       where: { id: req.params.id }

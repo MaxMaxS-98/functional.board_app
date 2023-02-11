@@ -1,6 +1,6 @@
 const router = require('express').Router();
 const { Player } = require('../../models');
-const withAuth = require('../../utils/auth');
+// const withAuth = require('../../utils/auth');
 
 // Get all players
 router.get('/', async (req, res) => {
@@ -14,7 +14,7 @@ router.get('/', async (req, res) => {
 });
 
 // Get a single player
-router.get('/:user_id', withAuth, async (req, res) => {
+router.get('/:user_id', async (req, res) => {
     try {
         const player = await Player.findOne(
             { where: { user_id: req.params.user_id } }
@@ -30,7 +30,7 @@ router.get('/:user_id', withAuth, async (req, res) => {
 });
 
 // Update a player
-router.put('/:user_id', withAuth, async (req, res) => {
+router.put('/:user_id', async (req, res) => {
     try {
         // Validate incoming data
         const player = await Player.update(
