@@ -35,6 +35,7 @@
     "prompt-sync": "^4.2.0",
     "real-deal-deck-of-cards": "^1.3.3",
     "sequelize": "",
+    "sleep-promise": "^9.1.0",
     "socket.io": ""
   },
   "homepage": "https://github.com/MaxMaxS-98/BlackJackProject#readme"

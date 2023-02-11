@@ -49,6 +49,28 @@ function checkBust() {
     checkDealerUp();
   }
 
+  function checkDealerBlackjack() {
+    let dealerBlackjack = false;
+  
+    // Check if dealer has a blackjack when up card is a 10 value card
+    if (dealerUp[1].value === 10) {
+      if (dealerHand[0].value === 11) {
+        dealerBlackjack = true;
+        console.log("The dealer has blackjack! The dealer wins.");
+      }
+    }
+  
+    // Check if dealer has a blackjack when up card is an ace
+    if (dealerUp[1].value === 11) {
+      if (dealerHand[0].value === 10) {
+        dealerBlackjack = true;
+        console.log("The dealer has blackjack! The dealer wins.")
+      }
+    }
+  
+    return dealerBlackjack;
+  }
+
 module.exports = { 
     checkBust,
     checkPush,
@@ -56,5 +78,6 @@ module.exports = {
     checkDealerUp,
     playerHit,
     playerStand,
-    checkBlackjack
+    checkBlackjack,
+    checkDealerBlackjack
 }

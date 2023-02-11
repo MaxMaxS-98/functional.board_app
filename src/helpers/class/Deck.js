@@ -22,7 +22,7 @@ class Deck {
           console.error(err);
           return;
         }
-        console.log("The file has been saved!");
+        console.log("Shoe updated");
       }
     );
     
@@ -54,7 +54,7 @@ class Deck {
   }
   
   }
-  }
+  
   
   module.exports = Deck;
 

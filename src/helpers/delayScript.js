@@ -1,11 +1,10 @@
-// delayScript.js
+const sleep = require('sleep-promise');
 
-const delay = (seconds) => {
-  return new Promise((resolve) => {
-    setTimeout(() => {
-      resolve();
-    }, seconds * 1000);
-  });
-};
+async function addDelay() {
+  console.log('Waiting 2 seconds...');
+  await sleep(2000);
+  console.log('2 seconds have passed.');
+}
 
-module.exports = delay;
+addDelay();
+module.exports = addDelay;
