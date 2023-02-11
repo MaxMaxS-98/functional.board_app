@@ -11,22 +11,6 @@ Player.init(
             primaryKey: true,
             autoIncrement: true,
         },
-        // table_id: {
-        //     type: DataTypes.INTEGER,
-        //     allowNull: false,
-        //     references: {
-        //         model: 'playtable',
-        //         key: 'id',
-        //     }
-        // },
-        // player_name: {
-        //     type: DataTypes.STRING,
-        //     allowNull: false,
-        //     references: {
-        //         model: 'user',
-        //         key: 'username',
-        //     }
-        // },
         credit: {
             type: DataTypes.INTEGER,
             allowNull: false,
