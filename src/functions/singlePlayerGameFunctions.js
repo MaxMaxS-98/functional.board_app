@@ -33,7 +33,7 @@ async function startGame() {
   playerBank -= playerBet;
   console.log("You bet " + playerBet + ".");
 
-  console.log("Your bank is now " + playerBank + ".\n");
+  console.log("Your credits are now " + playerBank + ".\n");
 
   // Deal initial hands to player and dealer
   playerHand.push(await drawCard());
@@ -64,8 +64,8 @@ async function startGame() {
       "\n"
   );
 
-  // Player's turn
-  while (playerTotal < 21 && playerHand.length < 5) {
+  // Player's turn hit until 17 or bust
+  while (playerTotal < 17) {
     console.log(playerHand.length + "-----test-----");
     console.log("\nYou choose to hit.");
     await delay(2);
@@ -76,6 +76,8 @@ async function startGame() {
     if (playerTotal > 21) {
       playerBust = true;
       console.log("\n Player busts! You went over 21.");
+      //log playerBalance
+      console.log(playerBank + "-----test-----");
       //empty all arrays
       playerHand.length = 0;
       dealerHand.length = 0;
@@ -114,7 +116,8 @@ async function startGame() {
     console.log("Dealer hits.");
 
     dealerHand.push(await draw.drawCard());
-    console.log("Dealer's hand: " + dealerHand[0]);
+    console.log("Dealer's hand: " + dealerHand.map(card => card.name).join(", "));
+
 
     dealerTotal = draw.handValue(dealerHand);
     console.log("Dealer's total: " + dealerTotal);
@@ -178,8 +181,8 @@ async function startGame() {
     //empty all arrays
   }
 }
-for (let i = 1; i < 3; i++) {
-  startGame();
+for (let i = 1; i < 30; i++) {
+  
   console.log("---test---");
   gameCount++;
   console.log("test " + gameCount + " complete");
@@ -195,3 +198,4 @@ for (let i = 1; i < 3; i++) {
   dealerDown.length = 0;
   dealerUp.length = 0;
 }
+startGame();
