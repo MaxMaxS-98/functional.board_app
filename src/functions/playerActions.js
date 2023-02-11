@@ -3,6 +3,7 @@ const draw = new Draw();
 
 
 function playerDraw() {
+  var playerHand = [];
     draw
       .drawCard()
       .then((cardSelected) => {
@@ -66,6 +67,7 @@ function playerDraw() {
     playerBust,
     playerBet,
     playerWin,
+    playerHand, //** */
   };
 
   //************ */

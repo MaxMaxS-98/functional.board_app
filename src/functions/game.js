@@ -1,8 +1,16 @@
 // File: game.js
-var playerBank = 1000
-const playerActions = require('./playerActions.js')
-const dealerActions = require('./dealerActions.js')
-const playerHand = [];
+const path = require('path');
+const delay = require(path.join(__dirname, '../helpers/delayScript.js'));
+// const playerActions = require('./playerActions.js')
+// const dealerActions = require('../helpers/class/dealerActions.js')
+
+var playerHand = [];
+var dealerHand = [];
+var dealerDown = [];
+var dealerUp = [];
+var playerTotal = 0;
+var dealerTotal = 0;
+var playerBank = 1000;
 
 // Start of the game
 console.log("Welcome to Blackjack.");
@@ -14,16 +22,36 @@ playerBet(betAmount);
 
 // Deal initial cards
 console.log("Dealing initial cards...");
-playerActions.playerDraw();
-dealerActions.dealerDraw();
+delay(1000);
+// draw card from dealerActions.js
+playerDraw();
+// push the card to playerHand array
+playerHand.push(playerDraw); //----PLACING CARD IN PLAYER HAND
+delay(1000);
+console.log(playerDraw +"----TESTING----");
+delay(1000);
+// draw card from dealerActions.js
+dealerDraw();
+// push the card to dealerHand array
+dealerHand.push(dealerDraw); //----PLACING CARD IN DEALER HAND
+delay(1000);
+console.log(dealerDraw +"----TESTING----");
 if (dealerHand.length > 0) {
+  delay(2000);
+  console.log(dealerHand.length + "----TESTING----");
+  delay(2000);
   dealerDown.push(dealerHand[0]);
-  console.log(
-    "The dealer's drew a facedown card.");
+  delay(2000);
+  console.log(dealerHand[0] + "----TESTING----");
+  delay(2000);
+  console.log( 
+    "The dealer drew a facedown card." + "----TESTING----");
     //TODO: store facedown value in variable
+    
 }
 if (dealerHand.length > 1) {
   dealerUp.push(dealerHand[1]);
+  delay(2000);
   console.log(
     "The dealer's faceup card is a " +
       dealerUp[0].name +
@@ -31,6 +59,7 @@ if (dealerHand.length > 1) {
       dealerUp[0].suit +
       "."
   );
+
 }
 
 

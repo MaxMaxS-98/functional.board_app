@@ -1,4 +1,4 @@
-const Draw = require('../helpers/class/draw');
+const Draw = require('./draw');
 const draw = new Draw();
 
 function dealerDraw() {
@@ -31,12 +31,7 @@ function dealerDraw() {
   }
 
   module.exports = {
-    playerHand,
-    dealerHand,
-    playerTotal,
-    dealerTotal,
-    dealerStand,
-    checkDealerDown,
-    checkDealerUp,
+    dealerDraw,
+    dealerStand
   };
   // ****

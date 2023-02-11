@@ -10,13 +10,17 @@ class Draw {
       const r = Math.floor(Math.random() * length);
       const cardSelected = await this.shoe.cards[r];
       this.shoe.cards.splice(r, 1);
-      console.log(cardSelected.name, cardSelected.suit, cardSelected.value);
-      console.log(cardSelected);
   
       return cardSelected;
     }
+
+    handValue(hand) {
+        let total = 0;
+        for (let card of hand) {
+            total += card.value;
+        }
+        return total;
+    }
   }
-  
-  
+
   module.exports = Draw;
-  
