@@ -36,74 +36,10 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(routes);
-// A sample get request handler to test the models
-app.get('/api/users', async (req, res) => {
-  try {
-    const dbUserData = await User.findAll({
-      attributes: ['id', 'username'],
-      include: [
-        {
-          model: Record,
-          attributes: ['games_played', 'games_won', 'max_profit']
-        },
-      ],
-    })
-    const users = dbUserData.map((user) =>
-      user.get({ plain: true })
-    );
-    res.status(200).json(users)
-  } catch (err) {
-    res.status(500).json({ error: err.message });
-  }
-});
 
-app.get('/api/table', async (req, res) => {
-  try {
-    const dbTableData = await Playtable.findAll({
-      include: [
-        { model: Dealer },
-        { model: Player }
-      ],
-    })
-    const tables = dbTableData.map((table) =>
-      table.get({ plain: true })
-    );
-    res.status(200).json(tables)
-  } catch (err) {
-    res.status(500).json({ error: err.message });
-  }
-});
 
-app.get('/api/players', async (req, res) => {
-  try {
-    const dbPlayerData = await Player.findAll({
-      include: [
-        {
-          model: User,
-          attributes: ['id', 'username'],
-        }
-      ],
-    })
-    const players = dbPlayerData.map((player) =>
-      player.get({ plain: true })
-    );
-    res.status(200).json(players)
-  } catch (err) {
-    res.status(500).json({ error: err.message });
-  }
-});
 
-app.get('/api/records', async (req, res) => {
-  try {
-    const dbRecordData = await Record.findAll()
-    const records = dbRecordData.map((record) =>
-      record.get({ plain: true })
-    );
-    res.status(200).json(records)
-  } catch (err) {
-    res.status(500).json({ error: err.message });
-  }
-});
+
 
 sequelize.sync({ force: false }).then(() => {
   app.listen(PORT, () => console.log(`Now listening on ${PORT}`));
