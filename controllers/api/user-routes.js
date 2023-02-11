@@ -43,7 +43,7 @@ router.get('/', async (req, res) => {
     );
     res.status(200).json(users)
   } catch (err) {
-    res.status(500).json({ error: err.message });
+    res.status(500).json(err);
   }
 });
 
@@ -67,7 +67,7 @@ router.get('/:id', withAuth, async (req, res) => {
 
     res.status(200).json(dbUserData.get({ plain: true }));
   } catch (err) {
-    res.status(500).json({ error: err.message });
+    res.status(500).json(err);
   }
 });
 
@@ -79,13 +79,30 @@ router.put('/:id', withAuth, async (req, res) => {
       returning: true,
     });
 
-    if (!updatedUser[0]) {
+    if (!updatedUser) {
       return res.status(404).json({ message: 'User not found' });
     }
 
-    res.status(200).json(updatedUser[1][0].get({ plain: true }));
+    res.status(200).json(updatedUser.get({ plain: true }));
   } catch (err) {
-    res.status(500).json({ error: err.message });
+    res.status(500).json(err);
+  }
+});
+
+// Delete an user by id
+router.delete('/:id', withAuth, async (req, res) => {
+  try {
+    const deletedUser = await User.destroy({
+      where: { id: req.params.id }
+    });
+
+    if (!deletedUser) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+
+    res.status(200).json({ message: 'User deleted successfully' });
+  } catch (err) {
+    res.status(500).json(err);
   }
 });
 
