@@ -1,135 +1,177 @@
-const fs = require("fs");
-const path = require("path");
-const deck = require("./buildDeck");
+// File: game.js
+const path = require('path');
+const delay = require(path.join(__dirname, '../helpers/delayScript.js'));
+// const playerActions = require('./playerActions.js')
+// const dealerActions = require('../helpers/class/dealerActions.js')
 
-const startGame = async () => {
-  var activePlayers = JSON.parse(
-    fs.readFileSync(path.join(__dirname, "../db/activePlayers.json"))
+var playerHand = [];
+var dealerHand = [];
+var dealerDown = [];
+var dealerUp = [];
+var playerTotal = 0;
+var dealerTotal = 0;
+var playerBank = 1000;
+
+// Start of the game
+console.log("Welcome to Blackjack.");
+console.log("The player's starting bank is " + playerBank + ".");
+
+// Place a bet
+let betAmount = 25;
+playerBet(betAmount);
+
+// Deal initial cards
+console.log("Dealing initial cards...");
+delay(1000);
+// draw card from dealerActions.js
+playerDraw();
+// push the card to playerHand array
+playerHand.push(playerDraw); //----PLACING CARD IN PLAYER HAND
+delay(1000);
+console.log(playerDraw +"----TESTING----");
+delay(1000);
+// draw card from dealerActions.js
+dealerDraw();
+// push the card to dealerHand array
+dealerHand.push(dealerDraw); //----PLACING CARD IN DEALER HAND
+delay(1000);
+console.log(dealerDraw +"----TESTING----");
+if (dealerHand.length > 0) {
+  delay(2000);
+  console.log(dealerHand.length + "----TESTING----");
+  delay(2000);
+  dealerDown.push(dealerHand[0]);
+  delay(2000);
+  console.log(dealerHand[0] + "----TESTING----");
+  delay(2000);
+  console.log( 
+    "The dealer drew a facedown card." + "----TESTING----");
+    //TODO: store facedown value in variable
+    
+}
+if (dealerHand.length > 1) {
+  dealerUp.push(dealerHand[1]);
+  delay(2000);
+  console.log(
+    "The dealer's faceup card is a " +
+      dealerUp[0].name +
+      " of " +
+      dealerUp[0].suit +
+      "."
   );
-  // console.log(activePlayers); // WORKS
-  var numPlayers = Object.keys(activePlayers).length;
-  // console.log(numPlayers); // WORKS
-//read activeShoe.json and assign to variable shoe
+
+}
 
 
-  const shoe = require("../db/activeShoe.json");
-  var card = shoe.cards;
+// Player turn
+while (!playerBust && !dealerStand) {
+  let playerChoice = prompt("Do you want to hit or stand?");
+  if (playerChoice === "hit") {
+    playerHit();
+  } else if (playerChoice === "stand") {
+    playerStand();
+  }
+}
 
-  // LOG RANDOM CARD TO CONSOLE
-  let r = Math.floor(Math.random() * card.length);
-  console.log(card[r]);
+// Dealer turn
+while (!dealerBust && !dealerStand) {
+  checkDealerDown();
+  checkDealerUp();
+}
 
-  // ADD THAT CARD TO PLAYER-ARRAY
-  let player1array = [];
-  console.log(player1array);
+// Determine winner
+if (!playerBust && !dealerBust) {
+  if (playerTotal > dealerTotal) {
+    playerWin();
+  } else if (dealerTotal > playerTotal) {
+    dealerWin();
+  } else {
+    checkPush();
+  }
+} else if (playerBust) {
+  dealerWin();
+} else if (dealerBust) {
+  playerWin();
+}
 
-  player1array.push(card[r]);
-  console.log(player1array);
+// Game play functions
 
+function checkBust() {
+  if (playerTotal > 21) {
+    console.log("The player has bust! The dealer wins.");
+    playerBust = true;
+  }
+  if (dealerTotal > 21) {
+    console.log("The dealer has bust! The player wins.");
+    dealerBust = true;
+  }
+}
 
+function checkPush() {
+  if (playerTotal === 21 && dealerTotal === 21) {
+    console.log("The game is a push.");
+  }
+}
 
-  // REMOVE CARD FROM SHOE
-  // const shoe.cards.splice(r, 1);
+function checkDealerDown() {
+  if (dealerTotal <= 16) {
+    dealerDraw();
+    checkBust();
+  }
+}
 
-  // console.log(card[0]); // WORKS
+function checkDealerUp() {
+  if (dealerTotal >= 17) {
+    dealerStand = true;
+  }
+}
 
-  
-  // var draw = shoe.cards[Math.floor(Math.random() * 52 )]; //shoe.cards.length
-  // console.log(draw);//check work
+function playerHit() {
+  console.log("The player has chosen to hit.");
+  playerDraw();
+  checkBust();
+}
 
+function playerStand() {
+  console.log("The player has chosen to stand.");
+  checkDealerDown();
+  checkDealerUp();
+}
 
-  // console.log(shoe);
-  // let deckLength = deck.length;
-  // console.log(deckLength);
+function dealerStand() {
+  console.log("The dealer has chosen to stand.");
+}
 
-  // var players = []; //TODO: figure out how to get logged in players in this array
-  // for (let i = 0; i < numPlayers; i++) {
-  //   players.push("Player" + (i + 1));
-  // }
-  // console.log(players);
-  // let dealerHand = [];
-  // let playerHand = [];
+// Betting and winner determination functions
 
-  // console.log("Starting a new game...");
-  // await new Promise((resolve) => setTimeout(resolve, 2000));
-  // console.log("Dealing cards...");
-  // await new Promise((resolve) => setTimeout(resolve, 1000));
+function playerBust() {
+  console.log("The player has bust! The dealer wins.");
+  playerBust = true;
+}
 
-  // // deal cards to each player individually one by one
-  // let drawCard = (player, draw) => {
-  //   if (draw.length < 15) {
-  //     console.log("Last hand -- shoe ending.");
-  //     console.log(draw.length);
+function dealerBust() {
+  console.log("The dealer has bust! The player wins.");
+  dealerBust = true;
+}
 
-  //   }
-  
-  //   // let card = draw.shift();
-  //   console.log(`${player.name} draws ${cards.name} of ${cards.suit} with a value of ${cards.value}.`);
+function playerBet(amount) {
+  if (amount <= playerBank) {
+    playerBank = playerBank - amount;
+    console.log("The player has placed a bet of " + amount + ".");
+    console.log("The player's bank is now " + playerBank + ".");
+  } else {
+    console.log("The player does not have enough funds to place this bet.");
+  }
+}
 
-  // };
-  
-  // let index = 0;
-  // let drawInterval = setInterval(() => {
-  //   if (index === players.length) {
-  //     clearInterval(drawInterval);
-  //     return;
-  //   }
-  
-  //   drawCard(players[index], draw);
-  //   index++;
-  // }, 2000);
+function playerWin() {
+  playerBank = playerBank + 2 * playerBet;
+  console.log(
+    "The player has won the hand! The player's bank is now " + playerBank + "."
+  );
+}
 
-  
-  
- 
+function dealerWin() {
+  console.log("The dealer has won the hand.");
+}
 
-
-};
-
-
-// pick a random number from cardIDs to deal players based on the id of the card in the JSON file
-  
-
-
-//   let faceDownCard = dealerHand[0].value;
-//   let faceDownSuit = dealerHand[0].suit;
-//   let faceDownName = dealerHand[0].name;
-
-//   await new Promise((resolve) => setTimeout(resolve, 1000));
-//   console.log("Dealer was dealt a face down card.");
-
-//   for (let i = 0; i < numPlayers; i++) {
-//     players[i].push(deck.pop());
-//     await new Promise((resolve) => setTimeout(resolve, 1000));
-//     console.log(
-//       `${players[i]} was dealt a ${players[i][0].name} of ${players[i][0].suit}. Value: ${players[i][0].value}.`
-//     );
-//   }
-
-//   dealerHand.push(deck.pop());
-//   let faceUpCard = dealerHand[1].value;
-//   let faceUpSuit = dealerHand[1].suit;
-//   let faceUpName = dealerHand[1].name;
-
-//   console.log(`Dealer's up card is ${faceUpName} of ${faceUpSuit}.`);
-//   await new Promise((resolve) => setTimeout(resolve, 3000));
-
-//   console.log("Checking for dealer blackjack...");
-//   await new Promise((resolve) => setTimeout(resolve, 3000));
-
-//   if (faceDownCard + faceUpCard === 21) {
-//     console.log("Dealer has blackjack!");
-//     // end the game, push all arrays to usedShoe.json
-//     fs.writeFileSync(
-//       path.join(__dirname, "../db/usedShoe.json"),
-//       JSON.stringify(players)
-//     );
-//     console.log("Game over!");
-//     process.exit();
-//   } else {
-//     console.log("Dealer has no blackjack!");
-//     // write instructions here
-//   }
-// };
-
-startGame();
