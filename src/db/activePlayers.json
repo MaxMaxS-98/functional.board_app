@@ -1,0 +1,27 @@
+[
+    {
+        "player_id": "999",
+        "username": "testplayer1",
+        "credit": 1000
+    },
+    {
+        "player_id": "888",
+        "username": "testplayer2",
+        "credit": 1000
+    },
+    {
+        "player_id": "777",
+        "username": "testplayer3",
+        "credit": 1000
+    },
+    {
+        "player_id": "666",
+        "username": "testplayer4",
+        "credit": 1000
+    },
+    {
+        "player_id": "555",
+        "username": "testplayer5",
+        "credit": 1000
+    }
+]
