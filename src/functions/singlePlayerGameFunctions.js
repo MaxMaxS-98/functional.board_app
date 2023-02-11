@@ -1,6 +1,7 @@
 const path = require("path");
-const Draw = require(path.join(__dirname, "../helpers/class/draw"));
-const draw = new Draw();
+const check = require("./checkFunctions");
+const Deck = require(path.join(__dirname, "../helpers/class/Deck"));
+const draw = new Deck();
 
 const delay = require(path.join(__dirname, "../helpers/delayScript"));
 
@@ -15,34 +16,51 @@ var playerBank = 1000;
 var playerBust = false;
 var dealerBust = false;
 var dealerStand = false;
+var playerBlackjack = false;
+var dealerBlackjack = false;
 var gameCount = 0;
 
-async function drawCard() {
-  const card = await draw.drawCard();
+function drawCard(hand) {
+  const card = draw.drawCard();
   console.log(card.name, card.suit, card.value);
-  setTimeout(() => {}, 2000);
+
+  hand.push(card);
+
   return card;
-  
 }
 
-async function startGame() {
+// Create two instances of drawCard function
+const playerDrawCard = () => drawCard(playerHand);
+const dealerDrawCard = () => drawCard(dealerHand);
+
+function startGame() {
   console.log("Starting a new game of Blackjack...\n");
 
   // Deduct player's bet from bank
   playerBank -= playerBet;
   console.log("You bet " + playerBet + ".");
-  setTimeout(() => {}, 2000);
+
   console.log("Your bank is now " + playerBank + ".\n");
-  setTimeout(() => {}, 2000);
 
   // Deal initial hands to player and dealer
-  playerHand.push(await drawCard());
-  setTimeout(() => {}, 2000);
-  dealerHand.push(await drawCard());
-  setTimeout(() => {}, 2000);
-  playerHand.push(await drawCard());
-  setTimeout(() => {}, 2000);
-  dealerHand.push(await drawCard());
+  playerDrawCard(playerHand);
+  console.log("Player dealt " + playerHand[0].name + " of " + playerHand[0].suit + ".")
+
+  dealerDrawCard(dealerHand);
+  console.log("Dealer dealt a face down card.");
+
+  playerDrawCard(playerHand);
+  console.log("Player dealt " + playerHand[1].name + " of " + playerHand[1].suit + ".");
+
+  dealerDrawCard(dealerHand);
+  console.log("Dealer dealt " + dealerHand[1].name + " of " + dealerHand[1].suit + ".");
+
+
+
+
+  // Check if player has blackjack
+console.log(playerTotal);
+checkBlackjack(playerTotal);
 
   // Show player's initial hand
   console.log(
@@ -50,7 +68,7 @@ async function startGame() {
       playerHand.map((card) => card.name).join(", ") 
  
   );
-  playerTotal = playerHand.reduce((sum, card) => sum + card.value, 0);
+  
   console.log("Your total: " + playerTotal + "\n");
 
   // Show one of the dealer's cards face up
@@ -68,8 +86,8 @@ async function startGame() {
   while (playerTotal < 21 && playerHand.length < 5) {
     console.log(playerHand.length + "-----test-----");
     console.log("\nYou choose to hit.");
-    await delay(2);
-    await playerHand.push(await drawCard());
+     delay(2);
+     playerHand.push( drawCard());
     console.log("Your hand: " + playerHand.map((card) => card.name).join(", "));
     playerTotal = playerHand.reduce((sum, card) => sum + card.value, 0);
     console.log("Your total: " + playerTotal);
@@ -102,28 +120,28 @@ async function startGame() {
   }
   // Show dealer's second card face up
   console.log("\nDealer's face up card: " + dealerUp.name);
-  setTimeout(() => {}, 2000);
-  console.log("\nDealer's hand: " + dealerUp.concat(dealerDown).join(", "));
-  setTimeout(() => {}, 2000);
+
+  console.log("\nDealer's hand: ", dealerUp.concat(dealerDown).join(", "));
+
   dealerTotal = draw.handValue(dealerHand);
-  setTimeout(() => {}, 2000);
+
   console.log("Dealer's total: " + dealerTotal + "\n");
-  setTimeout(() => {}, 2000);
+
 
   // Dealer's turn
   while (dealerTotal < 17) {
     console.log("Dealer hits.");
-    setTimeout(() => {}, 2000);
-    dealerHand.push(await draw.drawCard());
-    console.log("Dealer's hand: " + dealerHand[0]);
-    setTimeout(() => {}, 2000);
+  
+    dealerHand.push( draw.drawCard());
+    console.log("Dealer's hand: ", dealerHand[0]);
+  
     dealerTotal = draw.handValue(dealerHand);
     console.log("Dealer's total: " + dealerTotal);
-    setTimeout(() => {}, 2000);
+  
     if (dealerTotal > 21) {
       dealerBust = true;
       console.log("\nDealer busts! You win.");
-      setTimeout(() => {}, 2000);
+    
       playerBank += 2 * playerBet;
       console.log(
         "You won $" +
@@ -132,7 +150,7 @@ async function startGame() {
           playerBank +
           "."
       );
-      setTimeout(() => {}, 2000);
+    
       //empty all arrays
       playerHand.length = 0;
       dealerHand.length = 0;
@@ -177,25 +195,31 @@ async function startGame() {
       "You won $" + playerBet + ". Your remaining bank is $" + playerBank + "."
     );
     //empty all arrays
+    playerHand.length = 0;
+    dealerHand.length = 0;
+    dealerDown.length = 0;
+    dealerUp.length = 0;
   }
-}
-for (let i = 1; i < 3; i++) {
+ 
+// for (let i = 1; i < 3; i++) {
 
 
 
-  startGame();
-  console.log("---test---");
-  gameCount++;
-  console.log("test " + gameCount + " complete");
-  console.log("---test---");
-  setTimeout(() => {}, 2000);
+  
+  // console.log("---test---");
+  // gameCount++;
+  // console.log("test " + gameCount + " complete");
+  // console.log("---test---");
+
     // empty all arrays
- playerHand = [];
- dealerHand = [];
- dealerDown = [];
- dealerUp = [];
- playerHand.length = 0;
- dealerHand.length = 0;
- dealerDown.length = 0;
- dealerUp.length = 0;
-}
+//  playerHand = [];
+//  dealerHand = [];
+//  dealerDown = [];
+//  dealerUp = [];
+//  playerHand.length = 0;
+//  dealerHand.length = 0;
+//  dealerDown.length = 0;
+//  dealerUp.length = 0;
+// }
+ }
+ startGame();

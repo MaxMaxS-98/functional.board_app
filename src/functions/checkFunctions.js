@@ -8,6 +8,14 @@ function checkBust() {
       dealerBust = true;
     }
   }
+
+  function checkBlackjack(playerTotal) {
+    if (playerTotal === 21) {
+      console.log("The player has blackjack! The player wins.");
+      console.log("Game over!");
+      playerBlackjack = true;
+    }
+  }
   
   function checkPush() {
     if (playerTotal === 21 && dealerTotal === 21) {
@@ -23,26 +31,30 @@ function checkBust() {
   }
   
   function checkDealerUp() {
+    
     if (dealerTotal >= 17) {
       dealerStand = true;
     }
   }
   
-//   function playerHit() {
-//     console.log("The player has chosen to hit.");
-//     playerDraw();
-//     checkBust();
-//   }
+  function playerHit() {
+    console.log("The player has chosen to hit.");
+    playerDraw();
+    checkBust();
+  }
   
-//   function playerStand() {
-//     console.log("The player has chosen to stand.");
-//     checkDealerDown();
-//     checkDealerUp();
-//   }
+  function playerStand() {
+    console.log("The player has chosen to stand.");
+    checkDealerDown();
+    checkDealerUp();
+  }
 
 module.exports = { 
     checkBust,
     checkPush,
     checkDealerDown,
     checkDealerUp,
+    playerHit,
+    playerStand,
+    checkBlackjack
 }
