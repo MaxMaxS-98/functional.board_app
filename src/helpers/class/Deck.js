@@ -1,6 +1,13 @@
 const path = require("path");
 const fs = require("fs");
-const activeShoe = require(path.join(__dirname, "../db/activeShoe.json"));
+
+let activeShoe;
+
+try {
+  activeShoe = require(path.join(__dirname, "../../db/activeShoe.json"));
+} catch (err) {
+  console.error(err);
+}
 
 class Deck {
   constructor() {
@@ -14,8 +21,7 @@ class Deck {
     const cardSelected = this.shoe.cards[r];
     this.shoe.cards.splice(r, 1);
     this.usedShoe.push(cardSelected);
-    fs.writeFile(
-      path.join(__dirname, "../db/activeShoe.json"),
+    fs.writeFile(path.join(__dirname, "../../db/activeShoe.json"),
       JSON.stringify(this.shoe),
       (err) => {
         if (err) {
@@ -27,13 +33,12 @@ class Deck {
     );
     
     return cardSelected;
-    
   }
 
   handValue(hand) {
     let total = 0;
     let aceCount = 0;
-  
+
     for (let card of hand) {
       if (card.name === "Ace") {
         aceCount++;
@@ -41,7 +46,7 @@ class Deck {
         total += card.value;
       }
     }
-  
+
     for (let i = 0; i < aceCount; i++) {
       if (total + 11 <= 21) {
         total += 11;
@@ -49,11 +54,9 @@ class Deck {
         total += 1;
       }
     }
-  
+
     return total;
   }
-  
-  }
-  
-  
-  module.exports = Deck;
+}
+
+module.exports = Deck;

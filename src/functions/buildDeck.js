@@ -9,4 +9,4 @@ const buildDeck = () => {
   };
   
   buildDeck();
-module.exports = buildDeck;
+module.exports = { buildDeck } ;
