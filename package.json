@@ -27,7 +27,7 @@
     "express": "",
     "express-handlebars": "",
     "express-session": "",
-    "handlebars": "",
+    "handlebars": "^4.7.7",
     "inquirer": "^9.1.4",
     "mysql2": "",
     "playing-cards": "^1.1.0",
