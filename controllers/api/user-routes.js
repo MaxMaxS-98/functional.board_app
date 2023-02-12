@@ -1,27 +1,111 @@
 const router = require('express').Router();
-const { User, Record } = require('../../models');
+const { User, Record, Player } = require('../../models');
+
 
 // CREATE new user
 router.post('/', async (req, res) => {
   try {
-    const dbUserData = await User.create(
-      req.body
-    );
+    const dbUserData = await User.create(req.body);
     const dbRecordData = await Record.create(
       {
-        user_id: req.body.id
-      }
-    );
+        user_id: dbUserData.id
+      })
+    const dbPlayerData = await Player.create(
+      {
+        user_id: dbUserData.id
+      });
+      
     req.session.save(() => {
       req.session.loggedIn = true;
 
-      res.status(200).json({ dbUserData, dbRecordData });
+      res.status(200).json({ dbUserData,dbPlayerData, dbRecordData });
     });
   } catch (err) {
     console.log(err);
     res.status(500).json(err);
   }
 });
+
+// get all users
+router.get('/', async (req, res) => {
+  try {
+    const dbUserData = await User.findAll({
+      attributes: ['id', 'username'],
+      include: [
+        {
+          model: Record,
+          attributes: ['games_played', 'games_won', 'max_profit']
+        },
+      ],
+    })
+    const users = dbUserData.map((user) =>
+      user.get({ plain: true })
+    );
+    res.status(200).json(users)
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
+// Get user by id
+router.get('/:id', async (req, res) => {
+  try {
+    const dbUserData = await User.findOne({
+      where: { id: req.params.id },
+      attributes: ['id', 'username'],
+      include: [
+        {
+          model: Record,
+          attributes: ['games_played', 'games_won', 'max_profit']
+        },
+      ],
+    });
+
+    if (!dbUserData) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+
+    res.status(200).json(dbUserData.get({ plain: true }));
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
+// Update a user by id
+router.put('/:id', async (req, res) => {
+  try {
+    const updatedUser = await User.update(req.body, {
+      where: { id: req.params.id },
+      returning: true,
+    });
+
+    if (!updatedUser) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+
+    res.status(200).json(updatedUser.get({ plain: true }));
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
+// Delete an user by id
+router.delete('/:id', async (req, res) => {
+  try {
+    const deletedUser = await User.destroy({
+      where: { id: req.params.id }
+    });
+
+    if (!deletedUser) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+
+    res.status(200).json({ message: 'User deleted successfully' });
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
 
 // Login
 router.post('/login', async (req, res) => {
