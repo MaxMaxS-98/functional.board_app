@@ -1,34 +1,67 @@
+
+//wrapped in a function to be called by server.js
+//files and dependencies
 const path = require("path");
 const sleep = require("sleep-promise");
-const Deck = require(path.join(__dirname, "../helpers/class/Deck"));
-const draw = new Deck();
-const reset = require(path.join(__dirname, "../helpers/resetVariables"));
-const delay = require(path.join(__dirname, "../helpers/delayScript"));
-const { checkDealerBlackjack }= require(path.join(__dirname, "./checkFunctions"));
-var playerHand = [];
-var playerHandValue = 0 || 0;
-var dealerHand = [];
-var dealerHandValue = 0 || 0;
-var dealerDown = [];
-var dealerUp = [];
+const Deck = require(path.join(__dirname, "../helpers/deck"));
+const { resetVariables } = require(path.join(__dirname, "./actions.js"));
+const { checkDealerBlackjack } = require(path.join(__dirname, "./checkFunctions"));
+
+// (a)  variables
+// (a1) html references
+// var hDealerStand = null;
+// var hDealerHandValue = 0
+// var hDealerHand = [];
+// var hPlayerStand = null;
+// var hPlayerHandValue = 0
+// var hPlayerHand = [];
+// var hPlayerOptions = null;
+// var hDealerDown = []; // dealer's down card
+// var hDealerUp = []; // dealer's up card
+// var hPlayerBank = null;
+// var hPlayerBet = null;
+
+// (a2) game variables
+let deck = []; // deck pulled from db
+var dealerHand = []; // dealer's hand
+var playerHand = []; // player's hand
+var dealerHandValue = 0; // dealer's hand value
+var playerHandValue = 0; // player's hand value
+var safety = 17; // dealer will stand on this value
 var playerBet = 25;
-var playerTotal = 0;
-var dealerTotal = 0;
-var playerBank = 1000;
-var playerBust = false;
-var dealerBust = false;
-var dealerStand = false;
+// var playerTotal = 0;
+// var dealerTotal = 0;
+var playerBank = 1000; // stored in Player Model
+var playerBust = null;
+var dealerBust = null;
 var gameCount = 0;
+var turn = 0; // 0 = player, 1 = dealer
+
+// (b) initialize game (client side html) client.js
 
 async function drawCard() {
-  const card = await draw.drawCard();
-  
-  console.log(card.name, card.suit, card.value);
-  await sleep(1000);
-  return card;
+  const draw = new Deck();
+  let count = 0;
+  const maxDeckSize = 52;
+  do {
+    if (deck.length >= maxDeckSize) {
+      break;
+    }
+    const card = await draw.drawCard();
+    deck.push(card);
+    count++;
+  } while (count < 10);
 }
+console.log(deck);
 
+// (c) start game
 async function startGame() {
+  // (c1) reset totals, hands, deck, turn TODO: html
+  if (gameCount > 0) {
+  resetVariables();
+  }
+  // (c2) reshuffle if needed if shoe is low TODO: add reshuffle logic
+  // (c3) deal cards
   console.log("Starting a new game of Blackjack...\n");
 
   // Deduct player's bet from bank
@@ -37,24 +70,22 @@ async function startGame() {
   await sleep(1000);
   console.log("Your credits are now " + playerBank + ".\n");
   await sleep(1000);
-  // Deal initial hands to player and dealer
-  playerHand.push(await drawCard()); + console.log("You have been dealt a card.\n");
-  
-  await sleep(1000);
-  dealerHand.push(await drawCard()); + console.log("Dealer has been dealt a card.\n");
-  await sleep(1000);
-  playerHand.push(await drawCard()); + console.log("You have been dealt a card.\n");
-  await sleep(1000);
-  dealerHand.push(await drawCard()); + console.log("Dealer has been dealt a card.\n");
-  await sleep(1000);
-  //update playerHandValues and dealerHandValues
-  playerHandValue = playerHand.reduce((sum, card) => sum + card.value, 0);
-  dealerHandValue = dealerHand.reduce((sum, card) => sum + card.value, 0);
+  // Deal initial hands to player from deck
+  drawCard
+  turn = 0; playerHand.push(deck.pop()); console.log("You have been dealt a card.\n"); await sleep(1000);
+  turn++; dealerHand.push(deck.pop()), console.log("Dealer has been dealt a card.\n"), await sleep(1000);
+  turn = 0; playerHand.push(deck.pop()); console.log("You have been dealt a card.\n"); await sleep(1000);
+  turn++; dealerHand.push(deck.pop()), console.log("Dealer has been dealt a card.\n"), await sleep(1000);
+  console.log(deck);
 
   // Show player's initial hand
   console.log("Your hand: " + playerHand.map((card) => card.name).join(", "));
   playerTotal = playerHand.reduce((sum, card) => sum + card.value, 0);
   console.log("Your total: " + playerHandValue + "\n");
+  await sleep(1000);
+  //update playerHandValues and dealerHandValues
+  playerHandValue = playerHandValue[0] + playerHandValue[1];
+  dealerHandValue = dealerHandValue[0] + dealerHandValue[1];
 
   // Show one of the dealer's cards face up
   // dealerUp.push(dealerHand[1]);
@@ -106,7 +137,7 @@ checkDealerBlackjack();
       //log playerBalance
       console.log(playerBank + "-----test-----");
       //empty all arrays
-      reset();
+      resetVariables();
   
     }
   }
@@ -120,7 +151,7 @@ checkDealerBlackjack();
         playerBank +
         "."
     );
-   reset();
+   resetVariables();
   }
   // Show dealer's second card face up
   console.log("\nDealer's face up card: " + dealerUp.name);
@@ -156,7 +187,7 @@ checkDealerBlackjack();
       );
 
       //empty all arrays
-      reset();
+      resetVariables();
     }
   }
 
@@ -175,14 +206,14 @@ checkDealerBlackjack();
         "."
     );
     //empty all arrays
-    reset();
+    resetVariables();
   } else if (playerTotal < dealerTotal) {
     console.log("\nYou lose.");
     console.log(
       "You lost $" + playerBet + ". Your remaining bank is $" + playerBank + "."
     );
     //empty all arrays
-    reset();
+    resetVariables();
   } else {
     console.log("\nPush.");
     playerBank += playerBet;
@@ -198,7 +229,7 @@ for (let i = 1; i < 3; i++) {
   gameCount++;
   console.log("---test---" + gameCount + "---test---");
 
-// reset
+
 }
 }
 startGame();
@@ -211,17 +242,11 @@ module.exports = {
   dealerHandValue,
   playerBank,
   playerBet,
-  playerTotal,
-  dealerTotal,
   playerBust,
   dealerBust,
-  dealerUp,
-  dealerDown,
   gameCount,
-  reset,
+  resetVariables,
   checkDealerBlackjack,
   sleep,
-  delay,
   drawCard,
 };
- 

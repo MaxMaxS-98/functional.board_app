@@ -1,5 +1,5 @@
 const path = require("path");
-const { startGame, playerTotal, dealerTotal, dealerUp, dealerHand, playerBust, dealerBust, playerBlackjack, dealerStand, playerDraw, dealerDraw } = require(path.join(__dirname, "../singlePlayerGameFunctions"));
+// const { startGame, playerTotal, dealerTotal, dealerHand, playerBust, dealerBust, playerBlackjack, dealerStand, playerDraw, dealerDraw } = require(path.join(__dirname, "./singlePlayerGameFunctions"));
 
 function checkBust() {
   if (playerTotal > 21) {

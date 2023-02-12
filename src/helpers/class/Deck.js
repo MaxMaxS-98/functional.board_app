@@ -6,8 +6,9 @@ let activeShoe;
 try {
   activeShoe = require(path.join(__dirname, "../../db/activeShoe.json"));
 } catch (err) {
-  // console.error(err);
-  
+  console.error(err);
+  activeShoe = new Deck();
+  fs.writeFileSync(path.join(__dirname, "../../db/activeShoe.json"), JSON.stringify(activeShoe));
 }
 
 class Deck {
@@ -26,10 +27,10 @@ class Deck {
       JSON.stringify(this.shoe),
       (err) => {
         if (err) {
-         
+          console.error(err);
           return;
         }
-        // console.log("Shoe updated");
+        console.log("Shoe updated");
       }
     );
     

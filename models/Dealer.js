@@ -19,7 +19,7 @@ Dealer.init(
         //         key: 'id',
         //     }
         // },
-        hand: {
+        dealerHand: {
             type: DataTypes.STRING,
             allowNull: true
         },

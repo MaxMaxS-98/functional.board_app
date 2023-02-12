@@ -11,13 +11,17 @@ Player.init(
             primaryKey: true,
             autoIncrement: true,
         },
-        credit: {
+        playerBank: {
             type: DataTypes.INTEGER,
             allowNull: false,
             defaultValue: 1000
         },
-        hand: {
+        playerHand: {
             type: DataTypes.STRING,
+            allowNull: true
+        },
+        playerBet: {
+            type: DataTypes.INTEGER,
             allowNull: true
         },
         split_hand: {

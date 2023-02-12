@@ -26,7 +26,7 @@ class Deck {
     ];
 
     Handlebars.registerHelper("card", function (value, suit, id) {
-		var html = `<div class="card ${value} ${suit}" id=${id}></div>`;
+		var html = `<div class="card ${value} ${suit}" id=c${id}></div>`;
 		const htmlToLowerCase = html.toLowerCase();
 		return new Handlebars.SafeString(htmlToLowerCase);
 	  });
