@@ -4,11 +4,11 @@ const Deck = require(path.join(__dirname, "../helpers/class/Deck"));
 const draw = new Deck();
 const reset = require(path.join(__dirname, "../helpers/resetVariables"));
 const delay = require(path.join(__dirname, "../helpers/delayScript"));
-const check = require(path.join(__dirname, "./checkFunctions"));
+const { checkDealerBlackjack }= require(path.join(__dirname, "./checkFunctions"));
 var playerHand = [];
-var playerHandValue = 0;
+var playerHandValue = 0 || 0;
 var dealerHand = [];
-var dealerHandValue = 0;
+var dealerHandValue = 0 || 0;
 var dealerDown = [];
 var dealerUp = [];
 var playerBet = 25;
@@ -67,10 +67,7 @@ async function startGame() {
       "\n"
   );
   // check if the dealer has a blackjack when dealerUp value is 10 or ace
-  if (check.checkDealerBlackjack = true){
-    
-    process.exit(0);
-  }
+checkDealerBlackjack();
 
 
   
@@ -110,7 +107,7 @@ async function startGame() {
       console.log(playerBank + "-----test-----");
       //empty all arrays
       reset();
-      break;
+  
     }
   }
 
@@ -205,3 +202,26 @@ for (let i = 1; i < 3; i++) {
 }
 }
 startGame();
+
+module.exports = {
+  startGame,
+  playerHand,
+  dealerHand,
+  playerHandValue,
+  dealerHandValue,
+  playerBank,
+  playerBet,
+  playerTotal,
+  dealerTotal,
+  playerBust,
+  dealerBust,
+  dealerUp,
+  dealerDown,
+  gameCount,
+  reset,
+  checkDealerBlackjack,
+  sleep,
+  delay,
+  drawCard,
+};
+ 

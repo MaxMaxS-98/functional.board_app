@@ -25,10 +25,10 @@ class Deck {
       { name: "King", value: 10 },
     ];
 
-    Handlebars.registerHelper("card", function (value, suit) {
-      var html = `<div class="card ${value} ${suit}" id=c${id}></div>`;
-	  const htmlToLowerCase = html.toLowerCase();
-      return new Handlebars.SafeString(htmlToLowerCase)
+    Handlebars.registerHelper("card", function (value, suit, id) {
+      var html = `<div class="card ${value} ${suit}" id=${id}></div>`;
+      const htmlToLowerCase = html.toLowerCase();
+      return new Handlebars.SafeString(htmlToLowerCase);
     });
 
     let deck = [];
@@ -38,13 +38,13 @@ class Deck {
       suits.forEach((suit) => {
         names.forEach((name) => {
           const card = {
-            id: id++,
+            id: "c" + id++,
             name: name.name,
             suit: suit,
             value: name.value,
-			html: Handlebars.helpers.card(name.name, suit)
-		  };
-     
+            html: Handlebars.helpers.card(name.name, suit, id -1),
+			img_path:`../../assets/images/cards/${name.name.toLowerCase()}_of_${suit.toLowerCase()}.png`
+          };
           deck.push(card);
         });
       });
