@@ -2,16 +2,13 @@
 <html>
 <head>
   <link rel="stylesheet" href="style.css">
-  <title>My Card Game</title>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.11/handlebars.min.js"></script>
-  <script src="../helpers/deck.js"></script>
+  <title>BlackJack Test</title>
 </head>
 <body>
-  <div id="deck">
-    {{#each cards}}
-    {{card name suit}}
-  {{/each}}
-  
-  </div>
+{{{ card-template }}}
+
+<script src="https://cdn.jsdelivr.net/npm/handlebars@latest/dist/handlebars.js"></script>
+<script src="../helpers/deck.js"></script>  
+<script src="../helpers/render.js"></script>
 </body>
 </html>

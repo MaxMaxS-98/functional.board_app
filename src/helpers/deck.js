@@ -39,11 +39,16 @@ class Deck {
         names.forEach((name) => {
           const card = {
             id: "c" + id++,
+            facedown: false,
             name: name.name,
             suit: suit,
             value: name.value,
             html: Handlebars.helpers.card(name.name, suit, id -1),
-			img_path:`../../assets/images/cards/${name.name.toLowerCase()}_of_${suit.toLowerCase()}.png`
+            img_path: (this.facedown === true) ? 
+			`../../assets/images/cards/${name.name.toLowerCase()}_of_${suit.toLowerCase()}.png` :
+			`../../assets/images/cards/face_down.png`
+			
+           
           };
           deck.push(card);
         });
