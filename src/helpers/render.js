@@ -1,6 +1,5 @@
 const fs = require("fs");
 const path = require("path");
-const Handlebars = require("handlebars");
 
 const renderDeck = () => {
   // Read the JSON file that was created by buildDeck.js

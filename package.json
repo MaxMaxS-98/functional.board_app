@@ -30,14 +30,17 @@
     "handlebars": "^4.7.7",
     "inquirer": "^9.1.4",
     "mysql2": "",
+    "nanoid": "",
     "playing-cards": "^1.1.0",
     "playing-cards-js": "^0.0.2",
     "prompt-sync": "^4.2.0",
     "real-deal-deck-of-cards": "^1.3.3",
     "sequelize": "",
-    "socket.io": "",
-    "nanoid": "",
-    "sleep-promise": "^9.1.0"
+    "sleep-promise": "^9.1.0",
+    "socket.io": ""
   },
-  "homepage": "https://github.com/MaxMaxS-98/BlackJackProject#readme"
+  "homepage": "https://github.com/MaxMaxS-98/BlackJackProject#readme",
+  "devDependencies": {
+    "jest": "^29.4.2"
+  }
 }

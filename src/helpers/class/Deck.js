@@ -1,6 +1,6 @@
 const path = require("path");
 const fs = require("fs");
-const activeShoe = require(path.join(__dirname, "../../db/activeShoe.json"));
+const activeShoe = require(path.join(__dirname, "../db/activeShoe.json"));
 
 class Deck {
   constructor() {
@@ -15,7 +15,7 @@ class Deck {
     this.shoe.cards.splice(r, 1);
     this.usedShoe.push(cardSelected);
     fs.writeFile(
-      path.join(__dirname, "../../db/activeShoe.json"),
+      path.join(__dirname, "../db/activeShoe.json"),
       JSON.stringify(this.shoe),
       (err) => {
         if (err) {
@@ -57,5 +57,3 @@ class Deck {
   
   
   module.exports = Deck;
-
-

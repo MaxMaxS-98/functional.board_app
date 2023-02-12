@@ -12,7 +12,7 @@
             "html": {
                 "string": "<div class=\"card ace hearts\" id=1></div>"
             },
-            "img_path": "../../assets/images/cards/face_down.png"
+            "img_path": "../../assets/images/cards/ace_of_hearts.png"
         },
         {
             "id": "c2",
@@ -23,7 +23,7 @@
             "html": {
                 "string": "<div class=\"card 2 hearts\" id=2></div>"
             },
-            "img_path": "../../assets/images/cards/face_down.png"
+            "img_path": "../../assets/images/cards/2_of_hearts.png"
         },
         {
             "id": "c3",
@@ -34,7 +34,7 @@
             "html": {
                 "string": "<div class=\"card 3 hearts\" id=3></div>"
             },
-            "img_path": "../../assets/images/cards/face_down.png"
+            "img_path": "../../assets/images/cards/3_of_hearts.png"
         },
         {
             "id": "c4",
@@ -45,7 +45,7 @@
             "html": {
                 "string": "<div class=\"card 4 hearts\" id=4></div>"
             },
-            "img_path": "../../assets/images/cards/face_down.png"
+            "img_path": "../../assets/images/cards/4_of_hearts.png"
         },
         {
             "id": "c5",
@@ -56,7 +56,7 @@
             "html": {
                 "string": "<div class=\"card 5 hearts\" id=5></div>"
             },
-            "img_path": "../../assets/images/cards/face_down.png"
+            "img_path": "../../assets/images/cards/5_of_hearts.png"
         },
         {
             "id": "c6",
@@ -67,7 +67,7 @@
             "html": {
                 "string": "<div class=\"card 6 hearts\" id=6></div>"
             },
-            "img_path": "../../assets/images/cards/face_down.png"
+            "img_path": "../../assets/images/cards/6_of_hearts.png"
         },
         {
             "id": "c7",
@@ -78,7 +78,7 @@
             "html": {
                 "string": "<div class=\"card 7 hearts\" id=7></div>"
             },
-            "img_path": "../../assets/images/cards/face_down.png"
+            "img_path": "../../assets/images/cards/7_of_hearts.png"
         },
         {
             "id": "c8",
@@ -89,7 +89,7 @@
             "html": {
                 "string": "<div class=\"card 8 hearts\" id=8></div>"
             },
-            "img_path": "../../assets/images/cards/face_down.png"
+            "img_path": "../../assets/images/cards/8_of_hearts.png"
         },
         {
             "id": "c9",
@@ -100,7 +100,7 @@
             "html": {
                 "string": "<div class=\"card 9 hearts\" id=9></div>"
             },
-            "img_path": "../../assets/images/cards/face_down.png"
+            "img_path": "../../assets/images/cards/9_of_hearts.png"
         },
         {
             "id": "c10",
@@ -111,7 +111,7 @@
             "html": {
                 "string": "<div class=\"card 10 hearts\" id=10></div>"
             },
-            "img_path": "../../assets/images/cards/face_down.png"
+            "img_path": "../../assets/images/cards/10_of_hearts.png"
         },
         {
             "id": "c11",
@@ -122,7 +122,7 @@
             "html": {
                 "string": "<div class=\"card jack hearts\" id=11></div>"
             },
-            "img_path": "../../assets/images/cards/face_down.png"
+            "img_path": "../../assets/images/cards/jack_of_hearts.png"
         },
         {
             "id": "c12",
@@ -133,7 +133,7 @@
             "html": {
                 "string": "<div class=\"card queen hearts\" id=12></div>"
             },
-            "img_path": "../../assets/images/cards/face_down.png"
+            "img_path": "../../assets/images/cards/queen_of_hearts.png"
         },
         {
             "id": "c13",
@@ -144,7 +144,7 @@
             "html": {
                 "string": "<div class=\"card king hearts\" id=13></div>"
             },
-            "img_path": "../../assets/images/cards/face_down.png"
+            "img_path": "../../assets/images/cards/king_of_hearts.png"
         },
         {
             "id": "c14",
@@ -155,7 +155,7 @@
             "html": {
                 "string": "<div class=\"card ace diamonds\" id=14></div>"
             },
-            "img_path": "../../assets/images/cards/face_down.png"
+            "img_path": "../../assets/images/cards/ace_of_diamonds.png"
         },
         {
             "id": "c15",
@@ -166,7 +166,7 @@
             "html": {
                 "string": "<div class=\"card 2 diamonds\" id=15></div>"
             },
-            "img_path": "../../assets/images/cards/face_down.png"
+            "img_path": "../../assets/images/cards/2_of_diamonds.png"
         },
         {
             "id": "c16",
@@ -177,7 +177,7 @@
             "html": {
                 "string": "<div class=\"card 3 diamonds\" id=16></div>"
             },
-            "img_path": "../../assets/images/cards/face_down.png"
+            "img_path": "../../assets/images/cards/3_of_diamonds.png"
         },
         {
             "id": "c17",
@@ -188,7 +188,7 @@
             "html": {
                 "string": "<div class=\"card 4 diamonds\" id=17></div>"
             },
-            "img_path": "../../assets/images/cards/face_down.png"
+            "img_path": "../../assets/images/cards/4_of_diamonds.png"
         },
         {
             "id": "c18",
@@ -199,7 +199,7 @@
             "html": {
                 "string": "<div class=\"card 5 diamonds\" id=18></div>"
             },
-            "img_path": "../../assets/images/cards/face_down.png"
+            "img_path": "../../assets/images/cards/5_of_diamonds.png"
         },
         {
             "id": "c19",
@@ -210,7 +210,7 @@
             "html": {
                 "string": "<div class=\"card 6 diamonds\" id=19></div>"
             },
-            "img_path": "../../assets/images/cards/face_down.png"
+            "img_path": "../../assets/images/cards/6_of_diamonds.png"
         },
         {
             "id": "c20",
@@ -221,7 +221,7 @@
             "html": {
                 "string": "<div class=\"card 7 diamonds\" id=20></div>"
             },
-            "img_path": "../../assets/images/cards/face_down.png"
+            "img_path": "../../assets/images/cards/7_of_diamonds.png"
         },
         {
             "id": "c21",
@@ -232,7 +232,7 @@
             "html": {
                 "string": "<div class=\"card 8 diamonds\" id=21></div>"
             },
-            "img_path": "../../assets/images/cards/face_down.png"
+            "img_path": "../../assets/images/cards/8_of_diamonds.png"
         },
         {
             "id": "c22",
@@ -243,7 +243,7 @@
             "html": {
                 "string": "<div class=\"card 9 diamonds\" id=22></div>"
             },
-            "img_path": "../../assets/images/cards/face_down.png"
+            "img_path": "../../assets/images/cards/9_of_diamonds.png"
         },
         {
             "id": "c23",
@@ -254,7 +254,7 @@
             "html": {
                 "string": "<div class=\"card 10 diamonds\" id=23></div>"
             },
-            "img_path": "../../assets/images/cards/face_down.png"
+            "img_path": "../../assets/images/cards/10_of_diamonds.png"
         },
         {
             "id": "c24",
@@ -265,7 +265,7 @@
             "html": {
                 "string": "<div class=\"card jack diamonds\" id=24></div>"
             },
-            "img_path": "../../assets/images/cards/face_down.png"
+            "img_path": "../../assets/images/cards/jack_of_diamonds.png"
         },
         {
             "id": "c25",
@@ -276,7 +276,7 @@
             "html": {
                 "string": "<div class=\"card queen diamonds\" id=25></div>"
             },
-            "img_path": "../../assets/images/cards/face_down.png"
+            "img_path": "../../assets/images/cards/queen_of_diamonds.png"
         },
         {
             "id": "c26",
@@ -287,7 +287,7 @@
             "html": {
                 "string": "<div class=\"card king diamonds\" id=26></div>"
             },
-            "img_path": "../../assets/images/cards/face_down.png"
+            "img_path": "../../assets/images/cards/king_of_diamonds.png"
         },
         {
             "id": "c27",
@@ -298,7 +298,7 @@
             "html": {
                 "string": "<div class=\"card ace spades\" id=27></div>"
             },
-            "img_path": "../../assets/images/cards/face_down.png"
+            "img_path": "../../assets/images/cards/ace_of_spades.png"
         },
         {
             "id": "c28",
@@ -309,7 +309,7 @@
             "html": {
                 "string": "<div class=\"card 2 spades\" id=28></div>"
             },
-            "img_path": "../../assets/images/cards/face_down.png"
+            "img_path": "../../assets/images/cards/2_of_spades.png"
         },
         {
             "id": "c29",
@@ -320,7 +320,7 @@
             "html": {
                 "string": "<div class=\"card 3 spades\" id=29></div>"
             },
-            "img_path": "../../assets/images/cards/face_down.png"
+            "img_path": "../../assets/images/cards/3_of_spades.png"
         },
         {
             "id": "c30",
@@ -331,7 +331,7 @@
             "html": {
                 "string": "<div class=\"card 4 spades\" id=30></div>"
             },
-            "img_path": "../../assets/images/cards/face_down.png"
+            "img_path": "../../assets/images/cards/4_of_spades.png"
         },
         {
             "id": "c31",
@@ -342,7 +342,7 @@
             "html": {
                 "string": "<div class=\"card 5 spades\" id=31></div>"
             },
-            "img_path": "../../assets/images/cards/face_down.png"
+            "img_path": "../../assets/images/cards/5_of_spades.png"
         },
         {
             "id": "c32",
@@ -353,7 +353,7 @@
             "html": {
                 "string": "<div class=\"card 6 spades\" id=32></div>"
             },
-            "img_path": "../../assets/images/cards/face_down.png"
+            "img_path": "../../assets/images/cards/6_of_spades.png"
         },
         {
             "id": "c33",
@@ -364,7 +364,7 @@
             "html": {
                 "string": "<div class=\"card 7 spades\" id=33></div>"
             },
-            "img_path": "../../assets/images/cards/face_down.png"
+            "img_path": "../../assets/images/cards/7_of_spades.png"
         },
         {
             "id": "c34",
@@ -375,7 +375,7 @@
             "html": {
                 "string": "<div class=\"card 8 spades\" id=34></div>"
             },
-            "img_path": "../../assets/images/cards/face_down.png"
+            "img_path": "../../assets/images/cards/8_of_spades.png"
         },
         {
             "id": "c35",
@@ -386,7 +386,7 @@
             "html": {
                 "string": "<div class=\"card 9 spades\" id=35></div>"
             },
-            "img_path": "../../assets/images/cards/face_down.png"
+            "img_path": "../../assets/images/cards/9_of_spades.png"
         },
         {
             "id": "c36",
@@ -397,7 +397,7 @@
             "html": {
                 "string": "<div class=\"card 10 spades\" id=36></div>"
             },
-            "img_path": "../../assets/images/cards/face_down.png"
+            "img_path": "../../assets/images/cards/10_of_spades.png"
         },
         {
             "id": "c37",
@@ -408,7 +408,7 @@
             "html": {
                 "string": "<div class=\"card jack spades\" id=37></div>"
             },
-            "img_path": "../../assets/images/cards/face_down.png"
+            "img_path": "../../assets/images/cards/jack_of_spades.png"
         },
         {
             "id": "c38",
@@ -419,7 +419,7 @@
             "html": {
                 "string": "<div class=\"card queen spades\" id=38></div>"
             },
-            "img_path": "../../assets/images/cards/face_down.png"
+            "img_path": "../../assets/images/cards/queen_of_spades.png"
         },
         {
             "id": "c39",
@@ -430,7 +430,7 @@
             "html": {
                 "string": "<div class=\"card king spades\" id=39></div>"
             },
-            "img_path": "../../assets/images/cards/face_down.png"
+            "img_path": "../../assets/images/cards/king_of_spades.png"
         },
         {
             "id": "c40",
@@ -441,7 +441,7 @@
             "html": {
                 "string": "<div class=\"card ace clubs\" id=40></div>"
             },
-            "img_path": "../../assets/images/cards/face_down.png"
+            "img_path": "../../assets/images/cards/ace_of_clubs.png"
         },
         {
             "id": "c41",
@@ -452,7 +452,7 @@
             "html": {
                 "string": "<div class=\"card 2 clubs\" id=41></div>"
             },
-            "img_path": "../../assets/images/cards/face_down.png"
+            "img_path": "../../assets/images/cards/2_of_clubs.png"
         },
         {
             "id": "c42",
@@ -463,7 +463,7 @@
             "html": {
                 "string": "<div class=\"card 3 clubs\" id=42></div>"
             },
-            "img_path": "../../assets/images/cards/face_down.png"
+            "img_path": "../../assets/images/cards/3_of_clubs.png"
         },
         {
             "id": "c43",
@@ -474,7 +474,7 @@
             "html": {
                 "string": "<div class=\"card 4 clubs\" id=43></div>"
             },
-            "img_path": "../../assets/images/cards/face_down.png"
+            "img_path": "../../assets/images/cards/4_of_clubs.png"
         },
         {
             "id": "c44",
@@ -485,7 +485,7 @@
             "html": {
                 "string": "<div class=\"card 5 clubs\" id=44></div>"
             },
-            "img_path": "../../assets/images/cards/face_down.png"
+            "img_path": "../../assets/images/cards/5_of_clubs.png"
         },
         {
             "id": "c45",
@@ -496,7 +496,7 @@
             "html": {
                 "string": "<div class=\"card 6 clubs\" id=45></div>"
             },
-            "img_path": "../../assets/images/cards/face_down.png"
+            "img_path": "../../assets/images/cards/6_of_clubs.png"
         },
         {
             "id": "c46",
@@ -507,7 +507,7 @@
             "html": {
                 "string": "<div class=\"card 7 clubs\" id=46></div>"
             },
-            "img_path": "../../assets/images/cards/face_down.png"
+            "img_path": "../../assets/images/cards/7_of_clubs.png"
         },
         {
             "id": "c47",
@@ -518,7 +518,7 @@
             "html": {
                 "string": "<div class=\"card 8 clubs\" id=47></div>"
             },
-            "img_path": "../../assets/images/cards/face_down.png"
+            "img_path": "../../assets/images/cards/8_of_clubs.png"
         },
         {
             "id": "c48",
@@ -529,7 +529,7 @@
             "html": {
                 "string": "<div class=\"card 9 clubs\" id=48></div>"
             },
-            "img_path": "../../assets/images/cards/face_down.png"
+            "img_path": "../../assets/images/cards/9_of_clubs.png"
         },
         {
             "id": "c49",
@@ -540,7 +540,7 @@
             "html": {
                 "string": "<div class=\"card 10 clubs\" id=49></div>"
             },
-            "img_path": "../../assets/images/cards/face_down.png"
+            "img_path": "../../assets/images/cards/10_of_clubs.png"
         },
         {
             "id": "c50",
@@ -551,7 +551,7 @@
             "html": {
                 "string": "<div class=\"card jack clubs\" id=50></div>"
             },
-            "img_path": "../../assets/images/cards/face_down.png"
+            "img_path": "../../assets/images/cards/jack_of_clubs.png"
         },
         {
             "id": "c51",
@@ -562,7 +562,7 @@
             "html": {
                 "string": "<div class=\"card queen clubs\" id=51></div>"
             },
-            "img_path": "../../assets/images/cards/face_down.png"
+            "img_path": "../../assets/images/cards/queen_of_clubs.png"
         },
         {
             "id": "c52",
@@ -573,7 +573,7 @@
             "html": {
                 "string": "<div class=\"card king clubs\" id=52></div>"
             },
-            "img_path": "../../assets/images/cards/face_down.png"
+            "img_path": "../../assets/images/cards/king_of_clubs.png"
         }
     ]
 }
