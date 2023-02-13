@@ -3,10 +3,11 @@
     padding: 0;
     box-sizing: border-box;
 }
-
+/* this  is a body */
 body {
     background-color:rgb(71, 108, 71);
 }
+
 h1{
     color: azure;
     padding-left: 16px ;
@@ -72,6 +73,18 @@ h1{
     transform: rotate(7deg);
     border-radius: 30px;
     cursor: pointer;
+}
+
+#logout{
+    margin: 3px;
+    margin-bottom: 20px;
+    width: 7rem;
+    height: 3rem;
+    border: 2px solid black;
+    border-radius: 5px;
+    font-size: 19px;
+    background-color: rgb(98, 150, 150);
+    
 }
 
 input{
@@ -145,19 +158,24 @@ input,#bet{
     flex-direction: row-reverse;
     position: absolute;
     top: 24rem;
-    left: 11rem;
+    left: 15rem;
 }
 
-div #c1{
+ #c1, #c2, #c3, #c4, #c5{
     display: flex;
     text-align: center;
-    font-size: xx-large;
+    font-size: 20px;
     margin: 90px;
     padding: 11px;
     border: 4px dotted black;
     border-radius: 15px ;
-    height: 11rem;
-    width: 8rem
+    height: 9rem;
+    width: 6rem
+}
+
+div #c2, #c3, #c4{
+    margin-top: 16rem;
+   
 }
 
 .card-placement .first{
@@ -180,6 +198,46 @@ div #c1{
 
 .card-placement .fifth{ 
     transform: rotate(30deg);}
+
+    #background{
+        background-color: rgb(71, 108, 71)
+    }
+    
+    #start-game{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        width: 100%;
+        background-color: rgb(71, 108, 71);}
+
+    #start{
+        font-size: 50px;
+        border: 3px solid black;
+        border-radius: 16px;
+        background-color: rgb(207, 88, 88);
+        color: azure;
+        padding: 10px;
+ }
+#log-out{
+    margin-left: 10px;
+}
+ #logout a{
+       text-decoration: none;
+       color: #333;
+ }
+
+ #start a{
+        text-decoration: none;
+        color: azure;
+    }
+
+    #start:hover{
+     background-color: rgb(188, 103, 103);
+     transform: rotate(2deg);
+     border-radius: 30px;
+     cursor: pointer;
+ }
     
     @media screen and (max-width: 768px) {
         body {

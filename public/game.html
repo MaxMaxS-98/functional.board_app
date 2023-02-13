@@ -9,27 +9,38 @@
 </head>
 <body>
 
+    <div id="log-out">
+        <button id="logout"> <a href="index.html">Log Out </a> </button>
+        
+    </div>
+
+<!-- this is a div with a deck of cards-->
     <div class="deck">
-        <h1>A Deck of Cards</h1>
+        <div class="card back"></div>
         <div id="deck"></div>
     </div>
 
+<!-- this is a div that holds the game -->
     <div id="main">
         <div id="game">
 
+<!-- this is a div that holds the dealer -->
             <div id="dealer">
                 <div id="dealer-hand"></div>
             </div>
+
+<!--  this is a div that holds the player -->
             <div id="player">
                 <h1>Player: </h1>
                 <div id="player-hand"></div>
-            
 
+<!--  this div holds the coins -->
             <div id="coins">
                 <span id="loot">Coins: $<span></span></span>
                 <div id="bank">Earnings: $</div>
             </div>
 
+<!-- the buttons for the game -->
             <div id="buttons">
                 <button class="move" id="hit">Hit</button>
                 <button class="move" id="stand">Stand</button>
@@ -38,30 +49,28 @@
                 <button class="move" id="split">Split</button>
                 <input type="number" id="bet" placeholder="Bet">
             </div>
+
+<!-- this is a div that holds the players cards -->
             <div class ="card-placement">
                 <div class="first" id ="c1">
                     <h3>player 1</h3>
                 </div>
 
-                <div class="second" id ="c1">
+                <div class="second" id ="c2">
                     <h3>player 2</h3>
                 </div>
 
-                <div class="third" id ="c1">
+                <div class="third" id ="c3">
                     <h3>player 3</h3>
                 </div>
 
-                <div class="forth" id ="c1">
+                <div class="forth" id ="c4">
                     <h3>player 4</h3>
                 </div>
 
-                <div class="fifth" id ="c1">
+                <div class="fifth" id ="c5">
                     <h3>player 5</h3>
                 </div>
-
-                <!-- <div id ="c1">
-                    <h3> dealer</h3>
-                </div> -->
             </div>
         </div>
     </div>
