@@ -34,6 +34,11 @@ Player.init(
             type: DataTypes.STRING,
             allowNull: false,
             defaultValue: 'idle'
+        },
+        turn: {
+            type: DataTypes.INTEGER,
+            allowNull: false,
+            defaultValue: 0
         }
     },
     {
