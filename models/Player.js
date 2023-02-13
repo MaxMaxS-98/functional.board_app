@@ -17,7 +17,7 @@ Player.init(
             defaultValue: 1000
         },
         hand: {
-            type: DataTypes.STRING,
+            type: DataTypes.TEXT,
             allowNull: true
         },
         split_hand: {
@@ -34,6 +34,11 @@ Player.init(
             type: DataTypes.STRING,
             allowNull: false,
             defaultValue: 'idle'
+        },
+        turn: {
+            type: DataTypes.INTEGER,
+            allowNull: false,
+            defaultValue: 0
         }
     },
     {

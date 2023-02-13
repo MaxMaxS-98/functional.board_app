@@ -11,14 +11,6 @@ Record.init(
             primaryKey: true,
             autoIncrement: true,
         },
-        // record_username: {
-        //     type: DataTypes.STRING,
-        //     allowNull: true,
-        //     references: {
-        //         model: 'user',
-        //         key: 'username',
-        //     }
-        // },
         games_won: {
             type: DataTypes.INTEGER,
             allowNull: false,
