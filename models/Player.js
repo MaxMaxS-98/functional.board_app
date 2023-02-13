@@ -17,7 +17,7 @@ Player.init(
             defaultValue: 1000
         },
         hand: {
-            type: DataTypes.STRING,
+            type: DataTypes.TEXT,
             allowNull: true
         },
         split_hand: {

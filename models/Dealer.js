@@ -11,16 +11,9 @@ Dealer.init(
             primaryKey: true,
             autoIncrement: true,
         },
-        // table_id: {
-        //     type: DataTypes.INTEGER,
-        //     allowNull: false,
-        //     references: {
-        //         model: 'playtable',
-        //         key: 'id',
-        //     }
-        // },
+    
         hand: {
-            type: DataTypes.STRING,
+            type: DataTypes.TEXT,
             allowNull: true
         },
         // This shows the status of a dealer, for example: 'stand', 'split', 'double', 'busted', 'stand', etc.
@@ -28,6 +21,11 @@ Dealer.init(
             type: DataTypes.STRING,
             allowNull: false,
             defaultValue: 'idle'
+        },
+        is_active: {
+            type: DataTypes.BOOLEAN,
+            allowNull: false,
+            defaultValue: true
         }
     },
     {
