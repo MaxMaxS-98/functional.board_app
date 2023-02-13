@@ -2,12 +2,11 @@ const path = require("path");
 const fs = require("fs");
 const deckData = fs.readFileSync(path.join(__dirname, "../db/activeShoe.json"));
 const sleep = require("sleep-promise");
-const Deck = require(path.join(__dirname, "./deck/Deck"));
 const handValue = require(path.join(__dirname, "../helpers/handValue"));
 // const { checkDealerBlackjack }= require(path.join(__dirname, "./checkFunctions"));
 // variables
 
-const deck = JSON.parse(deckData);
+const Deck = require(path.join(__dirname, "./deck/Deck"));
 var deckQueue = [];
 
 // var dealerDown = (dealerHand[0].facedown, true)
@@ -31,30 +30,45 @@ var dealerHandValue = handValue(dealerHand); // holds the value of the dealer's 
 var usedCards = []; // holds cards that have been used
 
 // functions
-function drawCards() {
-  while (deckQueue.length < 20 && deck.length > 0) {
-    deckQueue.push(deck.pop());
+async function drawCards() {
+    const deck = new Deck();
+    return new Promise(async (resolve, reject) => {
+      while (deckQueue.length < 30 && deck.shoe.cards.length > 0) {
+        const card = await deck.drawCard();
+        deckQueue.push(card);
+        console.log(deckQueue.length)
+      }
+      resolve();
+    });
   }
-}
-
+  
 async function dealTable() {
-  drawCards();
+  await drawCards();
   for (let i = 0; i < 2; i++) {
-    playerHand.push(deckQueue.pop());
-    dealerHand.push(deckQueue.pop());
-    playerOneBot.push(deckQueue.pop());
-    playerTwoBot.push(deckQueue.pop());
-    playerFourBot.push(deckQueue.pop());
-    playerFiveBot.push(deckQueue.pop());
+    await playerHand.push(deckQueue.pop());
+    await dealerHand.push(deckQueue.pop());
+    await playerOneBot.push(deckQueue.pop());
+    await playerTwoBot.push(deckQueue.pop());
+    await playerFourBot.push(deckQueue.pop());
+    await playerFiveBot.push(deckQueue.pop());
+    await console.log(deckQueue.length);
   }
-  dealerHand[0].facedown = true;
-  dealerHand[1].facedown = false;
+
+    dealerHand[0].facedown = true;
+    console.log(dealerHand);
+    console.log(playerHandValue);
+    dealerHand[1].facedown = false;
+    console.log(dealerHand);
   turn++;
   if (turn > 5) {
     turn = 0;
   }
   await sleep(1000);
 }
+console.log(deckQueue.length);
+dealTable();
+
+
 
 function checkDealerHand() {
   if (dealerHand[1].value === 1) {
@@ -69,37 +83,37 @@ function checkDealerHand() {
 }
 
 function checkTableForBlackjack() {
-    var usedCards = [];
-    if (handValue(playerHand) === 21) {
-        console.log("Player has Blackjack!");
-        playerBank += playerBet * 1.5;
-        usedCards.push(...playerHand);
-        playerHand = [];
-    }
-    if (handValue(playerOneBot) === 21) {
-        console.log("Player One Bot has Blackjack!");
-        usedCards.push(...playerOneBot);
-        playerOneBot = [];
-    }
-    if (handValue(playerTwoBot) === 21) {
-        console.log("Player Two Bot has Blackjack!");
-        usedCards.push(...playerTwoBot);
-        playerTwoBot = [];
-    }
-    if (handValue(playerFourBot) === 21) {
-        console.log("Player Four Bot has Blackjack!");
-        usedCards.push(...playerFourBot);
-        playerFourBot = [];
-    }
-    if (handValue(playerFiveBot) === 21) {
-        console.log("Player Five Bot has Blackjack!");
-        usedCards.push(...playerFiveBot);
-        playerFiveBot = [];
-    }
+  var usedCards = [];
+  if (handValue(playerHand) === 21) {
+    console.log("Player has Blackjack!");
+    playerBank += playerBet * 1.5;
+    usedCards.push(...playerHand);
+    playerHand = [];
+  }
+  if (handValue(playerOneBot) === 21) {
+    console.log("Player One Bot has Blackjack!");
+    usedCards.push(...playerOneBot);
+    playerOneBot = [];
+  }
+  if (handValue(playerTwoBot) === 21) {
+    console.log("Player Two Bot has Blackjack!");
+    usedCards.push(...playerTwoBot);
+    playerTwoBot = [];
+  }
+  if (handValue(playerFourBot) === 21) {
+    console.log("Player Four Bot has Blackjack!");
+    usedCards.push(...playerFourBot);
+    playerFourBot = [];
+  }
+  if (handValue(playerFiveBot) === 21) {
+    console.log("Player Five Bot has Blackjack!");
+    usedCards.push(...playerFiveBot);
+    playerFiveBot = [];
+  }
 }
 
 const startGame = () => {
-    drawCards();
-    dealTable();
-  }
-  
+  drawCards();
+  dealTable();
+};
+startGame();

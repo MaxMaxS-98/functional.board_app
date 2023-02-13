@@ -2,7 +2,7 @@ const Handlebars = require("handlebars");
 
 class Deck {
   constructor(options = {}) {
-    const defaultOptions = { numberOfDecks: 1 };
+    const defaultOptions = { numberOfDecks: 5 };
     this.opts = { ...defaultOptions, ...options };
     this.cards = this.createDeck();
   }
@@ -26,36 +26,34 @@ class Deck {
     ];
 
     Handlebars.registerHelper("card", function (value, suit, id) {
-		var html = `<div class="card ${value} ${suit}" id=${id}></div>`;
-		const htmlToLowerCase = html.toLowerCase();
-		return new Handlebars.SafeString(htmlToLowerCase);
-	  });
-	  
-	  let deck = [];
-	  let id = 1;
-	  
-	  for (let d = 0; d < this.opts.numberOfDecks; d++) {
-		suits.forEach((suit) => {
-		  names.forEach((name) => {
-			const card = {
-			  id: "c" + id++,
-			  facedown: false,
-			  name: name.name,
-			  suit: suit,
-			  value: name.value,
-			  html: Handlebars.helpers.card(name.name, suit, id -1),
-			  img_path: (this.facedown === false) ? 
-			  `../../assets/images/cards/face_down.png` :
-			  `../../assets/images/cards/${name.name.toLowerCase()}_of_${suit.toLowerCase()}.png` 
-			  
-			 
-			};
-			deck.push(card);
-		  });
-		});
-	  }
-	  return deck;
-	}
+      var html = `<div class="card ${value} ${suit}" id=${id}></div>`;
+      const htmlToLowerCase = html.toLowerCase();
+      return new Handlebars.SafeString(htmlToLowerCase);
+    });
+
+    let deck = [];
+    let id = 1;
+
+    for (let d = 0; d < this.opts.numberOfDecks; d++) {
+      suits.forEach((suit) => {
+        names.forEach((name) => {
+          const card = {
+            id: "c" + id++,
+            facedown: false,
+            name: name.name,
+            suit: suit,
+            value: name.value,
+            html: Handlebars.helpers.card(name.name, suit, "c" +id -1),
+            img_path: (this.facedown === false) ? 
+            `../../assets/images/cards/face_down.png` :
+            `../../assets/images/cards/${name.name.toLowerCase()}_of_${suit.toLowerCase()}.png` 
+          };
+          deck.push(card);
+        });
+      });
+    }
+    return deck;
+  }
 }
 
 module.exports = Deck;
