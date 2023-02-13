@@ -1,0 +1,191 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color:rgb(71, 108, 71);
+}
+h1{
+    color: azure;
+    padding-left: 16px ;
+}
+#main {
+    margin: 0 auto;
+}
+
+#game {
+    background: transparent url("../assets/img/6.jpeg")0 0 no-repeat;
+    border-radius: 10px;
+    background-position: center;
+    background-size:contain ;
+    color: #333;
+    height: 100vh;
+    width: 100%;
+    position: relative;
+}
+
+#coins, #coins:before{
+    border-radius: 5px;
+    height: 60px;
+    position: absolute;
+    width: 160px;
+    padding: 8px;
+    right: 0;
+}
+
+#coins {
+    border: 5px solid #fcb900;
+    width: 200px;
+    height: 110px;
+    /* text-align: center; */
+}
+
+#loot, #bank{
+    color: rgb(255, 255, 255);
+    margin: 6px 0;
+    font-size: 30px;
+   
+}
+
+#buttons{
+    display: flex;
+    position: absolute;
+    padding: 10px;
+    text-align: center;
+    flex-direction: column;
+}
+
+.move{
+    margin: 3px;
+    width: 7rem;
+    height: 3rem;
+    border: 2px solid black;
+    border-radius: 20px;
+    font-size: 19px;
+    background-color: rgb(98, 150, 150);
+}
+
+.move:hover{
+    background-color: rgb(188, 207, 132);
+    transform: rotate(7deg);
+    border-radius: 30px;
+    cursor: pointer;
+}
+
+input{
+    border: 2px solid black;
+    border-radius: 6px;
+}
+
+input,#bet{
+    font-size: 26px;
+    width: 7rem;
+    margin-left: 5px;
+    margin-top: 4px;
+    text-align: center;
+    background-color: rgb(208, 195, 193);
+
+}
+/* 
+.deck
+{
+	width:50%;
+	margin: 20px auto;
+	padding: 10px;
+	text-align: center;
+	color:white;
+}
+
+.card
+{
+	padding: 10px;
+	border: solid 1px #995454;
+	background-color: rgb(252, 251, 251);
+	display: inline-block;
+	border-radius: 10px;
+	font-size: 14pt;
+	text-align: center;
+	color:black;
+	margin: 3px;
+}
+
+.card .value{
+	font-size:15pt;
+	font-family: sans-serif;
+}
+
+.card .suit
+{
+	background-image: url('card.png');
+	height: 100px;
+	width: 85px;
+}
+
+.card .diamonds
+{
+	background-position-y: 100px;
+}
+
+.card .hearts
+{
+	background-position-x: 90px;
+}
+
+.card .clubs
+{
+	background-position-x:90px;
+	background-position-y:100px;
+} */
+
+.card-placement{
+    /* transform: rotate(35deg);  */
+    display: flex;
+    flex-direction: row-reverse;
+    position: absolute;
+    top: 24rem;
+    left: 11rem;
+}
+
+div #c1{
+    display: flex;
+    text-align: center;
+    font-size: xx-large;
+    margin: 90px;
+    padding: 11px;
+    border: 4px dotted black;
+    border-radius: 15px ;
+    height: 11rem;
+    width: 8rem
+}
+
+.card-placement .first{
+    margin-bottom: 20px;
+    transform: rotate(-35deg);
+    
+}
+
+.card-placement .second{
+    transform: rotate(-20deg);
+}
+
+.card-placement .third{
+    transform: rotate(-1deg);
+}
+
+.card-placement .forth{
+    transform: rotate(20deg);
+}
+
+.card-placement .fifth{ 
+    transform: rotate(30deg);}
+    
+    @media screen and (max-width: 768px) {
+        body {
+          width: 100%;
+        }
+        #game {
+          width: 100%;
+        }
+    }
