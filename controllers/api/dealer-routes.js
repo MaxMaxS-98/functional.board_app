@@ -1,22 +1,25 @@
 const router = require('express').Router();
 const { Dealer } = require('../../models');
 
-// // Get all Dealer
-// router.get('/', async (req, res) => {
-//     try {
-//         const allDealers = await Dealer.findAll();
-//         res.status(200).json({ allDealers });
-//     } catch (err) {
-//         console.log(err);
-//         res.status(500).json(err);
-//     }
-// });
+// Get all Dealers
+router.get('/', async (req, res) => {
+    try {
+        const allDealers = await Dealer.findAll();
+        const dealers = allDealers.map((player) =>
+            dealers.get({ plain: true })
+        );
+        res.status(200).json(dealers)
+    } catch (err) {
+        console.log(err);
+        res.status(500).json(err);
+    }
+});
 
 // Get a single Dealer
-router.get('/:user_id', async (req, res) => {
+router.get('/:id', async (req, res) => {
     try {
         const dealer = await Dealer.findOne(
-            { where: { user_id: req.params.user_id } }
+            { where: { id: req.params.id } }
         );
         if (!dealer) {
             return res.status(400).json({ message: 'Dealer not found' });
@@ -29,18 +32,22 @@ router.get('/:user_id', async (req, res) => {
 });
 
 // Update a Dealer
-router.put('/:user_id', async (req, res) => {
+router.put('/:id', async (req, res) => {
     try {
         // Validate incoming data
         const dealer = await Dealer.update(
             req.body,
-            { where: { user_id: req.params.user_id } },
-            { new: true }
+            { where: { id: req.params.id },
+              new: true 
+            }
         );
-        if (!dealer) {
+        const updatedDealer = await Dealer.findOne({
+            where: { id: req.params.id }
+          });
+        if (!updatedDealer) {
             return res.status(400).json({ message: 'Dealer not found' });
         }
-        res.status(200).json({ dealer });
+        res.status(200).json(updatedDealer.get({ plain: true }))
     } catch (err) {
         console.log(err);
         res.status(500).json(err);
@@ -48,10 +55,10 @@ router.put('/:user_id', async (req, res) => {
 });
 
 // Delete a Dealer
-router.delete('/:user_id', async (req, res) => {
+router.delete('/:id', async (req, res) => {
     try {
         const dealer = await Dealer.destroy({
-            where: { user_id: req.params.user_id }
+            where: { id: req.params.id }
         });
         if (!dealer) {
             return res.status(400).json({ message: 'Dealer not found' });

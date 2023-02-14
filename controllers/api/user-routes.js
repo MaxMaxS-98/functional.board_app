@@ -18,7 +18,7 @@ router.post('/', async (req, res) => {
     req.session.save(() => {
       req.session.loggedIn = true;
 
-      res.status(200).json({ dbUserData,dbPlayerData, dbRecordData });
+      res.status(200).json({ dbUserData, dbPlayerData, dbRecordData });
     });
   } catch (err) {
     console.log(err);
@@ -74,16 +74,18 @@ router.get('/:id', async (req, res) => {
 // Update a user by id
 router.put('/:id', async (req, res) => {
   try {
-    const updatedUser = await User.update(req.body, {
+    const updateUser = await User.update(req.body, {
       where: { id: req.params.id },
       returning: true,
     });
 
-    if (!updatedUser) {
-      return res.status(404).json({ message: 'User not found' });
-    }
-
-    res.status(200).json(updatedUser.get({ plain: true }));
+    const updatedUser = await Playtable.findOne({
+      where: { id: req.params.id }
+    });
+  if (!updatedUser) {
+      return res.status(400).json({ message: 'User not found' });
+  }
+  res.status(200).json(updatedUser.get({ plain: true }))
   } catch (err) {
     res.status(500).json(err);
   }

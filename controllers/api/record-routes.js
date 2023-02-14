@@ -37,17 +37,18 @@ router.get('/:id', async (req, res) => {
 // Update a single record by ID
 router.put('/:id', async (req, res) => {
     try {
-        const updatedRecord = await Record.update(req.body, {
+        const updateRecord = await Record.update(req.body, {
             where: { id: req.params.id },
             returning: true
         });
 
-        if (!updatedRecord) {
-            return res.status(404).json({ message: 'Record not found' });
-        }
-        const plainRecord = updatedRecord.get({ plain: true })
-
-        res.status(200).json({ message: 'Record updated successfully', plainRecord });
+        const updatedRecord = await Record.findOne({
+          where: { id: req.params.id }
+        });
+      if (!updatedRecord) {
+          return res.status(400).json({ message: 'Record not found' });
+      }
+      res.status(200).json(updatedRecord.get({ plain: true }))
     } catch (err) {
         res.status(500).json({ error: err.message });
     }
