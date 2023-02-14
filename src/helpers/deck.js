@@ -1,4 +1,4 @@
-const Handlebars = require("handlebars");
+const Handlebars = require('handlebars');
 
 class Deck {
   constructor(options = {}) {
@@ -8,25 +8,25 @@ class Deck {
   }
 
   createDeck() {
-    const suits = ["Hearts", "Diamonds", "Spades", "Clubs"];
+    const suits = ['Hearts', 'Diamonds', 'Spades', 'Clubs'];
     const names = [
-      { name: "Ace", value: 1 || 11 },
-      { name: "2", value: 2 },
-      { name: "3", value: 3 },
-      { name: "4", value: 4 },
-      { name: "5", value: 5 },
-      { name: "6", value: 6 },
-      { name: "7", value: 7 },
-      { name: "8", value: 8 },
-      { name: "9", value: 9 },
-      { name: "10", value: 10 },
-      { name: "Jack", value: 10 },
-      { name: "Queen", value: 10 },
-      { name: "King", value: 10 },
+      { name: 'Ace', value: 1 || 11 },
+      { name: '2', value: 2 },
+      { name: '3', value: 3 },
+      { name: '4', value: 4 },
+      { name: '5', value: 5 },
+      { name: '6', value: 6 },
+      { name: '7', value: 7 },
+      { name: '8', value: 8 },
+      { name: '9', value: 9 },
+      { name: '10', value: 10 },
+      { name: 'Jack', value: 10 },
+      { name: 'Queen', value: 10 },
+      { name: 'King', value: 10 },
     ];
 
-    Handlebars.registerHelper("card", function (value, suit, id) {
-      var html = `<div class="card ${value} ${suit}" id=${id}></div>`;
+    Handlebars.registerHelper('card', function (value, suit, id) {
+      var html = `<div class='card ${value} ${suit}' id=${id}></div>`;
       const htmlToLowerCase = html.toLowerCase();
       return new Handlebars.SafeString(htmlToLowerCase);
     });
@@ -38,12 +38,12 @@ class Deck {
       suits.forEach((suit) => {
         names.forEach((name) => {
           const card = {
-            id: "c" + id++,
+            id: 'c' + id++,
             facedown: false,
             name: name.name,
             suit: suit,
             value: name.value,
-            html: Handlebars.helpers.card(name.name, suit, "c" +(id -1)),
+            html: Handlebars.helpers.card(name.name, suit, 'c' +(id -1)),
             img_path: (this.facedown === false) ? 
             `../../assets/images/cards/face_down.png` :
             `../../assets/images/cards/${name.name.toLowerCase()}_of_${suit.toLowerCase()}.png` 
