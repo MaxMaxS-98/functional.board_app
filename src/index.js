@@ -1,5 +1,5 @@
 //index.js
 
-const { startGame } = require("./functions/singlePlayerGameFunctions");
+// const { startGame } = require("./functions/singlePlayerGameFunctions");
 
 startGame();
