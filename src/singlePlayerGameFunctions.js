@@ -1,19 +1,19 @@
 const path = require("path");
 const sleep = require("sleep-promise");
-const {updatePlayer, updateDealer} = require("../helpers");
+const { updatePlayer, updateDealer } = require("../helpers/"); //helpers to update database
 const Deck = require(path.join(__dirname, "../helpers/class/Deck"));
 const draw = new Deck();
 const reset = require(path.join(__dirname, "../helpers/resetVariables"));
 const delay = require(path.join(__dirname, "../helpers/delayScript"));
 const { checkDealerBlackjack }= require(path.join(__dirname, "./checkFunctions"));
 var playerHand = [];
-var playerHandValue = 0 || 0;
+var playerHandValue = 0;
 var dealerHand = [];
-var dealerHandValue = 0 || 0;
+var dealerHandValue = 0;
 var dealerDown = [];
 var dealerUp = [];
 var playerBet = 25;
-var playerTotal = 0;
+var playerHandValue = 0;
 var dealerTotal = 0;
 var playerBank = 1000;
 var playerBust = false;
@@ -54,7 +54,7 @@ async function startGame() {
 
   // Show player's initial hand
   console.log("Your hand: " + playerHand.map((card) => card.name).join(", "));
-  playerTotal = playerHand.reduce((sum, card) => sum + card.value, 0);
+  playerHandValue = playerHand.reduce((sum, card) => sum + card.value, 0);
   console.log("Your total: " + playerHandValue + "\n");
 
   // Show one of the dealer's cards face up
@@ -204,25 +204,25 @@ for (let i = 1; i < 3; i++) {
 }
 startGame();
 
-module.exports = {
-  startGame,
-  playerHand,
-  dealerHand,
-  playerHandValue,
-  dealerHandValue,
-  playerBank,
-  playerBet,
-  playerTotal,
-  dealerTotal,
-  playerBust,
-  dealerBust,
-  dealerUp,
-  dealerDown,
-  gameCount,
-  reset,
-  checkDealerBlackjack,
-  sleep,
-  delay,
-  drawCard,
-};
+// module.exports = {
+//   startGame,
+//   playerHand,
+//   dealerHand,
+//   playerHandValue,
+//   dealerHandValue,
+//   playerBank,
+//   playerBet,
+//   playerTotal,
+//   dealerTotal,
+//   playerBust,
+//   dealerBust,
+//   dealerUp,
+//   dealerDown,
+//   gameCount,
+//   reset,
+//   checkDealerBlackjack,
+//   sleep,
+//   delay,
+//   drawCard,
+// };
  
