@@ -1,7 +1,7 @@
 const Record = require('./Record');
 const Playtable = require('./Playtable');
-const Player = require('./player');
-const Dealer = require('./dealer');
+const Player = require('./Player');
+const Dealer = require('./Dealer');
 const User = require('./User')
 
 // Table has many players
