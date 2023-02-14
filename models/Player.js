@@ -50,4 +50,4 @@ Player.init(
     }
 );
 
-module.exports = Player
+module.exports = Player;
