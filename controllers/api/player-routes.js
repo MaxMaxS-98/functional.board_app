@@ -6,7 +6,10 @@ const { Player } = require('../../models');
 router.get('/', async (req, res) => {
     try {
         const allPlayers = await Player.findAll();
-        res.status(200).json({ allPlayers });
+        const players = allPlayers.map((player) =>
+            players.get({ plain: true })
+        );
+        res.status(200).json(players)
     } catch (err) {
         console.log(err);
         res.status(500).json(err);
@@ -22,7 +25,7 @@ router.get('/:user_id', async (req, res) => {
         if (!player) {
             return res.status(400).json({ message: 'Player not found' });
         }
-        res.status(200).json({ player });
+        res.status(200).json(player.get({ plain: true }));
     } catch (err) {
         console.log(err);
         res.status(500).json(err);
@@ -35,13 +38,18 @@ router.put('/:user_id', async (req, res) => {
         // Validate incoming data
         const player = await Player.update(
             req.body,
-            { where: { user_id: req.params.user_id } },
-            { new: true }
+            { 
+                where: { user_id: req.params.user_id},
+                returning: true 
+            }
         );
-        if (!player) {
+        const updatedPlayer = await Player.findOne({
+            where: { id: req.params.user_id }
+          });
+        if (!updatedPlayer) {
             return res.status(400).json({ message: 'Player not found' });
         }
-        res.status(200).json({ player });
+        res.status(200).json(updatedPlayer.get({ plain: true }));
     } catch (err) {
         console.log(err);
         res.status(500).json(err);
@@ -57,7 +65,7 @@ router.delete('/:user_id', async (req, res) => {
         if (!player) {
             return res.status(400).json({ message: 'Player not found' });
         }
-        res.status(200).json({ player });
+        res.status(200).json(player.get({ plain: true }));
     } catch (err) {
         console.log(err);
         res.status(500).json(err);

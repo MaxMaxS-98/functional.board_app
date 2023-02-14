@@ -55,15 +55,13 @@ router.put('/:id', async (req, res) => {
                 where: { id: req.params.id },
                 returning: true
             });
-
+            
         const updatedRow = await Playtable.findOne({
             where: { id: req.params.id }
           });
-
         if (!updatedRow) {
             return res.status(400).json({ message: 'Table not found' });
         }
-        
         res.status(200).json(updatedRow.get({ plain: true }))
     } catch (err) {
         console.log(err);
