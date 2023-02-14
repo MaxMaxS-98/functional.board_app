@@ -2,7 +2,7 @@ const Handlebars = require("handlebars");
 
 class Deck {
   constructor(options = {}) {
-    const defaultOptions = { numberOfDecks: 5 };
+    const defaultOptions = { numberOfDecks: 1 };
     this.opts = { ...defaultOptions, ...options };
     this.cards = this.createDeck();
   }
@@ -43,7 +43,7 @@ class Deck {
             name: name.name,
             suit: suit,
             value: name.value,
-            html: Handlebars.helpers.card(name.name, suit, "c" +id -1),
+            html: Handlebars.helpers.card(name.name, suit, "c" +(id -1)),
             img_path: (this.facedown === false) ? 
             `../../assets/images/cards/face_down.png` :
             `../../assets/images/cards/${name.name.toLowerCase()}_of_${suit.toLowerCase()}.png` 

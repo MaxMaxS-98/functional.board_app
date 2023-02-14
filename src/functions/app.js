@@ -31,44 +31,45 @@ var usedCards = []; // holds cards that have been used
 
 // functions
 async function drawCards() {
-    const deck = new Deck();
-    return new Promise(async (resolve, reject) => {
-      while (deckQueue.length < 30 && deck.shoe.cards.length > 0) {
-        const card = await deck.drawCard();
-        deckQueue.push(card);
-        console.log(deckQueue.length)
-      }
-      resolve();
-    });
-  }
-  
+  const deck = new Deck();
+  return new Promise(async (resolve, reject) => {
+    while (deckQueue.length < 20 && deck.shoe.cards.length > 0) {
+      const card = await deck.drawCard();
+      deckQueue.push(card);
+      console.log(deckQueue.length);
+      sleep(500);
+    }
+    resolve();
+  });
+}
+
 async function dealTable() {
   await drawCards();
-  for (let i = 0; i < 2; i++) {
-    await playerHand.push(deckQueue.pop());
-    await dealerHand.push(deckQueue.pop());
-    await playerOneBot.push(deckQueue.pop());
-    await playerTwoBot.push(deckQueue.pop());
-    await playerFourBot.push(deckQueue.pop());
-    await playerFiveBot.push(deckQueue.pop());
-    await console.log(deckQueue.length);
-  }
 
-    dealerHand[0].facedown = true;
-    console.log(dealerHand);
-    console.log(playerHandValue);
-    dealerHand[1].facedown = false;
-    console.log(dealerHand);
-  turn++;
+  await playerHand.push(deckQueue.pop());
+  await playerOneBot.push(deckQueue.pop());
+  await playerTwoBot.push(deckQueue.pop());
+  await dealerHand.push(deckQueue.pop());
+  await playerFourBot.push(deckQueue.pop());
+  await playerFiveBot.push(deckQueue.pop());
+  await playerHand.push(deckQueue.pop());
+  await playerOneBot.push(deckQueue.pop());
+  await playerTwoBot.push(deckQueue.pop());
+  await dealerHand.push(deckQueue.pop());
+  await playerFourBot.push(deckQueue.pop());
+  await playerFiveBot.push(deckQueue.pop());
+
+  dealerHand[0].facedown = true;
+  console.log(dealerHand);
+  console.log(playerHandValue);
+  dealerHand[1].facedown = false;
+  console.log(dealerHand);
   if (turn > 5) {
     turn = 0;
   }
   await sleep(1000);
 }
 console.log(deckQueue.length);
-dealTable();
-
-
 
 function checkDealerHand() {
   if (dealerHand[1].value === 1) {
@@ -81,7 +82,7 @@ function checkDealerHand() {
     }
   }
 }
-
+dealTable();
 function checkTableForBlackjack() {
   var usedCards = [];
   if (handValue(playerHand) === 21) {
