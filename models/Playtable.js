@@ -16,9 +16,13 @@ Playtable.init(
         allowNull: false,
         defaultValue: false
     },
-    deck: {
+    opts: {
         type: DataTypes.TEXT,
         allowNull: true,
+    },
+    cards:{
+        type: DataTypes.TEXT,
+        allowNull: true, 
     }
 },
 {

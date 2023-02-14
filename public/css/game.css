@@ -152,8 +152,19 @@ input,#bet{
 	background-position-y:100px;
 } */
 
+#dealer{
+    display: flex;
+    flex-direction: row-reverse;
+    position: absolute;
+    top: 10rem;
+    left: 55rem;
+}
+
+#dealer-hand h1{
+    color: #333;
+}
+
 .card-placement{
-    /* transform: rotate(35deg);  */
     display: flex;
     flex-direction: row-reverse;
     position: absolute;
