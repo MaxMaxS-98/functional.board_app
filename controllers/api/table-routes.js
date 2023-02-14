@@ -26,7 +26,7 @@ router.get('/:id', async (req, res) => {
         if (!dbTableData) {
             return res.status(400).json({ message: 'Table not found' });
         }
-        
+
         res.status(200).json(dbTableData.get({ plain: true }))
 
     } catch (err) {
@@ -49,17 +49,18 @@ router.post('/', async (req, res) => {
 // Update table data
 router.put('/:id', async (req, res) => {
     try {
+        console.log(req.body)
         const updatedTable = await Playtable.update(
             req.body,
             {
                 where: { id: req.params.id },
                 returning: true
             });
-            
+
         const updatedRow = await Playtable.findOne({
             where: { id: req.params.id }
-          });
-        if (!updatedRow) {
+        });
+        if (updatedTable === 0 || !updatedRow) {
             return res.status(400).json({ message: 'Table not found' });
         }
         res.status(200).json(updatedRow.get({ plain: true }))
