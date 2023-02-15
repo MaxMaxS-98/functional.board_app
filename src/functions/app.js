@@ -4,7 +4,27 @@ const deckData = fs.readFileSync(path.join(__dirname, "../db/activeShoe.json"));
 const sleep = require("sleep-promise");
 const handValue = require(path.join(__dirname, "../helpers/handValue"));
 // const { checkDealerBlackjack }= require(path.join(__dirname, "./checkFunctions"));
+Handlebars.registerPartial('player-hand-template', $('#player-hand-template').html());
 // variables
+// Compile the hand-details-template
+var handDetailsTemplate = Handlebars.compile($('#hand-details-template').html());
+
+// Define the data context
+var data = {
+  players: [
+    { id: 'c1', playerName: 'player 1', cssClass: 'first', cards: ['2C', '3C', '4C'] },
+  //   { id: 'c2', playerName: 'player 2', cssClass: 'second', cards: ['5C', '6C', '7C'] },
+  //   { id: 'c3', playerName: 'player 3', cssClass: 'third', cards: ['8C', '9C', '10C'] },
+  //   { id: 'c4', playerName: 'player 4', cssClass: 'fourth', cards: ['JC', 'QC', 'KC'] },
+  //   { id: 'c5', playerName: 'player 5', cssClass: 'fifth', cards: ['AC', 'AD', 'AH', 'AS'] }
+  ]
+};
+
+// Render the template with the data context
+var html = handDetailsTemplate(data);
+
+// Insert the rendered HTML into the DOM
+$('#game-container').html(html);
 
 const Deck = require(path.join(__dirname, "./deck/Deck"));
 var deckQueue = [];

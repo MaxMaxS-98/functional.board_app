@@ -22,8 +22,9 @@
 
 <!-- this is a div that holds the game -->
     <div id="main">
+   
+        
         <div id="game">
-
 <!-- this is a div that holds the dealer -->
             <div id="dealer">
                 <div id="dealer-hand">
@@ -33,9 +34,15 @@
             </div>
 
 <!--  this is a div that holds the player -->
-            <div id="player">
-                <h1>Player: </h1>
-                <div id="player-hand"></div>
+     <!-- this is a div that holds the players cards -->
+     
+     <!-- <div id="hand-details-template">
+        {{#each players}}
+        <div class="{{cssClass}}" id="{{id}}">
+          {{> player-hand-template}}
+        </div>
+        {{/each}}
+      </div> -->
 
 <!--  this div holds the coins -->
             <div id="coins">
@@ -53,31 +60,11 @@
                 <input type="number" id="bet" placeholder="Bet">
             </div>
 
-<!-- this is a div that holds the players cards -->
-            <div class ="card-placement">
-                <div class="first" id ="c1">
-                    <h3>player 1</h3>
-                </div>
 
-                <div class="second" id ="c2">
-                    <h3>player 2</h3>
-                </div>
-
-                <div class="third" id ="c3">
-                    <h3>player 3</h3>
-                </div>
-
-                <div class="forth" id ="c4">
-                    <h3>player 4</h3>
-                </div>
-
-                <div class="fifth" id ="c5">
-                    <h3>player 5</h3>
-                </div>
-            </div>
         </div>
     </div>
 </div>
 </div>
+<script src="https://cdn.jsdelivr.net/npm/handlebars@latest/dist/handlebars.js"></script>
 </body>
 </html>
