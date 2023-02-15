@@ -1,6 +1,6 @@
 const path = require("path");
 const sleep = require("sleep-promise");
-const { updatePlayer, updateDealer } = require("../helpers/"); //helpers to update database
+// const { updatePlayer, updateDealer } = require("../helpers"); //helpers to update database
 const Deck = require(path.join(__dirname, "../helpers/class/Deck"));
 const draw = new Deck();
 const reset = require(path.join(__dirname, "../helpers/resetVariables"));
