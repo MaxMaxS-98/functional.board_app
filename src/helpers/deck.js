@@ -1,75 +1,59 @@
-//** from playing-cards-js */
+const Handlebars = require('handlebars');
 
-export default class Deck {
-	constructor(options = {}) {
-	  const defaultOptions = { jokers: 0 };
-	  this.opts = { ...defaultOptions, ...options };
-	  this.draw = this.moveTo.bind(this, 'held');
-	  this.drawToDiscard = this.moveTo.bind(this, 'discard');
-	  this.reset = this.initPiles;
-	  this.initPiles();
-	}
-  
-	initPiles() {
-	  this.held = [];
-	  this.discard = [];
-	  this.cards = this.createDeck();
-	  return this.cards;
-	}
-  
-	moveTo(pile, amount = 1) {
-	  if (amount < 1) {
-		return [];
-	  }
-	  const moved = this.cards.slice(0, amount);
-	  this.cards.splice(0, amount);
-	  this[pile] = [...moved, ...this[pile]];
-	  return moved;
-	}
-  
-	createDeck() {
-	  const suits = ['Hearts', 'Diamonds', 'Spades', 'Clubs'];
-	  const names = [
-		{ name: '1', value: 1 },
-		{ name: '2', value: 2 },
-		{ name: '3', value: 3 },
-		{ name: '4', value: 4 },
-		{ name: '5', value: 5 },
-		{ name: '6', value: 6 },
-		{ name: '7', value: 7 },
-		{ name: '8', value: 8 },
-		{ name: '9', value: 9 },
-		{ name: '10', value: 10 },
-		{ name: 'J', value: 10 },
-		{ name: 'Q', value: 10 },
-		{ name: 'K', value: 10 },
-	  ];
-	  const deck = [];
-	  let id = 1;
-  
-	  suits.forEach(suit => {
-		names.forEach(name => {
-		  deck.push({ id, suit, name: name.name, value: name.value });
-		  id++;
-		});
-	  });
-  
-	  if (this.opts.jokers) {
-		for (let i = this.opts.jokers; i; i -= 1) {
-		  deck.push({ id, joker: true });
-		  id++;
-		}
-	  }
-	  return deck;
-	}
+class Deck {
+  constructor(options = {}) {
+    const defaultOptions = { numberOfDecks: 1 };
+    this.opts = { ...defaultOptions, ...options };
+    this.cards = this.createDeck();
+  }
 
-	shuffle() {
-		for (let i = this.cards.length; i; i -= 1) {
-			const random = Math.floor(Math.random() * i);
+  createDeck() {
+    const suits = ['Hearts', 'Diamonds', 'Spades', 'Clubs'];
+    const names = [
+      { name: 'Ace', value: 1 || 11 },
+      { name: '2', value: 2 },
+      { name: '3', value: 3 },
+      { name: '4', value: 4 },
+      { name: '5', value: 5 },
+      { name: '6', value: 6 },
+      { name: '7', value: 7 },
+      { name: '8', value: 8 },
+      { name: '9', value: 9 },
+      { name: '10', value: 10 },
+      { name: 'Jack', value: 10 },
+      { name: 'Queen', value: 10 },
+      { name: 'King', value: 10 },
+    ];
 
-			[this.cards[i - 1], this.cards[random]] = [this.cards[random], this.cards[i - 1]];
-		}
+    Handlebars.registerHelper('card', function (value, suit, id) {
+      var html = `<div class='card ${value} ${suit}' id=${id}></div>`;
+      const htmlToLowerCase = html.toLowerCase();
+      return new Handlebars.SafeString(htmlToLowerCase);
+    });
 
-		return this.cards;
-	}
+    let deck = [];
+    let id = 1;
+
+    for (let d = 0; d < this.opts.numberOfDecks; d++) {
+      suits.forEach((suit) => {
+        names.forEach((name) => {
+          const card = {
+            id: 'c' + id++,
+            facedown: false,
+            name: name.name,
+            suit: suit,
+            value: name.value,
+            html: Handlebars.helpers.card(name.name, suit, 'c' +(id -1)),
+            img_path: (this.facedown === false) ? 
+            `../../assets/images/cards/face_down.png` :
+            `../../assets/images/cards/${name.name.toLowerCase()}_of_${suit.toLowerCase()}.png` 
+          };
+          deck.push(card);
+        });
+      });
+    }
+    return deck;
+  }
 }
+
+module.exports = Deck;

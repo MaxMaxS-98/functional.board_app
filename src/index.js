@@ -1,6 +1,5 @@
-import Deck from './helpers/deck';
-import Player from './helpers/player';
+//index.js
 
+// const { startGame } = require("./functions/singlePlayerGameFunctions");
 
-
-export { Deck, Player };
+startGame();

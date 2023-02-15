@@ -16,7 +16,7 @@ function playGame() {
     let player = new Player()
     let dealer = new Dealer()
     timeout(2000)
-    console.log(`We're all ready to go. You currently have ${player.money}.`)
+    console.log(` You currently have ${player.money}.`)
 
     while (player.money > 0) {
         // Player needs to bet
