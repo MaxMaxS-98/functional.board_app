@@ -31,11 +31,7 @@ function dealInitialCards() {
     // display the cards
     // displayCards(playerHand, $playerHandEl);
     // displayCards([dealerHand[0], dealerHand[1].setSide('back')], $dealerHandEl);
-    for (const element of playerHand) {
-        console.log(element)
-        element.setSide('front')
-        element.mount($playerHandEl)
-    }
+ 
 
     // check for blackjack
     if (isBlackjack(playerHand)) {
@@ -43,12 +39,11 @@ function dealInitialCards() {
     }
 }
 
-// function displayCards (hand, container) {
-//     for (const element of hand) {
-//         console.log(element);
-//         element.mount(container);
-//     }
-// }
+function displayPlayerCards (hand) {
+    for (let i = 0; i < hand.length; i++) {
+            
+    }
+}
 
 function isBlackjack(hand) {
     return hand.length === 2 && calculateHandValue(hand) === 21;
