@@ -25,8 +25,8 @@ router.get("/login", (req, res) => {
 
   res.sendFile(path.join(__dirname, "../public/login.html"));
 });
-router.get("/mock", (req, res) => {
-  console.log(cards);
-  res.render("player-hand-template", { cards });
-});
+// router.get("/mock", (req, res) => {
+//   console.log(cards);
+//   res.render("player-hand-template", { cards });
+// });
 module.exports = router;
