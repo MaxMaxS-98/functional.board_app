@@ -1,59 +1,65 @@
 // const Deck = require('deck-of-cards');
 const deck = Deck();
-deck.shuffle();
+const $playerHand1El = document.getElementById("player-hand1");
+const $playerHand2El = document.getElementById("player-hand2");
+
+const $dealerHandEl = document.getElementById("dealer-hand");
+const messageEL = document.getElementById("message");
 let playerHand = [];
 let dealerHand = [];
 
 document.getElementById("deal-button").addEventListener("click", dealInitialCards);
 
 function dealInitialCards() {
-  // clear the previous game state
-  playerHand = [];
-  dealerHand = [];
-  document.getElementById("player-hand").innerHTML = "";
-  document.getElementById("dealer-hand").innerHTML = "";
-  document.getElementById("message").innerHTML = "";
+    // clear the previous game state
+    deck.shuffle();
 
-  // deal two cards to the player and two to the dealer
-  for (let i = 0; i < 2; i++) {
-    console.log(deck.cards[i])
-    playerHand.push(deck.cards[i]);
-    dealerHand.push(deck.cards[i]);
-  }
+    playerHand = [];
+    dealerHand = [];
 
-  // display the cards
-  displayCards(playerHand, "player-hand");
-  displayCards([dealerHand[0], "?"], "dealer-hand");
+    $playerHandEl.innerHTML = "";
+    $dealerHandEl.innerHTML = "";
+    messageEL.innerHTML = "";
 
-  // check for blackjack
-  if (isBlackjack(playerHand)) {
-    document.getElementById("message").textContent = "Blackjack! You win!";
-  }
+    // deal two cards to the player and two to the dealer
+    for (let i = 0; i < 2; i++) {
+        // console.log(deck.cards[i])
+        playerHand.push(deck.cards[i]);
+        dealerHand.push(deck.cards[(i + 1)]);
+    }
+    console.log(playerHand, dealerHand)
+    // display the cards
+    // displayCards(playerHand, $playerHandEl);
+    // displayCards([dealerHand[0], dealerHand[1].setSide('back')], $dealerHandEl);
+ 
+
+    // check for blackjack
+    if (isBlackjack(playerHand)) {
+        messageEL.textContent = "Blackjack! You win!";
+    }
 }
 
-function displayCards(cards, elementId) {
-  let cardHtml = "";
-  for (let card of cards) {
-    cardHtml += `<img src="${card.image}" alt="${card.code}">`;
-  }
-  document.getElementById(elementId).innerHTML = cardHtml;
+function displayPlayerCards (hand) {
+    for (let i = 0; i < hand.length; i++) {
+            
+    }
 }
 
 function isBlackjack(hand) {
-  return hand.length === 2 && calculateHandValue(hand) === 21;
+    return hand.length === 2 && calculateHandValue(hand) === 21;
 }
 
 function calculateHandValue(hand) {
-  let total = 0;
-  let hasAce = false;
-  for (let card of hand) {
-    if (card.rank === 'A') {
-      hasAce = true;
+    let total = 0;
+    let hasAce = false;
+    for (let card of hand) {
+        if (card.rank === 'A') {
+            hasAce = true;
+        }
+        total += card.points;
     }
-    total += card.points;
-  }
-  if (hasAce && total <= 11) {
-    total += 10; // count Ace as 11 points if it won't cause bust
-  }
-  return total;
+    if (hasAce && total <= 11) {
+        total += 10; // count Ace as 11 points if it won't cause bust
+    }
+    return total;
 }
