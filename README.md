@@ -31,6 +31,7 @@ This is a web application so no installation is required.  Visit http://black-ja
     * Echo.js
     * Jest.js
     * Sequelize Session
+    * Handlebars.js
 * MySQL
 * Javascript
 * HTML5
