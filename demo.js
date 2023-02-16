@@ -2,11 +2,26 @@
 const $playerHandEl = document.getElementById("player-hand");
 const $dealerHandEl = document.getElementById("dealer-hand");
 const messageEL = document.getElementById("message");
+const betAmountEl = document.getElementById("bet-amount");
+const betEl = document.getElementById("bet")
+const balanceEl = document.getElementById("balance")
+const decrementBetBtn = document.getElementById("decrement-bet");
+const incrementBetBtn = document.getElementById("increment-bet");
+const placeBetBtn = document.getElementById("place-bet");
+const hitBtn = document.getElementById("hit-button");
+const standBtn = document.getElementById("stand-button")
+const initBalance = 300;
+const initBet = 15
+var currentBet = initBet;
+var currentBalance = initBalance
+
 let playerHand = [];
 let dealerHand = [];
 var deck = new Deck();
 
+
 function gameInit() {
+    updateBalance()
     // clear the previous game state
     deck = new Deck()
     deck.flip()
@@ -22,35 +37,31 @@ function gameInit() {
     // deal two cards to the player and two to the dealer
     drawCard(deck, playerHand, 2);
     drawCard(deck, dealerHand, 2)
-
-    console.log(playerHand, dealerHand)
     // display the cards
-    displayInitialCards(playerHand, dealerHand)
+    initHand(playerHand, dealerHand)
     showScore('player', playerHand)
-    const initCardValue = calculateHandValue(playerHand)
-    console.log(initCardValue)
     // check for blackjack
     if (isBlackjack(playerHand)) {
         messageEL.textContent = "Blackjack! You win!";
+        handlePlayerWin()
         endGame()
     }
 }
 
-function displayInitialCards(playerhand, dealerhand) {
-    $playerHandEl.innerHTML += `<div id='player-hand-1'class="col-1 card"></div>`;
-    $playerHandEl.innerHTML += `<div id='player-hand-2'class="col-1 card"></div>`;
-    let $playerHand1 = document.getElementById("player-hand-1");
-    let $playerHand2 = document.getElementById("player-hand-2");
-    playerhand[0].mount($playerHand1);
-    playerhand[1].mount($playerHand2);
+function initHand(playerhand, dealerhand) {
+    for (let i = 0; i < 2; i++) {
+        let $playerCardEl = createCardEl(playerhand[i], "player", i + 1);
+        $playerHandEl.appendChild($playerCardEl);
 
-    $dealerHandEl.innerHTML += `<div id='dealer-hand-1'class="col-1 card"></div>`;
-    $dealerHandEl.innerHTML += `<div id='dealer-hand-2'class="col-1 card"></div>`;
-    let $dealerHand1 = document.getElementById("dealer-hand-1");
-    let $dealerHand2 = document.getElementById("dealer-hand-2");
-    dealerhand[0].setSide('back')
-    dealerhand[0].mount($dealerHand1);
-    dealerhand[1].mount($dealerHand2);
+        let $dealerCardEl;
+        if (i === 0) {
+            dealerhand[i].setSide('back')
+            $dealerCardEl = createCardEl(dealerhand[i], "dealer", i + 1);
+        } else {
+            $dealerCardEl = createCardEl(dealerhand[i], "dealer", i + 1);
+        }
+        $dealerHandEl.appendChild($dealerCardEl);
+    }
 }
 
 function isBlackjack(hand) {
@@ -70,7 +81,7 @@ function calculateHandValue(hand) {
     }
     if (hasAce) {
         total += (total + 11 <= 21) ? 11 : 1;
-      }
+    }
     return total;
 }
 
@@ -88,9 +99,6 @@ function playerHit(deck) {
     $playerHandEl.appendChild($newCard);
     const handValue = calculateHandValue(playerHand);
     showScore('player', playerHand)
-
-    // console.log(playerHand)
-    // console.log(handValue)
     if (handValue > 21) {
         messageEL.textContent = "Bust! You lose.";
         endGame();
@@ -107,7 +115,6 @@ function playerStand(deck) {
 
 function dealerTurn(deck) {
     dealerHand[0].setSide("front");
-
     let handValue = calculateHandValue(dealerHand);
     while (handValue < 17) {
         drawCard(deck, dealerHand, 1);
@@ -115,48 +122,106 @@ function dealerTurn(deck) {
         $dealerHandEl.appendChild($newCard);
         handValue = calculateHandValue(dealerHand);
     }
-
     if (handValue > 21) {
         messageEL.textContent = "Dealer busts! You win!";
+        handlePlayerWin()
     } else if (handValue > calculateHandValue(playerHand)) {
         messageEL.textContent = "Dealer wins!";
     } else if (handValue < calculateHandValue(playerHand)) {
         messageEL.textContent = "You win!";
+        handlePlayerWin()
     } else {
         messageEL.textContent = "Push! It's a tie.";
+        handlePush()
     }
     endGame();
 }
 
 const showScore = (playerOrDealer, hand) => {
-      let scoreEL = document.getElementById(`${playerOrDealer}-score`)
-      let playerScore = calculateHandValue(hand)
-      scoreEL.textContent = `Player Hand Value: ${playerScore}`
+    let scoreEL = document.getElementById(`${playerOrDealer}-score`)
+    let playerScore = calculateHandValue(hand)
+    scoreEL.textContent = `Player Hand Value: ${playerScore}`
 }
 
 function endGame() {
     // Hide the Hit and Stand buttons and show the Deal button
-    document.getElementById("hit-button").style.display = "none";
-    document.getElementById("stand-button").style.display = "none";
-    document.getElementById("deal-button").style.display = "block";
+    currentBet = 15
+    updateBalance()
+    updateBet()
+    // betAmountEl.textContent = currentBet
+    console.log(currentBalance)
+    console.log(currentBet)
+    hitBtn.style.display = "none";
+    standBtn.style.display = "none";
+    betEl.style.display = "block";
+    // Enable buttons
+    placeBetBtn.disabled = false;
+    decrementBetBtn.disabled = false;
+    incrementBetBtn.disabled = false;
+
 }
 
 
 function createCardEl(card, dealerOrPlayer, index) {
+    let html = `<div id="${dealerOrPlayer}-hand-${index}" class="col-1 p-2 align-items-center justify-content-center"></div>`;
     var $newCardEl = document.createElement("div");
-    $newCardEl.classList.add("col-1","p-2", "align-items-center", "justify-content-center", "card");
-    $newCardEl.setAttribute('id', `${dealerOrPlayer}-hand-${index}`)
-    card.mount($newCardEl)
+    $newCardEl.innerHTML = html
+    card.mount($newCardEl.firstChild)
     return $newCardEl;
 }
 
-document.getElementById("deal-button").addEventListener("click", function () {
-    // Hide the Deal button and show the Hit and Stand buttons
-    document.getElementById("deal-button").style.display = "none";
-    document.getElementById("hit-button").style.display = "block";
-    document.getElementById("stand-button").style.display = "block";
+const handlePlayerWin = () => currentBalance += (currentBet * 2)
+const handlePush = () => currentBalance += currentBet
+const updateBalance = () => balanceEl.textContent = currentBalance - currentBet
+const updateBet = () => betAmountEl.textContent = currentBet
 
-    gameInit();
+placeBetBtn.addEventListener("click", function () {
+    // take the bet
+    currentBalance = currentBalance - currentBet
+    balanceEl.textContent = currentBalance
+    console.log(currentBalance)
+    // Disable buttons
+    placeBetBtn.disabled = true;
+    decrementBetBtn.disabled = true;
+    incrementBetBtn.disabled = true;
+    // Show countdown message
+    let count = 3;
+    let countdownInterval = setInterval(function () {
+        if (count > 0) {
+            messageEL.textContent = `Starting game in ${count} seconds...`;
+            count--;
+        } else {
+            clearInterval(countdownInterval);
+            // Hide the Place Bet button and show the Hit and Stand buttons
+            messageEL.textContent = "";
+            betEl.style.display = "none";
+            hitBtn.style.display = "block";
+            standBtn.style.display = "block";
+            gameInit();
+        }
+    }, 1000);
 });
-document.getElementById("hit-button").addEventListener("click", () => playerHit(deck));
-document.getElementById("stand-button").addEventListener("click", () => playerStand(deck));
+
+decrementBetBtn.addEventListener("click", function () {
+    if (currentBet > 15) {
+        currentBet -= 15;
+        updateBet()
+        updateBalance()
+    } else if (currentBet <= 15) {
+        window.alert(`The minimum bet is 15.`)
+    }
+});
+
+incrementBetBtn.addEventListener("click", function () {
+    if (Number (balanceEl.textContent) >= 15) {
+        currentBet += 15;
+        updateBet()
+        updateBalance()
+    } else if (Number(balanceEl.textContent) <= 0) {
+        window.alert(`Insufficient balance!`)
+    }
+
+});
+
+hitBtn.addEventListener("click", () => playerHit(deck));
+standBtn.addEventListener("click", () => playerStand(deck));
