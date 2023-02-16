@@ -56,14 +56,14 @@ function playerDraw() {
     );
   }
   
-  module.exports = {
+  module.exports = 
     playerDraw,
     playerHit,
     playerStand,
     playerBust,
     playerBet,
     playerWin,
-    playerHand, //** */
-  };
+    playerHand //** */
+  
 
   //************ */
