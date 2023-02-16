@@ -1,11 +1,22 @@
-<div class="player-hand" id="{{id}}">
+{{!-- <div class="player-hand" id="{{id}}">
   <h3>{{playerName}}</h3>
-  <ul>
+  <div class="">
     {{#each cards}}
       
    
     <li>id:{{id}}</li>
     <img src="{{img_path}}">
     {{/each}}
-  </ul>
+  </div>
+</div> --}}
+
+
+{{!-- <div class = "player-container"> --}}
+<div class="player-hand" id="player">
+    {{#each cards}}
+    <div = id="{{id}}">
+    <img src="{{img_path}}">
+    {{/each}}
+    </div>
+</div>
 </div>

@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+ <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -11,26 +11,25 @@
 
     <div id="log-out">
         <button id="logout"> <a href="index.html">Log Out </a> </button>
-        
     </div>
 
-<!-- this is a div with a deck of cards-->
-    <div class="deck">
-        <div class="card back"></div>
+ <!--this is a div with a deck of cards-->
+   <div class="deck"> 
+        <div class="card"></div>
         <div id="deck"></div>
-    </div>
+     </div> 
 
 <!-- this is a div that holds the game -->
     <div id="main">
    
         
-        <div id="game">
+       <div id="game"> 
 <!-- this is a div that holds the dealer -->
-            <div id="dealer">
-                <div id="dealer-hand">
-                    <h1>Dealer hand: </h1>
-                </div>
-            </div>
+             <div id="dealer">
+                 <div id="dealer-hand"> 
+                     <h1>Dealer hand: </h1>
+                 </div> 
+             </div> 
 
 <!--  this is a div that holds the player -->
      <!-- this is a div that holds the players cards -->
@@ -41,13 +40,13 @@
           {{> player-hand-template}}
         </div>
         {{/each}}
-      </div> -->
+      </div> --
 
-<!--  this div holds the coins -->
+  this div holds the coins -->
             <div id="coins">
                 <span id="loot">Coins: $<span></span></span>
                 <div id="bank">Earnings: $</div>
-            </div>
+            </div> 
 
 <!-- the buttons for the game -->
             <div id="buttons">
@@ -59,11 +58,11 @@
                 <input type="number" id="bet" placeholder="Bet">
             </div>
 
-
         </div>
     </div>
 </div>
 </div>
+<script src="/controllers/home-routes.js"> </script>
 <script src="https://cdn.jsdelivr.net/npm/handlebars@latest/dist/handlebars.js"></script>
 </body>
-</html>
+</html>  
