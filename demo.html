@@ -10,16 +10,49 @@
 </head>
 
 <body>
-  <div class="container">
+  <div class="container mb-4">
     <h1>Blackjack</h1>
     <p>Click the "Deal" button to start a new game.</p>
-    <button class="btn btn-primary mb-3" id="deal-button">Deal</button>
+    <!-- <div class="row flex-box">
+      <div class="col-sm-1">
+        <button class="btn btn-primary mb-3" id="deal-button">Deal</button>
+      </div>
+      <div class="col-sm-1">
+        <button class="btn btn-primary mb-3 hit-btn" id="hit-button" style="display:none">Hit</button>
+      </div>
+      <div class="col-sm-1">
+        <button class="btn btn-primary mb-3 stand-btn" id="stand-button" style="display:none">Stand</button>
+      </div>
+      <div class="col-sm-3 align-self-end">
+        <p class="text-start" id="player-score"></p>
+      </div>
+    </div> -->
+    <div class="container text-center">
+      <div class="row">
+        <div class="col-1">
+          <button class="btn btn-primary mb-3" id="deal-button">Deal</button>
+        </div>
+        <div class="col-1">
+          <button class="btn btn-primary mb-3 hit-btn" id="hit-button" style="display:none">Hit</button>
+        </div>
+        <div class="col-1">
+          <button class="btn btn-primary mb-3 stand-btn" id="stand-button" style="display:none">Stand</button>
+        </div>
+        <div class="col-6"></div>
+        <div class="col-3 align-self-end">
+          <p class="text-end" id="player-score"></p>
+        </div>
+      </div>
+    </div>
   </div>
-  <div class="row align-items-center justify-content-center">
-    <div class="col-sm-12 col-md-6 m-3" id="player-hand"></div>
-    <div class="col-sm-12 col-md-6 m-3" id="dealer-hand"></div>
+  <div class="container flex-box align-items-center justify-content-center mt-3 mp-3 h-70">
+    <div class="row m-3 p-4 flex-box align-items-center justify-content-center" id="player-hand"></div>
+    <div class="row m-3 p-4 flex-box align-items-center justify-content-center" id="dealer-hand"></div>
   </div>
-  <div id="message"></div>
+  <div class="mb-3 flex-box align-items-center justify-content-center">
+    <h1 class="text-center" id="message"></h1>
+  </div>
+ 
   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>

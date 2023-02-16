@@ -22,41 +22,7 @@
     -ms-text-size-adjust: 100%;
     text-size-adjust: 100%;
   }
-  /* #container {
-    position: fixed;
-    top: calc(50% + 1.5rem);
-    left: 50%;
-    -webkit-transform: translate3d(-50%, -50%, 0);
-    -moz-transform: translate3d(-50%, -50%, 0);
-    -o-transform: translate3d(-50%, -50%, 0);
-    -ms-transform: translate3d(-50%, -50%, 0);
-    transform: translate3d(-50%, -50%, 0);
-  }
-  #topbar {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    background-color: #334d41;
-    padding: 0.25rem;
-    text-align: center;
-  }
-  #topbar button {
-    background: none;
-    border: 1px solid #fff;
-    outline: none;
-    margin: 0.1rem;
-    padding: 0.4rem;
-    font: inherit;
-    font-size: 0.75rem;
-    line-height: 1;
-    color: #fff;
-    cursor: pointer;
-  }
-  #topbar button:hover {
-    background-color: #fff;
-    color: #444;
-  } */
+
   .message {
     position: fixed;
     top: 2.5rem;
@@ -69,8 +35,8 @@
   .card {
     /* position: absolute; */
     display: inline-block;
-    left: -1.9375rem;
-    top: -2.75rem;
+    /* left: -1.9375rem;
+    top: -2.75rem; */
     width: 3.875rem;
     height: 5.5rem;
     background-color: #fff;
