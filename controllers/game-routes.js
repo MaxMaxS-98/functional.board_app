@@ -3,6 +3,7 @@ const path = require('path');
 const router = require('express').Router();
 const { Playtable, Dealer, Player } = require('../models')
 
+
 // const { User } = require('../models');
 // const withAuth = require('../utils/auth')
 // GET homepage
