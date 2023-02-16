@@ -25,9 +25,25 @@ router.get("/login", (req, res) => {
 
   res.sendFile(path.join(__dirname, "../public/login.html"));
 });
+// router.get("/mock", (req, res) => {
+//     res.sendFile(path.join(__dirname, '../views/mock.html'));
+//   console.log(cards);
+//   res.render("player-hand-template", { cards });
+  
+// });
 
-router.get("/mock", (req, res) => {
-  console.log(cards);
-  res.render("player-hand-template", { cards });
-});
+// Set up a route for the mock.html file
+app.get('/mock', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public/mock.html'));
+
+  router.get("/mock", (req, res) => {
+    console.log(cards);
+    res.render("player-hand-template", { cards });
+  });
+  });
+
+  // Set up a route for the player-hand-template.handlebars file
+  app.get('/player-hand-template', (req, res) => {
+    res.render('player-hand-template');
+  });
 module.exports = router;
