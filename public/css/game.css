@@ -76,6 +76,7 @@ h1{
 }
 
 #logout{
+    /* position: flex; */
     margin: 3px;
     margin-bottom: 20px;
     width: 7rem;
@@ -84,7 +85,14 @@ h1{
     border-radius: 5px;
     font-size: 19px;
     background-color: rgb(98, 150, 150);
-    
+    top: 30rem;
+}
+
+#logout:hover{
+    background-color: rgb(188, 207, 132);
+    transform: rotate(7deg);
+    border-radius: 30px;
+    cursor: pointer;
 }
 
 input{
@@ -164,15 +172,15 @@ input,#bet{
     color: #333;
 }
 
-.card-placement{
-    display: flex;
-    flex-direction: row-reverse;
-    position: absolute;
-    top: 24rem;
-    left: 15rem;
+.player-hand{
+    /* display: flex; */
+    /* flex-direction: row-reverse; */
+    /* position: absolute; */
+    /* top: 24rem;
+    left: 15rem; */
 }
 
- #c1, #c2, #c3, #c4, #c5{
+ /* #c1, #c2, #c3, #c4, #c5{
     display: flex;
     text-align: center;
     font-size: 20px;
@@ -182,14 +190,30 @@ input,#bet{
     border-radius: 15px ;
     height: 9rem;
     width: 6rem
+} */
+
+img{
+    height: 100%;
+    width: 100%; 
 }
 
-div #c2, #c3, #c4{
-    margin-top: 16rem;
+ div #c1, #c2, #c3, #c4, #c5{
+    position: sticky;
+    /* margin-top: 16rem; */
+    text-align: center;
+    font-size: 20px;
+    /* margin: 90px; */
+    /* padding: 11px; */
+    /* border: 4px dotted black; */
+    border-radius: 15px ;
+    height: 9rem;
+    width: 6rem;
+    background-color:rgb(252, 251, 251);
+    right: 30px;
    
 }
 
-.card-placement .first{
+/* .card-placement .first{
     margin-bottom: 20px;
     transform: rotate(-35deg);
     
@@ -208,7 +232,7 @@ div #c2, #c3, #c4{
 }
 
 .card-placement .fifth{ 
-    transform: rotate(30deg);}
+    transform: rotate(30deg);} */
 
     #background{
         background-color: rgb(71, 108, 71)
