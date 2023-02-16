@@ -11,9 +11,14 @@ router.get('/game', async (req, res) => {
     try {
         const dbGameData = await Playtable.findAll({
             include: [
-                { model: Dealer },
-                { model: Player }
-            ]
+                { model: Dealer,
+                    attributes: ['hand']
+                },
+                { model: Player,
+                    attributes: ['id', 'credit', 'hand']
+                }
+            ],
+            attributes: ['cards']
         })
         const plainGameData = dbGameData.map((table) =>
             table.get({ plain: true })
