@@ -1,0 +1,73 @@
+Slide 1:
+
+Title: Blackjack-Blitz
+Slide 2:
+
+Title: Elevator Pitch
+Content: A web application using Node.js to create a multiplayer simulation of the traditional casino game, Blackjack.
+Slide 3:
+
+Title: Concept
+Content:
+Description of Project: Blackjack Blitz is a web application using Node.js to create a multiplayer simulation of the traditional casino game, Blackjack. The rules are the same as Blackjack and give the user multiple options to choose from to enhance their gaming experience. This is a multiplayer game, so multiple users can log in and play at the same time.
+
+Motivation for Development: We wanted to create a fun and engaging way for users to play Blackjack online and compete against each other.
+
+User Story: As a USER, I want to initiate a game of Blackjack.
+
+Acceptance Criteria:
+
+GIVEN I am logged in as a USER, my balance is displayed.
+THEN the dealer should prompt me to place my bet.
+AFTER bet is placed, a countdown of 10 seconds is displayed to allow any other player to place their bets.
+WHEN the countdown reaches zero, the game begins and the balance is subtracted from the player balance.
+WHEN the game begins, the dealer begins to deal cards to the players from the Active Shoe starting from the dealer -left to the right.
+THEN the dealer takes a card (hole card) face down and value is hidden from the players.
+THEN the dealer distributes the second card to the players.
+THEN the dealer takes a second card which displays face up.
+GIVEN the dealers second card is a 10 value, dealer checks hole card for an ACE. If ACE is in hole card, game ends, and table is cleared.
+THEN if the dealers second card is an ACE, the insurance is offered to the players, and Yes/No option is displayed.
+THEN dealer checks hole card for a 10 value. If dealer has 10 value, dealer has blackjack and game ends.
+THEN If the dealer does not have blackjack, Player 1 is prompted to make a decision on their hand.
+THEN player chooses play options until either they are satisfied with hand total, or BUST.
+AFTER Player 1 is done, repeat until all players are done.
+THEN Dealer draws until they have 17 or higher. If dealer has 22 or more, Dealer Busts.
+THEN winning players are paid their winnings. The Game Ends, and table is cleared, and cards are discarded to Used Shoe JSON
+Slide 4:
+
+Title: Process
+Content:
+Technologies used:
+Node.js
+Express.js
+Deck-Of-Cards.js
+Sequelize.js
+Echo.js
+Jest.js
+Sequelize Session
+MySQL
+Javascript
+HTML5
+CSS
+Breakdown of Tasks and Roles:
+Chris:
+Lian:
+Max:
+Challenges:
+Successes:
+Slide 5:
+
+Title: Directions for Future Development
+Slide 6:
+
+Title: Demo
+Content: Lian will demo a non-final version of the application.
+Slide 7:
+
+Title: Links
+Content:
+Deployed: http://blackjack-blitz-test.herokuapp.com
+Github Repo: https://github.com/MaxMaxS-98/BlackJackProject
+Slide 8:
+
+Title: Questions?
