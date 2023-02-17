@@ -34,6 +34,12 @@ router.get('/game', async (req, res) => {
     }
 });
 
+router.get('/start', async (req, res) => {
+    res.sendFile(path.join(__dirname, "../public/start-game.html"));
+
+      
+});
+
 
 
 module.exports = router;
