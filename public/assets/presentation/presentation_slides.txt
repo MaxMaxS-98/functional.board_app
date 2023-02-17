@@ -71,3 +71,35 @@ Github Repo: https://github.com/MaxMaxS-98/BlackJackProject
 Slide 8:
 
 Title: Questions?
+
+As a user, I want to play Blackjack online with other players in real-time
+I want to log in and be prompted by the dealer to place my bets
+I want to be able to play with multiple other players simultaneously
+I want to see my balance displayed and be prompted to make decisions about my hand as the game progresses
+I want to customize my game settings, such as the number of decks, bet size, and game speed
+I want to choose from different play options, such as hit, stand, double down, and split
+I want to see the final results of my game and my winnings, if any
+
+
+Git: Used for version control and collaboration on the project codebase
+GitHub: Used for hosting the project repository and for collaboration among team members
+VS Code: Used as an Integrated Development Environment (IDE) for writing and editing code
+Heroku: Used for deploying and hosting the project online
+
+ We used the same rules as a traditional casino game and offered users different options to enhance their gaming experience. The app is designed to give users the same experience they would have in a real casino. We were motivated to create a fun and engaging platform for users to play online and compete against each other. We also developed a user story that describes how the app works.
+
+We used several technologies including Node.js, Express.js, Deck-Of-Cards.js, Sequelize.js, Echo.js, Jest.js, Sequelize Session, MySQL, Javascript, HTML5, and CSS. We will also provide a breakdown of tasks and roles that we took on during the development process. We faced some challenges along the way, but we were able to overcome them and achieve success.
+
+
+Our team realized early on that effective communication was crucial to the success of the project. To address this challenge, we established regular meeting times outside of class to troubleshoor and brainstorm, and also to discuss the project's progress and set expectations for each team member. We also used collaboration tools like Slack and Zoom to share files/code.
+
+We faced several debugging challenges throughout the project, and we realized that we needed to be more systematic in our approach. To address this, we established a process for debugging that included using echo and Jest for writing tests and conducting code reviews with T.A.'s and the instructor. Also, figuring out how to plug all of our code together was probably the most difficult hurdle to get over.
+
+We faced some challenges when deploying the app on Heroku. To address this, we consulted online documentation, and asked for help from TA's. Through this, we were able to get our app up and running on Heroku.
+
+As we developed the app, we realized that some of the features we had planned would not be feasible within the timeline of the project. To address this, we revisited our initial concept and identified the minimum viable product (MVP) we could deliver within the timeline. This helped us focus on the core functionality of the app and meet our project goals.
+
+Our team recognized that strong interpersonal communication skills were essential in maintaining effective working relationships both within the team and with external people such as T.A's. To address this, we made a conscious effort to make improvements in active listening, provide regular feedback, and maintain open lines of communication. This helped us build a positive team dynamic and establish a strong working relationship with each other.
+
+http://blackjack-blitz-test.herokuapp.com
+https://github.com/MaxMaxS-98
