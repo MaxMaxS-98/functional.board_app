@@ -20,6 +20,10 @@ router.post('/', async (req, res) => {
 
       res.status(200).json({ dbUserData, dbPlayerData, dbRecordData });
     });
+    if (req.session.loggedIn) {
+      res.redirect("/start");
+      return;
+    }
   } catch (err) {
     console.log(err);
     res.status(500).json(err);
@@ -140,7 +144,12 @@ router.post('/login', async (req, res) => {
       res
         .status(200)
         .json({ user: dbUserData, message: 'You are now logged in!' });
+        
     });
+    if (req.session.loggedIn) {
+      res.redirect("/start");
+      return;
+    }
   } catch (err) {
     console.log(err);
     res.status(500).json(err);
