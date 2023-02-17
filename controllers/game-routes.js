@@ -7,7 +7,7 @@ const { Playtable, Dealer, Player } = require('../models')
 // const { User } = require('../models');
 // const withAuth = require('../utils/auth')
 // GET homepage
-router.get('/game', async (req, res) => {
+router.get('/', async (req, res) => {
     try {
         const dbGameData = await Playtable.findAll({
             include: [
