@@ -3,6 +3,7 @@ const path = require('path');
 const router = require('express').Router();
 const { Playtable, Dealer, Player } = require('../models')
 
+
 // const { User } = require('../models');
 // const withAuth = require('../utils/auth')
 // GET homepage
@@ -32,6 +33,16 @@ router.get('/game', async (req, res) => {
         console.log(err);
         res.status(500).json(err);
     }
+});
+// GET deck cards
+router.get('/cards', (req, res) => {
+        
+        // res.render("player-hand-template", { cards });// <-- renders to handlebars as cards
+        // TODO: get cards from db from /cards route
+        res.json(cards);
+        console.log(cards);
+        //write data to .json file OR keep it on server and select randomly
+        //fs.writeFile('/activeShoe.json', JSON.stringify(cards), (err) => {
 });
 
 router.get('/start', async (req, res) => {

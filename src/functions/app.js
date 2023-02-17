@@ -4,27 +4,27 @@ const deckData = fs.readFileSync(path.join(__dirname, "../db/activeShoe.json"));
 const sleep = require("sleep-promise");
 const handValue = require(path.join(__dirname, "../helpers/handValue"));
 // const { checkDealerBlackjack }= require(path.join(__dirname, "./checkFunctions"));
-Handlebars.registerPartial('player-hand-template', $('#player-hand-template').html());
+// Handlebars.registerPartial('player-hand-template', $('#player-hand-template').html());
 // variables
 // Compile the hand-details-template
-var handDetailsTemplate = Handlebars.compile($('#hand-details-template').html());
+// var handDetailsTemplate = Handlebars.compile($('#hand-details-template').html());
 
 // Define the data context
-var data = {
-  players: [
-    { id: 'c1', playerName: 'player 1', cssClass: 'first', cards: ['2C', '3C', '4C'] },
-  //   { id: 'c2', playerName: 'player 2', cssClass: 'second', cards: ['5C', '6C', '7C'] },
+// var data = {
+//   players: [
+//     { id: 'c1', playerName: 'player 1', cssClass: 'first', cards: ['2C', '3C', '4C'] },
+//   //   { id: 'c2', playerName: 'player 2', cssClass: 'second', cards: ['5C', '6C', '7C'] },
   //   { id: 'c3', playerName: 'player 3', cssClass: 'third', cards: ['8C', '9C', '10C'] },
   //   { id: 'c4', playerName: 'player 4', cssClass: 'fourth', cards: ['JC', 'QC', 'KC'] },
   //   { id: 'c5', playerName: 'player 5', cssClass: 'fifth', cards: ['AC', 'AD', 'AH', 'AS'] }
-  ]
-};
+//   ]
+// };
 
 // Render the template with the data context
-var html = handDetailsTemplate(data);
+// var html = handDetailsTemplate(data);
 
 // Insert the rendered HTML into the DOM
-$('#game-container').html(html);
+// $('#game-container').html(html);
 
 const Deck = require(path.join(__dirname, "./deck/Deck"));
 var deckQueue = [];
@@ -53,7 +53,7 @@ var usedCards = []; // holds cards that have been used
 async function drawCards() {
   const deck = new Deck();
   return new Promise(async (resolve, reject) => {
-    while (deckQueue.length < 20 && deck.shoe.cards.length > 0) {
+    while (deckQueue.length < 18 && deck.shoe.cards.length > 0) {
       const card = await deck.drawCard();
       deckQueue.push(card);
       console.log(deckQueue.length);
@@ -79,10 +79,13 @@ async function dealTable() {
   await playerFourBot.push(deckQueue.pop());
   await playerFiveBot.push(deckQueue.pop());
 
-  dealerHand[0].facedown = true;
+  // dealerHand[0].facedown = true;
+  console.log("---dealerHand---");
   console.log(dealerHand);
-  console.log(playerHandValue);
-  dealerHand[1].facedown = false;
+  console.log("---playerHand---");
+  console.log(playerHand);
+  // dealerHand[1].facedown = false;
+  console.log("---- dealerHand(2nd card)")
   console.log(dealerHand);
   if (turn > 5) {
     turn = 0;
