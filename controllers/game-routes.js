@@ -45,6 +45,12 @@ router.get('/cards', (req, res) => {
         //fs.writeFile('/activeShoe.json', JSON.stringify(cards), (err) => {
 });
 
+router.get('/start', async (req, res) => {
+    res.sendFile(path.join(__dirname, "../public/start-game.html"));
+
+      
+});
+
 
 
 module.exports = router;
