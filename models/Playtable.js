@@ -24,14 +24,22 @@ Playtable.init(
       type: DataTypes.TEXT,
       allowNull: true,
     },
-    hit_cards: {
-      type: DataTypes.JSON,
-      allowNull: true,
-    },
-    stand_cards: {
-      type: DataTypes.JSON,
-      allowNull: true,
-    },
+    // hit_cards: {
+    //   type: DataTypes.JSON,
+    //   allowNull: true,
+    // },
+    // stand_cards: {
+    //   type: DataTypes.JSON,
+    //   allowNull: true,
+    // },
+    // remaining_deck: {
+    //   type: DataTypes.JSON,
+    //   allowNull: true,
+    // },
+    //   dealer_cards: {
+    //   type: DataTypes.JSON,
+    //   allowNull: true,
+    // },
   },
   {
     sequelize,

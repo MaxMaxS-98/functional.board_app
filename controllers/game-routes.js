@@ -2,8 +2,7 @@ const express = require("express");
 const router = express.Router();
 const Playtable = require("../models/Playtable");
 // Load the activeShoe from the JSON file
-const activeShoeData = require("../models/game/activeShoe.json");
-const activeShoe = activeShoeData;
+const activeShoe = require("../models/game/activeShoe.json");
 console.log("Game routes loaded");
 
 // define pushActiveShoeIntoDeck function
@@ -56,20 +55,6 @@ function drawCards(deck, numCards) {
 // parse json requests
 router.use(express.json());
 
-// Start a new game
-router.post("/", async (req, res) => {
-  // Create a new record for a new game
-  const game = await Playtable.create({
-    is_active: true,
-    opts: "new game",
-    player_cards: null,
-    dealer_cards: null,
-    winner: null,
-  });
-
-  // Call startNewGame after game is initialized
-  startNewGame(req, res, deck, game);
-});
 
 async function startNewGame(req, res, deck, game) {
   // Draw two cards for the player and two cards for the dealer
@@ -102,7 +87,21 @@ async function startNewGame(req, res, deck, game) {
   });
 
 }
-  
+  // Start a new game
+router.post("/", async (req, res) => {
+  // Create a new record for a new game
+  const game = await Playtable.create({
+    is_active: true,
+    opts: "new game",
+    player_cards: null,
+    dealer_cards: null,
+    winner: null,
+    remaining_deck: JSON.stringify(deck)
+  });
+
+  // Call startNewGame after game is initialized
+  startNewGame(req, res, deck, game);
+});
 // Hit the player with another card
 router.post("/:gameId/hit", async (req, res) => {
   console.log("Hit route called");
@@ -121,7 +120,9 @@ router.post("/:gameId/hit", async (req, res) => {
 
   // Draw a new card for the player and add it to their hand
   const playerCards = JSON.parse(game.player_cards);
-  const newCard = drawCards(deck, 1)[0];
+  console.log("game.player_cards:", game.player_cards);
+
+  const newCard = drawCards(JSON.parse(game.remaining_deck), 1)[0];
   playerCards.push(newCard);
 
   // Update the player's hand in the database
@@ -171,14 +172,18 @@ router.post("/:gameId/stand", async (req, res) => {
   }
 
   // Reveal the dealer's face-down card
+  if (!game.dealer_cards) {
+    return res.status(400).json({ error: "Dealer cards not found" });
+  }
+  
   const dealerCards = JSON.parse(game.dealer_cards);
-  dealerCards[0].side = "front";
-
+  dealerCards[0].faceup = true;
+  
   // Draw cards for the dealer until they have at least 17 points
   while (calculateHandValue(dealerCards) < 17) {
-    dealerCards.push(drawCards(activeShoe, 1)[0]);
+    dealerCards.push(drawCards(JSON.parse(game.remaining_deck), 1)[0]);
   }
-
+  
   // Update the dealer's hand in the database
   game.dealer_cards = JSON.stringify(dealerCards);
   await game.save();

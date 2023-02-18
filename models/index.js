@@ -1,7 +1,7 @@
 const Record = require('./Record');
 const Playtable = require('./Playtable');
 const Player = require('./Player');
-const Dealer = require('./Dealer');
+// const Dealer = require('./Dealer');
 const User = require('./User')
 
 // Table has many players
@@ -15,14 +15,14 @@ Playtable.hasMany(Player,
 Player.belongsTo(Playtable);
 
 // Table has one dealer
-Playtable.hasOne(Dealer,
-  {
-    foreignKey: 'table_id',
-    onDelete: 'CASCADE'
-  }
-);
-// Dealer belongs to one table
-Dealer.belongsTo(Playtable);
+// Playtable.hasOne(Dealer,
+//   {
+//     foreignKey: 'table_id',
+//     onDelete: 'CASCADE'
+//   }
+// );
+// // Dealer belongs to one table
+// Dealer.belongsTo(Playtable);
 
 
 // User is a player
@@ -51,7 +51,7 @@ module.exports = {
   User,
   Record,
   Playtable,
-  Player,
-  Dealer
+  Player
+  // Dealer
 };
 
