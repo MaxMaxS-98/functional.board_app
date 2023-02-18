@@ -5,8 +5,20 @@ const Playtable = require("../models/Playtable");
 const activeShoeData = require("../models/game/activeShoe.json");
 const activeShoe = activeShoeData;
 console.log("Game routes loaded");
-// functions
-  
+
+// define pushActiveShoeIntoDeck function
+function pushActiveShoeIntoDeck(deck) {
+  for (let i = 0; i < activeShoe.length; i++) {
+    deck.push(activeShoe[i]);
+  }
+}
+
+// initialize deck with activeShoe data
+let deck = [];
+pushActiveShoeIntoDeck(deck);
+console.log(deck.length);
+
+  //random draw from deck
 function drawCards(deck, numCards) {
     const drawnCards = [];
     for (let i = 0; i < numCards; i++) {
@@ -16,7 +28,7 @@ function drawCards(deck, numCards) {
     }
     return drawnCards;
   }
-
+//calculate the value of the cards
   function calculateHandValue(cards) {
     let total = 0;
     let aces = 0;
@@ -46,39 +58,54 @@ router.use(express.json());
 
 // Start a new game
 router.post("/", async (req, res) => {
-    // Parse activeShoe.json as an array of objects
-    const deck = activeShoe;
-  
-    // Create a new record for a new game
-    const game = await Playtable.create({
-      is_active: true,
-      opts: "new game",
-      cards: JSON.stringify(deck),
-      player_cards: null,
-      dealer_cards: null,
-      winner: null,
-    });
-  
-    // Call startNewGame after game is initialized
-    startNewGame(req, res, deck, game);
+  // Create a new record for a new game
+  const game = await Playtable.create({
+    is_active: true,
+    opts: "new game",
+    player_cards: null,
+    dealer_cards: null,
+    winner: null,
   });
-  
-  async function startNewGame(req, res, deck, game) {
-    // Draw two cards for the player and two cards for the dealer
-    const playerCards = drawCards(deck, 2);
-    const dealerCards = drawCards(deck, 2);
-  
-    // Save the player and dealer cards to the database
-    game.player_cards = JSON.stringify(playerCards);
-    game.dealer_cards = JSON.stringify(dealerCards);
-    await game.save();
-  
-    // Return the game ID and the player's cards to the client
-    res.json({ game_id: game.id, player_cards: playerCards });
-  }
 
+  // Call startNewGame after game is initialized
+  startNewGame(req, res, deck, game);
+});
+
+async function startNewGame(req, res, deck, game) {
+  // Draw two cards for the player and two cards for the dealer
+  const playerCards = drawCards(deck, 2);
+  const playerHand = {
+    cardOne: "Player has been dealt a " + playerCards[0].name + " of " + playerCards[0].suit,
+    cardTwo: "Player has been dealt a " + playerCards[1].name + " of " + playerCards[1].suit,
+    value: playerCards[0].value + playerCards[1].value,
+  };
+
+  const dealerCards = drawCards(deck, 2);
+  const dealerHand = {
+    cardOne: "Dealer down card: ?",
+    cardTwo: "Dealer has been dealt a " + dealerCards[1].name + " of " + dealerCards[1].suit,
+    value: dealerCards[1].value 
+  };
+
+  // Save the player and dealer Hands to the database
+  game.player_cards = JSON.stringify(playerHand);
+  game.dealer_cards = JSON.stringify(dealerHand);
+  await game.save();
+
+
+  // Return the game ID and the player's hands and dealer's hands to the client
+  res.json({
+    game_id: game.id,
+    player_cards: playerHand,
+    dealer_cards: dealerHand,
+    message: "Do you want to hit or stand?"
+  });
+
+}
+  
 // Hit the player with another card
-router.post("/game/:gameId/hit", async (req, res) => {
+router.post("/:gameId/hit", async (req, res) => {
+  console.log("Hit route called");
   const gameId = req.params.gameId;
 
   // Find the game by ID
@@ -94,15 +121,17 @@ router.post("/game/:gameId/hit", async (req, res) => {
 
   // Draw a new card for the player and add it to their hand
   const playerCards = JSON.parse(game.player_cards);
-  const newCard = drawCards(activeShoe, 1)[0];
+  const newCard = drawCards(deck, 1)[0];
   playerCards.push(newCard);
 
   // Update the player's hand in the database
   game.player_cards = JSON.stringify(playerCards);
   await game.save();
 
-  // Check if the player has gone over 21 (busted)
+  // Calculate the value of the player's hand
   const playerTotal = calculateHandValue(playerCards);
+
+  // Check if the player has gone over 21 (busted)
   if (playerTotal > 21) {
     // End the game and declare the dealer the winner
     game.is_active = false;
@@ -111,15 +140,23 @@ router.post("/game/:gameId/hit", async (req, res) => {
     return res.json({
       message: "Player busts! Dealer wins.",
       winner: game.winner,
+      player_cards: playerCards,
+      dealer_cards: JSON.parse(game.dealer_cards)
     });
   }
 
-  // Return the new player cards to the client
-  res.json({ player_cards: playerCards });
+  // Return the new player cards and the dealer's hand to the client
+  res.json({
+    player_cards: playerCards,
+    dealer_cards: JSON.parse(game.dealer_cards),
+    message: "Do you want to hit or stand?"
+  });
 });
 
+
 // Stand and let the dealer play
-router.post("/game/:gameId/stand", async (req, res) => {
+router.post("/:gameId/stand", async (req, res) => {
+  console.log("Stand route called");
   const gameId = req.params.gameId;
 
   // Find the game by ID
@@ -139,7 +176,7 @@ router.post("/game/:gameId/stand", async (req, res) => {
 
   // Draw cards for the dealer until they have at least 17 points
   while (calculateHandValue(dealerCards) < 17) {
-    dealerCards.push(drawCards(game, 1)[0]);
+    dealerCards.push(drawCards(activeShoe, 1)[0]);
   }
 
   // Update the dealer's hand in the database
@@ -156,6 +193,8 @@ router.post("/game/:gameId/stand", async (req, res) => {
     return res.json({
       message: "Dealer busts! Player wins.",
       winner: game.winner,
+      player_cards: JSON.parse(game.player_cards),
+      dealer_cards: dealerCards,
     });
   }
 
@@ -167,23 +206,24 @@ router.post("/game/:gameId/stand", async (req, res) => {
     game.is_active = false;
     game.winner = "player";
     await game.save();
-    return res.json({ message: "Player wins.", winner: game.winner });
+    return res.json({ message: "Player wins.", winner: game.winner, player_cards, dealer_cards });
   } else if (playerTotal < dealerTotal) {
     // End the game and declare the dealer the winner
     game.is_active = false;
     game.winner = "dealer";
     await game.save();
-    return res.json({ message: "Dealer wins.", winner: game.winner });
+    return res.json({ message: "Dealer wins.", winner: game.winner, player_cards, dealer_cards });
   } else {
     // End the game and declare it a tie
     game.is_active = false;
     game.winner = "tie";
     await game.save();
-    return res.json({ message: "Tie game.", winner: game.winner });
+    return res.json({ message: "Tie game.", winner: game.winner, player_cards, dealer_cards });
   }
 });
 
-router.put("/game/:gameId/restart", async (req, res) => {
+
+router.put("/:gameId/restart", async (req, res) => {
   const gameId = req.params.gameId;
   const game = await Playtable.findByPk(gameId);
   if (!game) {
@@ -199,7 +239,7 @@ router.put("/game/:gameId/restart", async (req, res) => {
   res.json({ message: "Game restarted successfully." });
 });
 
-router.put("/game/:gameId/end", async (req, res) => {
+router.put("/:gameId/end", async (req, res) => {
   const gameId = req.params.gameId;
   const game = await Playtable.findByPk(gameId);
   if (!game) {

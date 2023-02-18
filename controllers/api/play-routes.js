@@ -1,4 +1,5 @@
 const router = require('express').Router();
+require('../../deck-of-cards');
 const initBalance = 1000;
 const initBet = 15;
 var currentBet = initBet;
