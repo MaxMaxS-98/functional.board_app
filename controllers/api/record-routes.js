@@ -81,5 +81,19 @@ router.delete('/:id', async (req, res) => {
   }
 });
 
+ //get game state by Id
+ router.get('/game/:gameId', async (req, res) => {
+  const gameId = req.params.gameId;
+  const game = await Playtable.findByPk(gameId);
+  if (!game) {
+     return res.status(404).json({ error: 'Game not found' });
+  }
+  res.json({
+     is_active: game.is_active,
+     player_cards: JSON.parse(game.player_cards),
+     dealer_cards: JSON.parse(game.dealer_cards),
+     winner: game.winner,
+  });
+});
 
 module.exports = router;

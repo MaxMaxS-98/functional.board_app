@@ -90,7 +90,7 @@ router.delete('/:id', async (req, res) => {
     }
 });
 
-app.get('/game/:gameId', async (req, res) => {
+router.get('/game/:gameId', async (req, res) => {
     const gameId = req.params.gameId;
   
     // Find the game by ID

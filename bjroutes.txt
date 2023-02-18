@@ -1,0 +1,5 @@
+POST /game: Starts a new game.
+POST /game/:gameId/hit: Deals another card to the player's hand.
+POST /game/:gameId/stand: Lets the dealer play and determines the winner.
+PUT /game/:gameId/restart: Restarts a game with a new deck of cards.
+PUT /game/:gameId/end: Ends a game immediately and declares the dealer the winner.

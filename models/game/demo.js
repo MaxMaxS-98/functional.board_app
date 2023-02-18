@@ -2,7 +2,23 @@ const express = require('express');
 const Playtable = require('./models/Playtable');
 
 const app = express();
-
+app.get('/game/:gameId', async (req, res) => {
+    const gameId = req.params.gameId;
+  
+    // Find the game by ID
+    const game = await Playtable.findByPk(gameId);
+    if (!game) {
+      return res.status(404).json({ error: 'Game not found' });
+    }
+  
+    // Return the game state to the client
+    res.json({
+      is_active: game.is_active,
+      player_cards: JSON.parse(game.player_cards),
+      dealer_cards: JSON.parse(game.dealer_cards),
+      winner: game.winner,
+    });
+  });
 // Middleware to parse JSON requests
 app.use(express.json());
 
