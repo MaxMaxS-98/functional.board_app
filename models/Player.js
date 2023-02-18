@@ -29,7 +29,6 @@ Player.init(
             allowNull: false,
             defaultValue: true
         },
-        // This shows the status of a player, for example: 'stand', 'split', 'double', 'busted', 'stand', etc.
         current_status: {
             type: DataTypes.STRING,
             allowNull: false,

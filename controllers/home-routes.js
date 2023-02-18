@@ -30,4 +30,6 @@ router.get("/mock", (req, res) => {
   console.log(cards);
   res.render("player-hand-template", { cards });
 });
+
+
 module.exports = router;

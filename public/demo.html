@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>Blackjack</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  <link rel="stylesheet" href="./css/demoStyle.css">
+
+</head>
+
+<body>
+  <div class="container mb-4">
+    <h1>Blackjack</h1>
+    <p>Click the "+" or "-" button to adjust your bet and "Place Bet" to start a new game.</p>
+
+    <div class="container text-center">
+      <div class="row">
+        <!-- <div class="col-1">
+          <button class="btn btn-primary mb-3" id="deal-button">Deal</button>
+        </div> -->
+        <div class="col-1">
+          <button class="btn btn-primary mb-3 hit-btn" id="hit-button" style="display:none">Hit</button>
+        </div>
+        <div class="col-1">
+          <button class="btn btn-primary mb-3 stand-btn" id="stand-button" style="display:none">Stand</button>
+        </div>
+        <div class="col-7 align-self-center" id="bet">
+          <p>Bet Amount: <span id="bet-amount">15</span></p>
+          <p>Current Balance: <span id="balance">285</span></p>
+          <button class="btn btn-primary" id="decrement-bet">-</button>
+          <button class="btn btn-primary" id="increment-bet">+</button>
+          <button class="btn btn-primary" id="place-bet">Place Bet</button>
+        </div>
+        <div class="col-3 align-self-end">
+          <p class="text-end" id="player-score"></p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="container flex-box align-items-center justify-content-center mt-3 mp-3 h-70">
+    <div class="row m-3 p-4 flex-box align-items-center justify-content-center" id="player-hand"></div>
+    <div class="row m-3 p-4 flex-box align-items-center justify-content-center" id="dealer-hand"></div>
+  </div>
+  <div class="mb-3 flex-box align-items-center justify-content-center">
+    <h1 class="text-center" id="message"></h1>
+  </div>
+ 
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+  <script src="node_modules/deck-of-cards/dist/deck.min.js"></script>
+  <script src="insomniaDemo.js"></script>
+
+</body>
+
+</html>

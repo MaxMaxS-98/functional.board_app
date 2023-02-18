@@ -34,23 +34,25 @@ router.get('/', async (req, res) => {
         res.status(500).json(err);
     }
 });
-// GET deck cards
-router.get('/cards', (req, res) => {
-        
-        // res.render("player-hand-template", { cards });// <-- renders to handlebars as cards
-        // TODO: get cards from db from /cards route
-        res.json(cards);
-        console.log(cards);
-        //write data to .json file OR keep it on server and select randomly
-        //fs.writeFile('/activeShoe.json', JSON.stringify(cards), (err) => {
-});
 
-router.get('/start', async (req, res) => {
-    res.sendFile(path.join(__dirname, "../public/start-game.html"));
-
-      
-});
-
+app.get('/game/:gameId', async (req, res) => {
+    const gameId = req.params.gameId;
+  
+    // Find the game by ID
+    const game = await Playtable.findByPk(gameId);
+    if (!game) {
+      return res.status(404).json({ error: 'Game not found' });
+    }
+  
+    // Return the game state to the client
+    res.json({
+      is_active: game.is_active,
+      player_cards: JSON.parse(game.player_cards),
+      dealer_cards: JSON.parse(game.dealer_cards),
+      winner: game.winner,
+    });
+  });
+  
 
 
 module.exports = router;
