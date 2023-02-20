@@ -92,11 +92,12 @@ router.post("/", async (req, res) => {
   // Create a new record for a new game
   const game = await Playtable.create({
     is_active: true,
-    opts: "new game",
+    // opts: "new game",
+    cards: JSON.stringify(deck),
     player_cards: null,
     dealer_cards: null,
     winner: null,
-    remaining_deck: JSON.stringify(deck)
+    // remaining_deck: JSON.stringify(deck)
   });
 
   // Call startNewGame after game is initialized
@@ -109,6 +110,7 @@ router.post("/:gameId/hit", async (req, res) => {
 
   // Find the game by ID
   const game = await Playtable.findByPk(gameId);
+  console.log(game);
   if (!game) {
     return res.status(404).json({ error: "Game not found" });
   }
@@ -119,6 +121,7 @@ router.post("/:gameId/hit", async (req, res) => {
   }
 
   // Draw a new card for the player and add it to their hand
+  console.log(game.player_cards) + "---test text";
   const playerCards = JSON.parse(game.player_cards);
   console.log("game.player_cards:", game.player_cards);
 

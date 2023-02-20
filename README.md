@@ -48,7 +48,12 @@ This application is deployed on Heroku.
 https://black-jack-blitz-test.herokuapp.com/
 
 ## Screenshots
-![Screenshot](/public/assets/images/BlackJackBlitz.png)
+![Screenshot]()
+![Screenshot]()
+![Screenshot]()
+![Screenshot]()
+![Screenshot]()
+
 
 ## Contributors
 * Christopher Dean
