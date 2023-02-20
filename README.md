@@ -61,6 +61,7 @@ https://black-jack-blitz-test.herokuapp.com/
 ![Screenshot](![Alt text](https://github.com/MaxMaxS-98/functional.board_app/blob/chris/public/assets/images/login.png?raw%3Dtrue))
 ![Screenshot](![Alt text](https://github.com/MaxMaxS-98/functional.board_app/blob/chris/public/assets/images/main_screenshot.png?raw%3Dtrue))
 ![Screenshot](![Alt text](https://github.com/MaxMaxS-98/functional.board_app/blob/chris/public/assets/images/sign_up.png?raw%3Dtrue))
+![Screenshot](![Alt text](![Alt text](![Alt text](public/assets/images/Screen%20Shot%202023-02-16%20at%207.28.26%20PM.png))
 
 
 ## Contributors
