@@ -3,6 +3,7 @@ const fs = require("fs");
 const deckData = fs.readFileSync(path.join(__dirname, "../db/activeShoe.json"));
 const sleep = require("sleep-promise");
 const handValue = require(path.join(__dirname, "../helpers/handValue"));
+const Deck = require(path.join(__dirname, "./deck/Deck"));
 // const { checkDealerBlackjack }= require(path.join(__dirname, "./checkFunctions"));
 // Handlebars.registerPartial('player-hand-template', $('#player-hand-template').html());
 // variables
@@ -26,11 +27,14 @@ const handValue = require(path.join(__dirname, "../helpers/handValue"));
 // Insert the rendered HTML into the DOM
 // $('#game-container').html(html);
 
-const Deck = require(path.join(__dirname, "./deck/Deck"));
-var deckQueue = [];
+// HTML Variables
+// const $playerHand = $("#player-hand");
+// const $dealerHand = $("#dealer-hand");
+
 
 // var dealerDown = (dealerHand[0].facedown, true)
 // var dealerUp = (dealerHand[1].facedown, false)
+var deckQueue = [];
 var playerBet = 25; // call from html
 var dealerTotal = 0;
 var playerBank = 1000; // call from database

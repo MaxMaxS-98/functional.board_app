@@ -1,9 +1,9 @@
 // playerFunctions.js
 // handles client side player functions
-const deck = require("../deck-of-cards.js");
 
 
-//TODO: check with Lian to see if any of these functions need to communicate with database.
+
+  
 
 // function to hit and add a card to the player's hand
 
@@ -24,9 +24,7 @@ function hit(playerHand, deck) {
 function stand(playerHand) {
     // return the player's hand
     console.log(playerHand);
-    // TODO: add logic for UI here 
-    //TODO:
-    // add logic to go to next player in queue
+
 }
 
 // function to calculate the value of the player's hand
@@ -75,6 +73,7 @@ function checkBust(playerHand) {
 }
 // export the functions
 module.exports = {
+    drawCards,
     hit,
     stand,
     calculateHandValue,
